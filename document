@@ -1,0 +1,121 @@
+Hi Ali
+
+
+
+the frontend ist uploaded to: 
+
+
+
+www.motolaos.com/html
+
+
+
+Here now some details for the backend:
+
+
+
+
+
+Gerneral
+
+
+
+- all meta for each page to be editable
+
+
+
+- Each Page with Banner has its own Banners (image and/or video - when a video is playing no auto load next image).
+
+Images and videos to be editable in the backend
+
+
+
+- Alt and Title to be editable for each Image on the Site
+
+
+
+- Title to be editable for each link on the Site
+
+
+
+- Language for each page to be editable in backend
+
+
+
+- Text for each language on each page to be editable in backend
+
+
+
+- all images for each page to be changed trough backend with alt and title for each language
+
+
+
+- social links to be set in backend
+
+
+
+
+
+
+
+
+
+Index
+
+
+
+- You will see LAO MOTORCYCLE DAIRIES twice. In the backend to have the option
+
+to activate either one. Each items in the diaries for these two models should have independent
+
+Text (Tittle and description).
+
+
+
+
+
+
+
+Tours
+
+
+
+Has different layout than the pdf. On all the tour pages to include a contact popup - no link to contact.html
+
+
+
+
+
+
+
+Gallery
+
+
+
+Please use a media grid here according to the layout pdf. As you see this grid is for images and videos with popup to be
+
+uploaded through the backend. Can you include a media library similar to Wordpress i the backend for the images???
+
+The images will have to load auto sized to the thumbnail grid.
+
+
+
+
+
+Diaries
+
+
+
+It is an image grid with headline - please see the layout pdf. The diary is like a blog, when clicking on an image it should expand under the image row the detailed view of it - no extra page. In the pdf you see the diary description on top, please to make it expand the selected image row.
+
+The first big image on description should show the same image which was just clicked with 5 small thumbnails under - to fit the image.
+
+These detailed diary images as popup.
+
+
+
+Dont hesitate asking
+
+Thanks
+
+Please keep in mind that it will have to be finished this month.
