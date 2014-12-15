@@ -43,7 +43,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="<?php echo $this->createUrl("/site/index"); ?>">
-                        <img src="<?php echo Yii::app()->theme->baseUrl; ?>/assets/img/logo.png" alt="" />
+                        Logo
                     </a>
                 </div>
                 <!-- end navbar-header -->

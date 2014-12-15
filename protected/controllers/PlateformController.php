@@ -1,6 +1,6 @@
 <?php
 
-class CategoryController extends Controller {
+class PlateformController extends Controller {
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -57,13 +57,13 @@ class CategoryController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
-        $model = new Category;
+        $model = new Plateform;
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
-        if (isset($_POST['Category'])) {
-            $model->attributes = $_POST['Category'];
+        if (isset($_POST['Plateform'])) {
+            $model->attributes = $_POST['Plateform'];
             if ($model->save()) {
                 Yii::app()->user->setFlash("success", "Data has been saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
@@ -86,8 +86,8 @@ class CategoryController extends Controller {
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
-        if (isset($_POST['Category'])) {
-            $model->attributes = $_POST['Category'];
+        if (isset($_POST['Plateform'])) {
+            $model->attributes = $_POST['Plateform'];
             if ($model->save()) {
                 Yii::app()->user->setFlash("success", "Data has been saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
@@ -122,10 +122,10 @@ class CategoryController extends Controller {
      */
     public function actionIndex() {
 
-        $model = new Category('search');
+        $model = new Plateform('search');
         $model->unsetAttributes();  // clear any default values
-        if (isset($_GET['Category']))
-            $model->attributes = $_GET['Category'];
+        if (isset($_GET['Plateform']))
+            $model->attributes = $_GET['Plateform'];
 
         $this->render('index', array(
             'model' => $model,
@@ -136,11 +136,11 @@ class CategoryController extends Controller {
      * Returns the data model based on the primary key given in the GET variable.
      * If the data model is not found, an HTTP exception will be raised.
      * @param integer $id the ID of the model to be loaded
-     * @return Category the loaded model
+     * @return Plateform the loaded model
      * @throws CHttpException
      */
     public function loadModel($id) {
-        $model = Category::model()->findByPk($id);
+        $model = Plateform::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
@@ -148,10 +148,10 @@ class CategoryController extends Controller {
 
     /**
      * Performs the AJAX validation.
-     * @param Category $model the model to be validated
+     * @param Plateform $model the model to be validated
      */
     protected function performAjaxValidation($model) {
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'category-form') {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'Plateform-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
@@ -161,23 +161,23 @@ class CategoryController extends Controller {
 
     public function manageRelations($model, $related = "", $related_id = "") {
         switch ($related) {
-            case "categoryLangs":
+            case "PlateformLangs":
                 if (!empty($related_id)) {
-                    $model->$related = CategoryLang::model()->findByPk($related_id);
+                    $model->$related = PlateformLang::model()->findByPk($related_id);
                 } else {
-                    $model->$related = new CategoryLang;
+                    $model->$related = new PlateformLang;
                 }
                 $model->$related->parent_id = $model->id;
-                if (isset($_POST['CategoryLang'])) {
-                    $model->$related->attributes = $_POST['CategoryLang'];
+                if (isset($_POST['PlateformLang'])) {
+                    $model->$related->attributes = $_POST['PlateformLang'];
                     if ($model->$related->save()) {
                         $this->redirect(array('view', 'id' => $model->id, "related" => $related, "related_id" => $related_id));
                     }
                 }
                 break;
             default:
-                $model->categoryLangs = new CategoryLang;
-                $model->categoryLangs->parent_id = $model->id;
+                $model->PlateformLangs = new PlateformLang;
+                $model->PlateformLangs->parent_id = $model->id;
                 break;
         }
     }
@@ -191,8 +191,8 @@ class CategoryController extends Controller {
     public function deleteRelations($related = "", $related_id = "") {
 
         switch ($related) {
-            case "categoryLangs":
-                CategoryLang::model()->deleteByPk($related_id);
+            case "PlateformLangs":
+                PlateformLang::model()->deleteByPk($related_id);
                 break;
             default:
                 break;

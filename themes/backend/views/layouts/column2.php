@@ -42,127 +42,32 @@ $pluggins_array = array(
             <li class="<?php echo $this->id == "site" && $this->action->id == "index" ? "selected" : "" ?>">
                 <a href="<?php echo $this->createUrl("/site/index"); ?>"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
             </li>
-            <li class="<?php echo $this->id == "category" ? "selected" : "" ?>">
-                <a href="<?php echo $this->createUrl("/category/index"); ?>"><i class="fa fa-edit fa-fw"></i> Category<span class="fa arrow"></span></a>
+            <li class="<?php echo $this->id == "plateform" ? "selected" : "" ?>">
+                <a href="<?php echo $this->createUrl("/plateform/index"); ?>"><i class="fa fa-edit fa-fw"></i> Plateforms<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="<?php echo $this->createUrl("/category/index/"); ?>">List</a>
+                        <a href="<?php echo $this->createUrl("/plateform/index/"); ?>">List</a>
                     </li>
                     <li>
-                        <a href="<?php echo $this->createUrl("/category/create/"); ?>">Create</a>
+                        <a href="<?php echo $this->createUrl("/plateform/create/"); ?>">Create</a>
                     </li>
                 </ul>
                 <!-- second-level-items -->
             </li>
-            <li class="<?php echo $this->id == "tour" ? "selected" : "" ?>">
-                <a href="<?php echo $this->createUrl("/tour/index"); ?>"><i class="fa fa-edit fa-fw"></i> Tour<span class="fa arrow"></span></a>
+            <li class="<?php echo $this->id == "pluggin" ? "selected" : "" ?>">
+                <a href="<?php echo $this->createUrl("/pluggin/index"); ?>"><i class="fa fa-edit fa-fw"></i> Pluggins<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="<?php echo $this->createUrl("/tour/index/"); ?>">List</a>
+                        <a href="<?php echo $this->createUrl("/pluggin/index/"); ?>">List</a>
                     </li>
                     <li>
-                        <a href="<?php echo $this->createUrl("/tour/create/"); ?>">Create</a>
+                        <a href="<?php echo $this->createUrl("/pluggin/create/"); ?>">Create</a>
                     </li>
-                    <li>
-                        <a href="<?php echo $this->createUrl("/tour/getHomePageSetting/"); ?>">Home Page Settings</a>
-                    </li>
+              
                 </ul>
                 <!-- second-level-items -->
             </li>
-            <li class="<?php echo $this->id == "language" ? "selected" : "" ?>">
-                <a href="<?php echo $this->createUrl("/language/index"); ?>"><i class="fa fa-edit fa-fw"></i> Language<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="<?php echo $this->createUrl("/language/index/"); ?>">List</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo $this->createUrl("/language/create/"); ?>">Create</a>
-                    </li>
-                </ul>
-                <!-- second-level-items -->
-            </li>
-            <li class="<?php echo in_array($this->id, $pluggins_array) ? "selected" : "" ?>">
-                <a href="<?php echo $this->createUrl("/banner/index"); ?>"><i class="fa fa-edit fa-fw"></i> Pluggins & Pages<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="<?php echo $this->createUrl("/banner/index/"); ?>">Banners</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo $this->createUrl("/motoDairy/index/"); ?>">Moto Dairy</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo $this->createUrl("/motoGallery/index/"); ?>">Moto Gallery</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo $this->createUrl("/teamImage/index/"); ?>">Team Image</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo $this->createUrl("/innerSlider/index/"); ?>">Inner Slider</a>
-                    </li>
-                </ul>
-                <!-- second-level-items -->
-            </li>
-
-            <li class="<?php echo $this->id == "faqAndTerms" ? "selected" : "" ?>">
-                <a href="<?php echo $this->createUrl("/faq/index"); ?>"><i class="fa fa-edit fa-fw"></i> Faq And Terms<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="<?php echo $this->createUrl("/faqAndTerms/index/"); ?>">List</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo $this->createUrl("/faqAndTerms/create/"); ?>">Create</a>
-                    </li>
-                </ul>
-                <!-- second-level-items -->
-            </li>
-            <li class="<?php echo $this->id == "seo" ? "selected" : "" ?>">
-                <a href="<?php echo $this->createUrl("/seo/index"); ?>"><i class="fa fa-edit fa-fw"></i> Seo Tags<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="<?php echo $this->createUrl("/seo/index/"); ?>">List</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo $this->createUrl("/seo/create/"); ?>">Create</a>
-                    </li>
-                </ul>
-                <!-- second-level-items -->
-            </li>
-<!--            <li class="<?php echo $this->id == "pages" ? "selected" : "" ?>">
-                <a href="<?php echo $this->createUrl("/pages/index"); ?>"><i class="fa fa-edit fa-fw"></i> Pages<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="<?php echo $this->createUrl("/pages/index/"); ?>">List</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo $this->createUrl("/pages/create/"); ?>">Create</a>
-                    </li>
-                </ul>
-                 second-level-items 
-            </li>-->
-            <li class="<?php echo $this->id == "label" ? "selected" : "" ?>">
-                <a href="<?php echo $this->createUrl("/label/index"); ?>"><i class="fa fa-edit fa-fw"></i> Labels<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="<?php echo $this->createUrl("/label/index/"); ?>">List</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo $this->createUrl("/label/create/"); ?>">Create</a>
-                    </li>
-                </ul>
-                <!-- second-level-items -->
-            </li>
-            <li class="<?php echo $this->id == "socialMediaLink" ? "selected" : "" ?>">
-                <a href="<?php echo $this->createUrl("/socialMediaLink/index"); ?>"><i class="fa fa-edit fa-fw"></i> Social Media Link<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="<?php echo $this->createUrl("/socialMediaLink/index/"); ?>">List</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo $this->createUrl("/socialMediaLink/create/"); ?>">Create</a>
-                    </li>
-                </ul>
-                <!-- second-level-items -->
-            </li>
+           
             <?php
             if (strstr(Yii::app()->request->hostInfo, "localhost")) {
                 //$this->renderPartial("//layouts/_menus_local_host");
@@ -171,7 +76,7 @@ $pluggins_array = array(
         </ul>
         <!-- end side-menu -->
     </div>
-</nav>
+</nav>go
 <!-- end sidebar-collapse -->
 <!--  page-wrapper -->
 <div id="page-wrapper">

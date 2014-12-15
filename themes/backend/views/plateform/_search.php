@@ -30,11 +30,13 @@
                         <div class="form-group">
                             <?php echo $form->label($model, 'parent'); ?>
                             <?php
-                            $criteria = new CDbCriteria();
-                            $criteria->addCondition("parent = 0");
-
-                            $categories = array("" => "Select") + CHtml::listData(Category::model()->findAll($criteria), "id", "name");
-                            echo $form->dropDownList($model, 'parent', $categories, array('class' => 'form-control'));
+                                $criteria = new CDbCriteria();
+                                $criteria->addCondition("parent = 0");
+                                if (!$model->isNewRecord) {
+                                    $criteria->addCondition("id <>" . $model->id);
+                                }
+                                $plates = array("" => "Select") + CHtml::listData(Plateform::model()->findAll($criteria), "id", "name");
+                                echo $form->dropDownList($model, 'parent', $plates, array('class' => 'form-control'));
                             ?>
                         </div>
 

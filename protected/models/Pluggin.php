@@ -6,9 +6,7 @@
  * The followings are the available columns in table 'tours':
  * @property string $id
  * @property string $name
- * @property string $short_title
- * @property string $tour_type
- * @property integer $category_id
+ * @property integer $pluggin_id
  * @property string $url
  * @property string $meta_title
  * @property string $meta_description
@@ -28,7 +26,7 @@ class Pluggin extends DTActiveRecord {
      * @return string the associated database table name
      */
     public function tableName() {
-        return 'tours';
+        return 'pluggin';
     }
 
     /**
@@ -38,44 +36,19 @@ class Pluggin extends DTActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('name,category_id, short_title, tour_type, create_time, create_user_id, update_time, update_user_id', 'required'),
-            array('category_id', 'numerical', 'integerOnly' => true),
-            array('name, short_title, tour_type, url, meta_title', 'length', 'max' => 150),
+            array('name,pluggin_id, create_time, create_user_id, update_time, update_user_id', 'required'),
+            array('pluggin_id', 'numerical', 'integerOnly' => true),
+            array('name, short_title, pluggin_type, url, meta_title', 'length', 'max' => 150),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             array('meta_description, description,short_description, activity_log', 'safe'),
             array('name', 'unique'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, name, short_title, tour_type, category_id, url, meta_title, meta_description, description, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on' => 'search'),
+            array('id, name, short_title, pluggin_type, pluggin_id, url, meta_title, meta_description, description, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on' => 'search'),
         );
     }
 
-    /**
-     * Behaviour
-     *
-     */
-    public function behaviors() {
-        return array(
-            'DTMultiLangBehaviour' => array(
-                'class' => 'DTMultiLangBehaviour',
-                'langClassName' => 'TourLang',
-                'relation' => 'tour_langs',
-                'langTableName' => 'tour_langs',
-                'langForeignKey' => 'parent_id',
-                'localizedAttributes' => array(
-                    'name',
-                    'short_title',
-                    'tour_type',
-                    'meta_title',
-                    'meta_description',
-                    'description',
-                    'short_description',
-                ), //attributes of the model to be translated
-                'localizedPrefix' => '',
-                'defaultLanguage' => 'en', //your main language. Example : 'fr'
-            ),
-        );
-    }
+
 
     /**
      * @return array relational rules.
@@ -84,13 +57,12 @@ class Pluggin extends DTActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'category' => array(self::BELONGS_TO, 'Category', 'category_id'),
-            'tour_langs' => array(self::HAS_MANY, 'TourLang', 'parent_id'),
-            'tour_images' => array(self::HAS_MANY, 'TourImage', 'tour_id'),
-            'tour_images_display_def' => array(self::HAS_ONE, 'TourImage', 'tour_id', 'condition' => 'is_default=1 '),
-            'tour_images_display' => array(self::HAS_ONE, 'TourImage', 'tour_id', 'order' => 'id DESC '),
-            'tour_images_display_def_count' => array(self::STAT, 'TourImage', 'tour_id', 'condition' => 'is_default=1 '),
-            'tour_images_display_count' => array(self::STAT, 'TourImage', 'tour_id', 'order' => 'id DESC '),
+            'category' => array(self::BELONGS_TO, 'Plateform', 'pluggin_id'),
+            'pluggin_images' => array(self::HAS_MANY, 'PlugginImage', 'pluggin_id'),
+            'pluggin_images_display_def' => array(self::HAS_ONE, 'PlugginImage', 'pluggin_id', 'condition' => 'is_default=1 '),
+            'pluggin_images_display' => array(self::HAS_ONE, 'PlugginImage', 'pluggin_id', 'order' => 'id DESC '),
+            'pluggin_images_display_def_count' => array(self::STAT, 'PlugginImage', 'pluggin_id', 'condition' => 'is_default=1 '),
+            'pluggin_images_display_count' => array(self::STAT, 'PlugginImage', 'pluggin_id', 'order' => 'id DESC '),
         );
     }
 
@@ -101,9 +73,7 @@ class Pluggin extends DTActiveRecord {
         return array(
             'id' => 'Id',
             'name' => 'Name',
-            'short_title' => 'Short Title',
-            'tour_type' => 'Tour Type',
-            'category_id' => 'Category',
+            'pluggin_id' => 'Category',
             'url' => 'Url',
             'meta_title' => 'Meta Title',
             'meta_description' => 'Meta Description',
@@ -134,12 +104,11 @@ class Pluggin extends DTActiveRecord {
         $criteria = new CDbCriteria;
         $criteria->compare('id', $this->id, true);
         $criteria->compare('name', $this->name, true);
-        $criteria->compare('short_title', $this->short_title, true);
-        $criteria->compare('tour_type', $this->tour_type, true);
-        //$criteria->compare('category_id', $this->category_id);
+   
+        //$criteria->compare('pluggin_id', $this->pluggin_id);
 
         if ($id = $this->getCategoryId($this->name) != '') {
-            $criteria->compare('category_id', $id);
+            $criteria->compare('pluggin_id', $id);
         }
         $criteria->compare('url', $this->url, true);
         $criteria->compare('meta_title', $this->meta_title, true);
@@ -165,7 +134,7 @@ class Pluggin extends DTActiveRecord {
         $criteria = new CDbCriteria;
         $criteria->compare('name', $name, true);
         $criteria->select = 'id';
-        if ($model = Category::model()->find($criteria)) {
+        if ($model = Plateform::model()->find($criteria)) {
             return $model->id;
         }
     }
@@ -183,8 +152,8 @@ class Pluggin extends DTActiveRecord {
      * @return type
      */
     public function afterFind() {
-//        if(!empty($this->tour_images)){
-//            //$this->_image = $this->tour_images[0]->image_url['image_large'];
+//        if(!empty($this->pluggin_images)){
+//            //$this->_image = $this->pluggin_images[0]->image_url['image_large'];
 //        }
         $this->url = $this->id . "-" . $this->url;
         return parent::afterFind();

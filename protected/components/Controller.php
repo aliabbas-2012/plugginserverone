@@ -76,14 +76,9 @@ class Controller extends CController {
 
             Yii::app()->theme = "frontend";
             $this->layout = "//layouts/column2";
-            Yii::app()->language = 'en';
-            if (isset($_GET['lang'])) {
-                Yii::app()->language = $_GET['lang'];
-            }
-
-            $this->lang_id = Language::model()->getLanuageId(Yii::app()->language)->id;
+          
         } else {
-            
+            Yii::app()->theme = "backend";
         }
         /**
          * install configurations

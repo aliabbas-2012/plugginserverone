@@ -38,7 +38,7 @@ $this->menu = array(
                         'htmlOptions' => array("class" => "table table-striped table-bordered table-hover"),
                         'attributes' => array(
                             'name',
-                            'heading',
+                    
                             array(
                                 'name' => 'parent',
                                 'value' => isset($model->parent_cat) ? $model->parent_cat->name : "",

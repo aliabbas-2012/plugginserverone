@@ -3,7 +3,7 @@
 class m140908_194312_plateforms extends DTDbMigration {
 
     public function up() {
-        $table = "category";
+        $table = "plateform";
         $columns = array(
             'id' => 'int(11) unsigned NOT NULL AUTO_INCREMENT',
             'name' => 'varchar(150) NOT NULL',
@@ -23,7 +23,7 @@ class m140908_194312_plateforms extends DTDbMigration {
     }
 
     public function down() {
-        $table = "category";
+        $table = "plateform";
         $this->dropTable($table);
     }
 

@@ -34,16 +34,7 @@
                                 <?php echo $form->error($model, 'name'); ?>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-lg-2">
-                                <?php echo $form->labelEx($model, 'heading'); ?>
-                            </div>
-                            <div class="col-lg-8">
-                                <?php echo $form->textField($model, 'heading', array('class' => 'form-control', 'size' => 60, 'maxlength' => 150)); ?>
-                                <?php echo $form->error($model, 'heading'); ?>
-                            </div>
-                        </div>
-
+         
                         <div class="form-group">
                             <div class="col-lg-2">
                                 <?php echo $form->labelEx($model, 'parent'); ?> 
@@ -55,8 +46,8 @@
                                 if (!$model->isNewRecord) {
                                     $criteria->addCondition("id <>" . $model->id);
                                 }
-                                $categories = array("" => "Select") + CHtml::listData(Category::model()->findAll($criteria), "id", "name");
-                                echo $form->dropDownList($model, 'parent', $categories, array('class' => 'form-control'));
+                                $plates = array("" => "Select") + CHtml::listData(Plateform::model()->findAll($criteria), "id", "name");
+                                echo $form->dropDownList($model, 'parent', $plates, array('class' => 'form-control'));
                                 ?>
                                 <?php echo $form->error($model, 'parent'); ?>
                             </div>

@@ -6,7 +6,6 @@
  * The followings are the available columns in table 'category':
  * @property string $id
  * @property string $name
- * @property string $heading
  * @property integer $parent
  * @property string $url
  * @property string $meta_title
@@ -24,7 +23,7 @@ class Plateform extends DTActiveRecord {
      * @return string the associated database table name
      */
     public function tableName() {
-        return 'category';
+        return 'plateform';
     }
 
     /**
@@ -34,7 +33,7 @@ class Plateform extends DTActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('name,heading, create_time, create_user_id, update_time, update_user_id', 'required'),
+            array('name, create_time, create_user_id, update_time, update_user_id', 'required'),
             array('parent', 'numerical', 'integerOnly' => true),
             array('name, url, meta_title', 'length', 'max' => 150),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
@@ -53,10 +52,9 @@ class Plateform extends DTActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'categoryLangs' => array(self::HAS_MANY, 'CategoryLang', 'parent_id'),
-            'exist_categoryLangs' => array(self::HAS_MANY, 'CategoryLang', 'parent_id'),
-            'tours' => array(self::HAS_MANY, 'Tour', 'category_id'),
-            'parent_cat' => array(self::BELONGS_TO, 'Category', 'parent'),
+           
+            'pluggins' => array(self::HAS_MANY, 'Pluggin', 'category_id'),
+            'parent_plate' => array(self::BELONGS_TO, 'Plateform', 'parent'),
         );
     }
 
@@ -67,7 +65,6 @@ class Plateform extends DTActiveRecord {
         return array(
             'id' => 'ID',
             'name' => 'Name',
-            'heading' => 'Heading',
             'parent' => 'Parent',
             'url' => 'Url',
             'meta_title' => 'Meta Title',
@@ -101,7 +98,6 @@ class Plateform extends DTActiveRecord {
         $criteria->compare('id', $this->id, true);
         $criteria->compare('name', $this->name, true);
         $criteria->compare('parent', $this->parent);
-        $criteria->compare('heading', $this->heading);
         $criteria->compare('url', $this->url, true);
         $criteria->compare('meta_title', $this->meta_title, true);
         $criteria->compare('meta_description', $this->meta_description, true);
