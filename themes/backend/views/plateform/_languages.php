@@ -3,13 +3,13 @@
         <!-- Advanced Tables -->
         <div class="panel panel-default">
             <div class="panel-heading">
-                Category in Different Languages
+                Plateform in Different Languages
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
                     <?php
                     $this->widget('zii.widgets.grid.CGridView', array(
-                        'id' => 'category-grid',
+                        'id' => 'plateform-grid',
                         'dataProvider' => $languages,
                         'htmlOptions' => array(
                             'class' => 'table-responsive'
@@ -28,10 +28,10 @@
                                 'template'=>'{update}{delete}',
                                 'buttons'=>array(
                                     'update'=>array(
-                                        'url'=>'Yii::app()->controller->createUrl("/category/view/",array("id"=>$data->category->id,"related"=>"categoryLangs","related_id"=>$data->id))'
+                                        'url'=>'Yii::app()->controller->createUrl("/plateform/view/",array("id"=>$data->plateform->id,"related"=>"plateformLangs","related_id"=>$data->id))'
                                     ),
                                     'delete'=>array(
-                                        'url'=>'Yii::app()->controller->createUrl("/category/delete/",array("id"=>$data->category->id,"related"=>"categoryLangs","related_id"=>$data->id))'
+                                        'url'=>'Yii::app()->controller->createUrl("/plateform/delete/",array("id"=>$data->plateform->id,"related"=>"plateformLangs","related_id"=>$data->id))'
                                     ),
                                 )
                             ),

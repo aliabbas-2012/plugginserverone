@@ -59,7 +59,7 @@ class PlugginController extends Controller {
         $model = $this->loadModel($id);
         $this->manageRelations($model, $related, $related_id);
 
-        $this->render("//Pluggin/_lang_form", array("model" => $model->Pluggin_langs, "id" => $model->id));
+        $this->render("/Pluggin/_lang_form", array("model" => $model, "id" => $model->id));
     }
 
     /**
@@ -171,15 +171,14 @@ class PlugginController extends Controller {
     public function manageRelations($model, $related = "", $related_id = "") {
 
         switch ($related) {
-            case "Pluggin_langs":
+            case "Pluggin":
                 $this->setDefaultRelations($model);
                 if (!empty($related_id)) {
-                    $model->$related = PlugginLang::model()->findByPk($related_id);
+                    $model->$related = Pluggin::model()->findByPk($related_id);
                 }
-                $model->$related->parent_id = $model->id;
-                $model->$related->Pluggin_type = $model->Pluggin_type;
-                if (isset($_POST['PlugginLang'])) {
-                    $model->$related->attributes = $_POST['PlugginLang'];
+                $model->$related->parent = $model->id;
+                if (isset($_POST['Pluggin'])) {
+                    $model->$related->attributes = $_POST['Pluggin'];
                     if ($model->$related->save()) {
                         $this->redirect(array('view', 'id' => $model->id, "related" => $related, "related_id" => $model->$related->id));
                     }
@@ -190,7 +189,7 @@ class PlugginController extends Controller {
                 if (!empty($related_id)) {
                     $model->$related = PlugginImage::model()->findByPk($related_id);
                 }
-                $model->$related->Pluggin_id = $model->id;
+                $model->$related->pluggin_id = $model->id;
                 if (isset($_POST['PlugginImage'])) {
                     $model->$related->attributes = $_POST['PlugginImage'];
                     if ($model->$related->save()) {
@@ -208,12 +207,9 @@ class PlugginController extends Controller {
      * set all default relations
      */
     public function setDefaultRelations($model) {
-        $model->Pluggin_langs = new PlugginLang;
-        $model->Pluggin_langs->parent_id = $model->id;
-        $model->Pluggin_langs->Pluggin_type = $model->Pluggin_type;
         //handle other relations
-        $model->Pluggin_images = new PlugginImage();
-        $model->Pluggin_images->Pluggin_id = $model->id;
+        //$model->Pluggin_images = new PlugginImage();
+        //$model->Pluggin_images->pluggin_id = $model->id;
     }
 
     /**
@@ -225,8 +221,8 @@ class PlugginController extends Controller {
     public function deleteRelations($related = "", $related_id = "") {
 
         switch ($related) {
-            case "Pluggin_langs":
-                PlugginLang::model()->deleteByPk($related_id);
+            case "Pluggin":
+                Pluggin::model()->deleteByPk($related_id);
                 break;
             case "Pluggin_images":
                 PlugginImage::model()->deleteByPk($related_id);

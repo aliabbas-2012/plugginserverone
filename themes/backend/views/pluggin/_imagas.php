@@ -3,13 +3,13 @@
         <!-- Advanced Tables -->
         <div class="panel panel-default">
             <div class="panel-heading">
-                Tour Images
+                Pluggin Images
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
                     <?php
                     $this->widget('zii.widgets.grid.CGridView', array(
-                        'id' => 'tour-img-grid',
+                        'id' => 'pluggin-img-grid',
                         'dataProvider' => $images,
                         'htmlOptions' => array(
                             'class' => 'table-responsive'
@@ -45,10 +45,10 @@
                                 'template' => '{update}{delete}',
                                 'buttons' => array(
                                     'update' => array(
-                                        'url' => 'Yii::app()->controller->createUrl("/tour/view/",array("id"=>$data->tour->id,"related"=>"tour_images","related_id"=>$data->id))'
+                                        'url' => 'Yii::app()->controller->createUrl("/pluggin/view/",array("id"=>$data->pluggin->id,"related"=>"pluggin_images","related_id"=>$data->id))'
                                     ),
                                     'delete' => array(
-                                        'url' => 'Yii::app()->controller->createUrl("/tour/delete/",array("id"=>$data->tour->id,"related"=>"tour_images","related_id"=>$data->id))'
+                                        'url' => 'Yii::app()->controller->createUrl("/pluggin/delete/",array("id"=>$data->pluggin->id,"related"=>"pluggin_images","related_id"=>$data->id))'
                                     ),
                                 )
                             ),

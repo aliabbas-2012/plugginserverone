@@ -11,7 +11,7 @@
 
                         
                         <?php                         $form = $this->beginWidget('CActiveForm', array(
-                        'id' => 'tour-form',
+                        'id' => 'pluggin-form',
                         'enableAjaxValidation' => false,
                         'htmlOptions' => array(
                         'class' => 'form-horizontal'
@@ -50,10 +50,10 @@
                                                                                   
 
                                 <div class="form-group">
-                                    <?php echo $form->labelEx($model,'tour_type',array('class' => 'control-label col-lg-2')); ?>
+                                    <?php echo $form->labelEx($model,'pluggin_type',array('class' => 'control-label col-lg-2')); ?>
                                     <div class="col-lg-4">
-                                        <?php echo $form->textField($model, 'tour_type', array('class' => 'form-control','maxlength' => 150)); ?>
-                                        <?php echo $form->error($model,'tour_type'); ?>
+                                        <?php echo $form->textField($model, 'pluggin_type', array('class' => 'form-control','maxlength' => 150)); ?>
+                                        <?php echo $form->error($model,'pluggin_type'); ?>
  
                                     </div>
 
@@ -61,10 +61,10 @@
                                                                                   
 
                                 <div class="form-group">
-                                    <?php echo $form->labelEx($model,'category_id',array('class' => 'control-label col-lg-2')); ?>
+                                    <?php echo $form->labelEx($model,'plateform_id',array('class' => 'control-label col-lg-2')); ?>
                                     <div class="col-lg-4">
-                                        <?php echo $form->textField($model, 'category_id',array('class' => 'form-control')); ?>
-                                        <?php echo $form->error($model,'category_id'); ?>
+                                        <?php echo $form->textField($model, 'plateform_id',array('class' => 'form-control')); ?>
+                                        <?php echo $form->error($model,'plateform_id'); ?>
  
                                     </div>
 

@@ -1,6 +1,6 @@
 <?php
-/* @var $this TourController */
-/* @var $model Tour */
+/* @var $this PlugginController */
+/* @var $model Pluggin */
 /* @var $form CActiveForm */
 ?>
 
@@ -32,10 +32,10 @@
 
 
                         <div class="form-group">
-                            <?php echo $form->label($model, 'short_title', array('class' => 'control-label col-lg-2')); ?>
+                            <?php echo $form->label($model, 'meta_title', array('class' => 'control-label col-lg-2')); ?>
                             <div class="col-lg-4">
-                                <?php echo $form->textField($model, 'short_title', array('class' => 'form-control', 'maxlength' => 150)); ?>
-                                <?php echo $form->error($model, 'short_title'); ?>
+                                <?php echo $form->textField($model, 'meta_title', array('class' => 'form-control', 'maxlength' => 150)); ?>
+                                <?php echo $form->error($model, 'meta_title'); ?>
 
                             </div>
 

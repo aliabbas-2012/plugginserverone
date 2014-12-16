@@ -175,7 +175,7 @@ abstract class GxController extends Controller {
 	 * Example of returned data:
 	 * <pre>
 	 * array(
-	 *   'categories' => array(1, 4),
+	 *   'plateforms' => array(1, 4),
 	 *   'tags' => array(array('id1' => 3, 'id2' => 7), array('id1' => 2, 'id2' => 0)) // composite pks
 	 * )
 	 * </pre>

@@ -1,15 +1,15 @@
 <?php
-/* @var $this CategoryController */
-/* @var $model Category */
+/* @var $this PlateformController */
+/* @var $model Plateform */
 
 $this->breadcrumbs = array(
-    'Categories' => array('index'),
+    'Plateforms' => array('index'),
     $model->name,
 );
 
 $this->menu = array(
-    array('label' => 'List Category', 'url' => array('index')),
-    array('label' => 'Create Category', 'url' => array('create')),
+    array('label' => 'List Plateform', 'url' => array('index')),
+    array('label' => 'Create Plateform', 'url' => array('create')),
 );
 ?>
 <!-- Page-Level CSS -->
@@ -18,7 +18,7 @@ $this->menu = array(
 <div class="row">
     <!-- page header -->
     <div class="col-lg-12">
-        <h1 class="page-header"><h1>View Category [<?php echo $model->name; ?>]</h1></h1>
+        <h1 class="page-header"><h1>View Plateform [<?php echo $model->name; ?>]</h1></h1>
     </div>
     <!--end page header -->
 </div>
@@ -66,13 +66,13 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->theme->baseUrl . '
 ?>
 <?php
 $criteria = new CDbCriteria();
-$criteria->addCondition("parent_id =" . $model->id);
-$lang = new CActiveDataProvider('CategoryLang', array(
+$criteria->addCondition("parent =" . $model->id);
+$lang = new CActiveDataProvider('Plateform', array(
     'criteria' => $criteria,
         ));
 
 if (count($lang->getTotalItemCount()) > 0) {
-    $this->renderPartial("//category/_languages", array("languages" => $lang));
+    $this->renderPartial("//plateform/_languages", array("languages" => $lang));
 }
 ?>
-<?php $this->renderPartial("//category/_lang_form", array("model" => $model->categoryLangs, "id" => $model->id)); ?>
+<?php /*$this->renderPartial("//plateform/_lang_form", array("model" => $model->plateform, "id" => $model->id));*/ ?>

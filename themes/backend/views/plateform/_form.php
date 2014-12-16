@@ -1,6 +1,6 @@
 <?php
-/* @var $this CategoryController */
-/* @var $model Category */
+/* @var $this PlateformController */
+/* @var $model Plateform */
 /* @var $form CActiveForm */
 ?>
 
@@ -16,7 +16,7 @@
                     <div class="col-lg-9">
                         <?php
                         $form = $this->beginWidget('CActiveForm', array(
-                            'id' => 'category-form',
+                            'id' => 'plateform-form',
                             'enableAjaxValidation' => false,
                         ));
                         ?>

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "category".
+ * This is the model class for table "plateform".
  *
- * The followings are the available columns in table 'category':
+ * The followings are the available columns in table 'plateform':
  * @property string $id
  * @property string $name
  * @property integer $parent
@@ -53,7 +53,7 @@ class Plateform extends DTActiveRecord {
         // class name for the relations automatically generated below.
         return array(
            
-            'pluggins' => array(self::HAS_MANY, 'Pluggin', 'category_id'),
+            'pluggins' => array(self::HAS_MANY, 'Pluggin', 'plateform_id'),
             'parent_plate' => array(self::BELONGS_TO, 'Plateform', 'parent'),
         );
     }
@@ -117,7 +117,7 @@ class Plateform extends DTActiveRecord {
      * Returns the static model of the specified AR class.
      * Please note that you should have this exact method in all your CActiveRecord descendants!
      * @param string $className active record class name.
-     * @return Category the static model class
+     * @return Plateform the static model class
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);

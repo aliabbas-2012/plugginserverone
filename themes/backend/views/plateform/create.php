@@ -1,15 +1,15 @@
 <?php
-/* @var $this CategoryController */
-/* @var $model Category */
+/* @var $this PlateformController */
+/* @var $model Plateform */
 
 $this->breadcrumbs = array(
-    'Categories' => array('index'),
+    'Plateforms' => array('index'),
     'Create',
 );
 
 $this->menu = array(
-    array('label' => 'List Category', 'url' => array('index')),
-    array('label' => 'Manage Category', 'url' => array('admin')),
+    array('label' => 'List Plateform', 'url' => array('index')),
+    array('label' => 'Manage Plateform', 'url' => array('admin')),
 );
 ?>
 
@@ -17,7 +17,7 @@ $this->menu = array(
 <div class="row">
     <!-- page header -->
     <div class="col-lg-12">
-        <h1 class="page-header">Create Category</h1>
+        <h1 class="page-header">Create Plateform</h1>
     </div>
     <!--end page header -->
 </div>

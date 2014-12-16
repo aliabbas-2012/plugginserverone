@@ -1,17 +1,15 @@
 <?php
 
 /**
- * This is the model class for table "tours".
+ * This is the model class for table "plugins".
  *
- * The followings are the available columns in table 'tours':
+ * The followings are the available columns in table 'plugins':
  * @property string $id
  * @property string $name
- * @property integer $pluggin_id
- * @property string $url
+ * @property integer $plateform_id
  * @property string $meta_title
  * @property string $meta_description
  * @property string $description
- * @property string $short_description
  * @property string $create_time
  * @property string $create_user_id
  * @property string $update_time
@@ -36,15 +34,15 @@ class Pluggin extends DTActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('name,pluggin_id, create_time, create_user_id, update_time, update_user_id', 'required'),
-            array('pluggin_id', 'numerical', 'integerOnly' => true),
-            array('name, short_title, pluggin_type, url, meta_title', 'length', 'max' => 150),
+            array('name,plateform_id, create_time, create_user_id, update_time, update_user_id', 'required'),
+            array('plateform_id', 'numerical', 'integerOnly' => true),
+            array('name, meta_title', 'length', 'max' => 150),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
-            array('meta_description, description,short_description, activity_log', 'safe'),
+            array('meta_description, description, activity_log', 'safe'),
             array('name', 'unique'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, name, short_title, pluggin_type, pluggin_id, url, meta_title, meta_description, description, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on' => 'search'),
+            array('id, name, meta_title, plateform_id, meta_title, meta_description, description, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on' => 'search'),
         );
     }
 
@@ -57,7 +55,7 @@ class Pluggin extends DTActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'category' => array(self::BELONGS_TO, 'Plateform', 'pluggin_id'),
+            'plateform' => array(self::BELONGS_TO, 'Plateform', 'plateform_id'),
             'pluggin_images' => array(self::HAS_MANY, 'PlugginImage', 'pluggin_id'),
             'pluggin_images_display_def' => array(self::HAS_ONE, 'PlugginImage', 'pluggin_id', 'condition' => 'is_default=1 '),
             'pluggin_images_display' => array(self::HAS_ONE, 'PlugginImage', 'pluggin_id', 'order' => 'id DESC '),
@@ -73,8 +71,7 @@ class Pluggin extends DTActiveRecord {
         return array(
             'id' => 'Id',
             'name' => 'Name',
-            'pluggin_id' => 'Category',
-            'url' => 'Url',
+            'plateform_id' => 'Plateform',
             'meta_title' => 'Meta Title',
             'meta_description' => 'Meta Description',
             'description' => 'Description',
@@ -105,23 +102,21 @@ class Pluggin extends DTActiveRecord {
         $criteria->compare('id', $this->id, true);
         $criteria->compare('name', $this->name, true);
    
-        //$criteria->compare('pluggin_id', $this->pluggin_id);
+        $criteria->compare('plateform_id', $this->plateform_id);
 
-        if ($id = $this->getCategoryId($this->name) != '') {
-            $criteria->compare('pluggin_id', $id);
+        if ($id = $this->getPlateformId($this->name) != '') {
+            $criteria->compare('plateform_id', $id);
         }
-        $criteria->compare('url', $this->url, true);
         $criteria->compare('meta_title', $this->meta_title, true);
         $criteria->compare('meta_description', $this->meta_description, true);
         $criteria->compare('description', $this->description, true);
-        $criteria->compare('short_description', $this->short_description, true);
         $criteria->compare('create_time', $this->create_time, true);
         $criteria->compare('create_user_id', $this->create_user_id, true);
         $criteria->compare('update_time', $this->update_time, true);
         $criteria->compare('update_user_id', $this->update_user_id, true);
         $criteria->compare('activity_log', $this->activity_log, true);
 
-        return new CActiveDataProvider('Tour', array(
+        return new CActiveDataProvider('Pluggin', array(
             'criteria' => $criteria,
         ));
     }
@@ -130,7 +125,7 @@ class Pluggin extends DTActiveRecord {
      * 
      * @param type $name
      */
-    public function getCategoryId($name) {
+    public function getPlateformId($name) {
         $criteria = new CDbCriteria;
         $criteria->compare('name', $name, true);
         $criteria->select = 'id';
@@ -141,7 +136,7 @@ class Pluggin extends DTActiveRecord {
 
     /**
      * Returns the static model of the specified AR class.
-     * @return tours the static model class
+     * @return plugins the static model class
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
@@ -155,7 +150,7 @@ class Pluggin extends DTActiveRecord {
 //        if(!empty($this->pluggin_images)){
 //            //$this->_image = $this->pluggin_images[0]->image_url['image_large'];
 //        }
-        $this->url = $this->id . "-" . $this->url;
+        //$this->url = $this->id . "-" . $this->url;
         return parent::afterFind();
     }
 
@@ -164,7 +159,7 @@ class Pluggin extends DTActiveRecord {
      * @return type
      */
     public function beforeSave() {
-        $this->setSlug();
+        //$this->setSlug();
         return parent::beforeSave();
     }
 
@@ -173,7 +168,7 @@ class Pluggin extends DTActiveRecord {
      * for url
      * before save 
      */
-    public function setSlug() {
+    /*public function setSlug() {
         if (empty($this->url)) {
             $this->url = $this->name;
         }
@@ -181,6 +176,6 @@ class Pluggin extends DTActiveRecord {
         $this->url = str_replace(" ", "-", $this->url);
         $this->url = str_replace("_", "-", $this->url);
         $this->url = MyHelper::convert_no_sign($this->url);
-    }
+    }*/
 
 }

@@ -12,7 +12,7 @@
 
                         <?php
                         $form = $this->beginWidget('CActiveForm', array(
-                            'id' => 'tour-form',
+                            'id' => 'pluggin-form',
                             'enableAjaxValidation' => false,
                             'htmlOptions' => array(
                                 'class' => 'form-horizontal'
@@ -48,8 +48,8 @@
                                 <?php
                                 $criteria = new CDbCriteria();
 
-                                $categories = array("" => "Select") + CHtml::listData(Plateform::model()->findAll($criteria), "id", "name");
-                                echo $form->dropDownList($model, 'plateform_id', $categories, array('class' => 'form-control'));
+                                $plateforms = array("" => "Select") + CHtml::listData(Plateform::model()->findAll($criteria), "id", "name");
+                                echo $form->dropDownList($model, 'plateform_id', $plateforms, array('class' => 'form-control'));
                                 ?>
                                 <?php echo $form->error($model, 'plateform_id'); ?>
 

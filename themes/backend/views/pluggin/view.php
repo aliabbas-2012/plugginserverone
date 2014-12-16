@@ -1,15 +1,15 @@
 <?php
-/* @var $this TourController */
-/* @var $model Tour */
+/* @var $this PlugginController */
+/* @var $model Pluggin */
 
 $this->breadcrumbs = array(
-    'Tours' => array('index'),
+    'Pluggins' => array('index'),
     $model->name,
 );
 
 $this->menu = array(
-    array('label' => 'List Tour', 'url' => array('index')),
-    array('label' => 'Create Tour', 'url' => array('create')),
+    array('label' => 'List Pluggin', 'url' => array('index')),
+    array('label' => 'Create Pluggin', 'url' => array('create')),
 );
 ?>
 <!-- Page-Level CSS -->
@@ -18,7 +18,7 @@ $this->menu = array(
 <div class="row">
     <!-- page header -->
     <div class="col-lg-12">
-        <h1 class="page-header">View Tour #<?php echo $model->id; ?></h1>
+        <h1 class="page-header">View Pluggin #<?php echo $model->id; ?></h1>
     </div>
     <!--end page header -->
 </div>
@@ -33,32 +33,20 @@ $this->menu = array(
             <div class="panel-body">
                 <div class="table-responsive">
                     <?php
-                    $en_lang = Language::model()->getLanuageId("en", "id");
+                    /*$en_lang = Language::model()->getLanuageId("en", "id");*/
                     $this->widget('zii.widgets.CDetailView', array(
                         'data' => $model,
                         'htmlOptions' => array("class" => "table table-striped table-bordered table-hover"),
                         'attributes' => array(
                             'name',
-                            'short_title',
-                            'tour_type',
+                            'meta_title',
                             array(
-                                'name' => 'category_id',
-                                'value' => isset($model->category) ? $model->category->name : "",
+                                'name' => 'plateform_id',
+                                'value' => isset($model->plateform) ? $model->plateform->name : "",
                                 'type' => "raw",
                             ),
-                            array(
-                                'name' => 'home Page',
-                                'value' => $model->getHomePageLink($en_lang->id),
-                                'type' => "raw",
-                            ),
-                            'url',
                             'meta_title',
                             'meta_description',
-                            array(
-                                'name' => 'short_description',
-                                'value' => $model->short_description,
-                                'type' => "raw",
-                            ),
                             array(
                                 'name' => 'description',
                                 'value' => $model->description,
@@ -81,41 +69,41 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->theme->baseUrl . '
     <div class="col-lg-12">
         <div class="panel-body">
             <ul class="nav nav-tabs">
-                <li class="<?php echo empty($related) || $related == "tour_langs" ? "active" : "" ?>"><a href="#languages" data-toggle="tab">Tour Languages</a>
-                </li>
-                <li class="<?php echo $related == "tour_images" ? "active" : "" ?>"><a href="#images" data-toggle="tab">Tour Images</a>
+                <!--<li class="<?php //echo empty($related) || $related == "pluggin_langs" ? "active" : "" ?>"><a href="#languages" data-toggle="tab">Pluggin Languages</a>
+                </li>-->
+                <li class="<?php echo $related == "pluggin_images" ? "active" : "" ?>"><a href="#images" data-toggle="tab">Pluggin Images</a>
                 </li>
 
             </ul>
 
             <div class="tab-content">
-                <div class="tab-pane fade in <?php echo empty($related) || $related == "tour_langs" ? "active" : "" ?>" id="languages">
+                <!--<div class="tab-pane fade in <?php echo empty($related) || $related == "pluggin" ? "active" : "" ?>" id="languages">
                     <?php
-                    $criteria = new CDbCriteria();
-                    $criteria->addCondition("parent_id =" . $model->id);
-                    $lang = new CActiveDataProvider('TourLang', array(
+                    /*$criteria = new CDbCriteria();
+                    $criteria->addCondition("plateform_id =" . $model->id);
+                    $lang = new CActiveDataProvider('Pluggin', array(
                         'criteria' => $criteria,
                     ));
 
                     if (count($lang->getTotalItemCount()) > 0) {
-                        $this->renderPartial("//tour/_languages", array("languages" => $lang, "id" => $model->id));
-                    }
+                        $this->renderPartial("//pluggin/_languages", array("languages" => $lang, "id" => $model->id));
+                    }*/
                     ?>
-                    <?php //$this->renderPartial("//tour/_lang_form", array("model" => $model->tour_langs, "id" => $model->id)); ?>
-                </div>
-                <div class="tab-pane <?php echo $related == "tour_images" ? "active" : "fade" ?>" id="images">
+                    <?php //$this->renderPartial("//pluggin/_lang_form", array("model" => $model->pluggin_langs, "id" => $model->id)); ?>
+                </div>-->
+                <div class="tab-pane <?php echo $related == "pluggin_images" ? "active" : "fade" ?>" id="images">
                     <?php
                     $criteria = new CDbCriteria();
-                    $criteria->addCondition("tour_id =" . $model->id);
-                    $images = new CActiveDataProvider('TourImage', array(
+                    $criteria->addCondition("pluggin_id =" . $model->id);
+                    $images = new CActiveDataProvider('PlugginImage', array(
                         'criteria' => $criteria,
                     ));
 
                     if (count($images->getTotalItemCount()) > 0) {
-                        $this->renderPartial("//tour/_imagas", array("images" => $images));
+                        $this->renderPartial("//pluggin/_imagas", array("images" => $images));
                     }
                     ?>
-                    <?php $this->renderPartial("//tour/_image_form", array("model" => $model->tour_images, "id" => $model->id)); ?>
+                    <?php //$this->renderPartial("//pluggin/_image_form", array("model" => $model->pluggin_images, "id" => $model->id)); ?>
                 </div>
 
             </div>

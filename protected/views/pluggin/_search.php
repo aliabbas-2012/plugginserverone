@@ -1,6 +1,6 @@
 <?php
-/* @var $this TourController */
-/* @var $model Tour */
+/* @var $this PlugginController */
+/* @var $model Pluggin */
 /* @var $form CActiveForm */
 ?>
 

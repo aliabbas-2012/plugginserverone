@@ -160,8 +160,9 @@ class PlateformController extends Controller {
     //manage relationships here
 
     public function manageRelations($model, $related = "", $related_id = "") {
+        
         switch ($related) {
-            case "PlateformLangs":
+            /*case "PlateformLangs":
                 if (!empty($related_id)) {
                     $model->$related = PlateformLang::model()->findByPk($related_id);
                 } else {
@@ -174,10 +175,24 @@ class PlateformController extends Controller {
                         $this->redirect(array('view', 'id' => $model->id, "related" => $related, "related_id" => $related_id));
                     }
                 }
+                break;*/
+            case "Plateform":
+                if (!empty($related_id)) {
+                    $model->$related = Plateform::model()->findByPk($related_id);
+                } else {
+                    $model->$related = new Plateform;
+                }
+                $model->$related->parent_id = $model->id;
+                if (isset($_POST['Plateform'])) {
+                    $model->$related->attributes = $_POST['Plateform'];
+                    if ($model->$related->save()) {
+                        $this->redirect(array('view', 'id' => $model->id, "related" => $related, "related_id" => $related_id));
+                    }
+                }
                 break;
             default:
-                $model->PlateformLangs = new PlateformLang;
-                $model->PlateformLangs->parent_id = $model->id;
+                //$model->Plateforms = new Plateform;
+                //$model->plateform->parent = $model->id;
                 break;
         }
     }
@@ -191,8 +206,8 @@ class PlateformController extends Controller {
     public function deleteRelations($related = "", $related_id = "") {
 
         switch ($related) {
-            case "PlateformLangs":
-                PlateformLang::model()->deleteByPk($related_id);
+            case "Plateform":
+                Plateform::model()->deleteByPk($related_id);
                 break;
             default:
                 break;

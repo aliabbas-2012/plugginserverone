@@ -3,10 +3,10 @@
         <!-- Form Elements -->
         <div class="panel panel-default">
             <div class="panel-heading">
-                Create or Edit Tour Languages
+                Create or Edit Pluggin Languages
                 <?php
-                $option = array("id" => $id, "related" => "tour_langs");
-                echo CHtml::link("(Add New)", $this->createUrl("/tour/view", $option))
+                $option = array("id" => $id, "related" => "pluggin_langs");
+                echo CHtml::link("(Add New)", $this->createUrl("/pluggin/view", $option))
                 ?>
             </div>
             <div class="panel-body">
@@ -17,9 +17,9 @@
                             $option['related_id'] = $model->id;
                         }
                         $form = $this->beginWidget('CActiveForm', array(
-                            'id' => 'tour-lang-form',
+                            'id' => 'pluggin-lang-form',
                             'enableAjaxValidation' => false,
-                            'action' => $this->createUrl("/tour/createNewLanguage", $option),
+                            'action' => $this->createUrl("/pluggin/createNewLanguage", $option),
                         ));
                         $form->hiddenField($model, "parent_id")
                         ?>
@@ -75,15 +75,6 @@
 
                         </div>
                         <div class="col-lg-6">
-                            <div class="form-group">
-                                <?php echo $form->labelEx($model, 'short_title', array('class' => 'control-label col-lg-3')); ?>
-                                <div class="col-lg-8">
-                                    <?php echo $form->textField($model, 'short_title', array('class' => 'form-control', 'maxlength' => 150)); ?>
-                                    <?php echo $form->error($model, 'short_title'); ?>
-
-                                </div>
-
-                            </div><!-- group -->
 
                             <div class="form-group">
                                 <?php echo $form->labelEx($model, 'meta_title', array('class' => 'control-label col-lg-3')); ?>

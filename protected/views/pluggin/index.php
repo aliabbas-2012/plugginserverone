@@ -1,15 +1,15 @@
 <?php
-/* @var $this TourController */
-/* @var $model Tour */
+/* @var $this PlugginTourController */
+/* @var $model Pluggin */
 
 $this->breadcrumbs=array(
-	'Tours'=>array('index'),
+	'Pluggins'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-array('label'=>'List Tour', 'url'=>array('index')),
-array('label'=>'Create Tour', 'url'=>array('create')),
+array('label'=>'List Pluggin', 'url'=>array('index')),
+array('label'=>'Create Pluggin', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -18,7 +18,7 @@ $('.search-form').toggle();
 return false;
 });
 $('.search-form form').submit(function(){
-$('#tour-grid').yiiGridView('update', {
+$('#pluggin-grid').yiiGridView('update', {
 data: $(this).serialize()
 });
 return false;
@@ -32,7 +32,7 @@ return false;
 <div class="row">
     <!--  page header -->
     <div class="col-lg-12">
-        <h1 class="page-header">Manage Tours</h1>
+        <h1 class="page-header">Manage Pluggins</h1>
     </div>
     <!-- end  page header -->
 </div>
@@ -51,7 +51,7 @@ return false;
             <div class="panel-body">
                 <div class="table-responsive">
                     <?php $this->widget('zii.widgets.grid.CGridView', array(
-                    'id'=>'tour-grid',
+                    'id'=>'pluggin-grid',
                     'dataProvider'=>$model->search(),
                     'htmlOptions' => array(
                     'class' => 'table-responsive'
@@ -62,8 +62,8 @@ return false;
                     		'id',
 		'name',
 		'short_title',
-		'tour_type',
-		'category_id',
+		'pluggin_type',
+		'plateform_id',
 		/*
 		'url',
 		'meta_title',

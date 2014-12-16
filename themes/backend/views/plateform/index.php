@@ -1,15 +1,15 @@
 <?php
-/* @var $this CategoryController */
-/* @var $model Category */
+/* @var $this PlateformController */
+/* @var $model Plateform */
 
 $this->breadcrumbs = array(
-    'Categories' => array('index'),
+    'Plateforms' => array('index'),
     'Manage',
 );
 
 $this->menu = array(
-    array('label' => 'List Category', 'url' => array('index')),
-    array('label' => 'Create Category', 'url' => array('create')),
+    array('label' => 'List Plateform', 'url' => array('index')),
+    array('label' => 'Create Plateform', 'url' => array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -18,7 +18,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#category-grid').yiiGridView('update', {
+	$('#plateform-grid').yiiGridView('update', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -31,7 +31,7 @@ $('.search-form form').submit(function(){
 <div class="row">
     <!--  page header -->
     <div class="col-lg-12">
-        <h1 class="page-header">Manage Categories</h1>
+        <h1 class="page-header">Manage Plateforms</h1>
     </div>
     <!-- end  page header -->
 </div>
@@ -54,7 +54,7 @@ $('.search-form form').submit(function(){
                 <div class="table-responsive">
                     <?php
                     $this->widget('zii.widgets.grid.CGridView', array(
-                        'id' => 'category-grid',
+                        'id' => 'plateform-grid',
                         'dataProvider' => $model->search(),
                         'htmlOptions' => array(
                             'class' => 'table-responsive'

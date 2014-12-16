@@ -1,17 +1,17 @@
 <?php
 
-class CategoryController extends PublicController {
+class PlateformController extends PublicController {
 
     public $layout = "//layouts/main";
 
-    public function actionIndex($category = '') {
+    public function actionIndex($plateform = '') {
         $this->page_key = "tours-bikes";
         $criteria = new CDbCriteria();
         $criteria->addCondition("name = :name");
         $criteria->params = array(
-            ':name' => $category
+            ':name' => $plateform
         );
-        $model = Category::model()->find($criteria);
+        $model = Plateform::model()->find($criteria);
         //contact us model
 
         $contact = new ContactForm;
@@ -23,20 +23,20 @@ class CategoryController extends PublicController {
         if (isset($_GET['ajax'])) {
             $this->renderPartial('//default/_contact_form', array('model' => $contact));
         } else {
-            $this->render('//category/index', array('model' => $model, "contact" => $contact));
+            $this->render('//plateform/index', array('model' => $model, "contact" => $contact));
         }
     }
 
     /**
      * 
-     * @param type $category
+     * @param type $plateform
      * @param type $slug
      */
-    public function actionDetail($category = "", $slug = "") {
+    public function actionDetail($plateform = "", $slug = "") {
         $slug = explode("-", $slug);
         $id = $slug[0];
 
-        $model = Tour::model()->findByPk($id);
+        $model = Pluggin::model()->findByPk($id);
 
         $this->pageTitle = "[" . Yii::app()->name . "]" . $model->name;
         $this->meta_keywords = $model->meta_title;
@@ -52,7 +52,7 @@ class CategoryController extends PublicController {
         if (isset($_GET['ajax'])) {
             $this->renderPartial('//default/_contact_form', array('model' => $contact));
         } else {
-            $this->render('//category/detail', array('model' => $model, "contact" => $contact));
+            $this->render('//plateform/detail', array('model' => $model, "contact" => $contact));
         }
     }
 

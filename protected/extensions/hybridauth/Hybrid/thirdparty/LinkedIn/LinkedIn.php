@@ -753,7 +753,7 @@ class LinkedIn {
 		}
 		
 		// construct and send the request
-		$query    = self::_URL_API . '/v1/posts/' . $pid . '/category/code';
+		$query    = self::_URL_API . '/v1/posts/' . $pid . '/plateform/code';
 		$response = $this->fetch('PUT', $query, $data);
 		  
   	/**

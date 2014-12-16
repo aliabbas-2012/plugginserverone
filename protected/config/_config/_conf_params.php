@@ -78,7 +78,7 @@ $params = array(
         'about' => 'about',
         'terms' => 'terms',
     ),
-    'category' => array(
+    'plateform' => array(
         'links'=>"links",
         'home' => 'home',
         'tours-bikes' => 'tours-bikes',

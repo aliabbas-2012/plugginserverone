@@ -1,22 +1,22 @@
 <?php
-/* @var $this TourController */
-/* @var $model Tour */
+/* @var $this PlugginController */
+/* @var $model Pluggin */
 
 $this->breadcrumbs=array(
-	'Tours'=>array('index'),
+	'Pluggins'=>array('index'),
 	$model->name,
 );
 
 $this->menu=array(
-array('label'=>'List Tour', 'url'=>array('index')),
-array('label'=>'Create Tour', 'url'=>array('create')),
+array('label'=>'List Pluggin', 'url'=>array('index')),
+array('label'=>'Create Pluggin', 'url'=>array('create')),
 
 );
 ?>
 <div class="row">
     <!-- page header -->
     <div class="col-lg-12">
-        <h1 class="page-header">View Tour #<?php echo $model->id; ?></h1>
+        <h1 class="page-header">View Pluggin #<?php echo $model->id; ?></h1>
     </div>
     <!--end page header -->
 </div>
@@ -36,8 +36,8 @@ array('label'=>'Create Tour', 'url'=>array('create')),
                     		'id',
 		'name',
 		'short_title',
-		'tour_type',
-		'category_id',
+		'pluggin_type',
+		'plateform_id',
 		'url',
 		'meta_title',
 		'meta_description',

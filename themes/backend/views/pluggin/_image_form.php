@@ -3,10 +3,10 @@
         <!-- Form Elements -->
         <div class="panel panel-default">
             <div class="panel-heading">
-                Create or Edit Tour Images
+                Create or Edit Pluggin Images
                 <?php
-                $option = array("id" => $id, "related" => "tour_images");
-                echo CHtml::link("(Add New)", $this->createUrl("/tour/view", $option))
+                $option = array("id" => $id, "related" => "pluggin_images");
+                echo CHtml::link("(Add New)", $this->createUrl("/pluggin/view", $option))
                 ?>
             </div>
             <div class="panel-body">
@@ -17,14 +17,14 @@
                             $option['related_id'] = $model->id;
                         }
                         $form = $this->beginWidget('CActiveForm', array(
-                            'id' => 'tour-images-form',
+                            'id' => 'pluggin-images-form',
                             'enableAjaxValidation' => false,
-                            'action' => $this->createUrl("/tour/view", $option),
+                            'action' => $this->createUrl("/pluggin/view", $option),
                             'htmlOptions' => array(
                                 'enctype' => 'multipart/form-data'
                             )
                         ));
-                        $form->hiddenField($model, "tour_id")
+                        $form->hiddenField($model, "pluggin_id")
                         ?>
 
                         <p class="form-group alert alert-info">Fields with <span class="required">*</span> are required.</p>

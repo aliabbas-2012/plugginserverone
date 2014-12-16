@@ -1,6 +1,6 @@
 <?php
-/* @var $this CategoryController */
-/* @var $model Category */
+/* @var $this PlateformController */
+/* @var $model Plateform */
 /* @var $form CActiveForm */
 ?>
 

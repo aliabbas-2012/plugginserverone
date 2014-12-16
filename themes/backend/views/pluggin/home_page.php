@@ -11,7 +11,7 @@
                     <div class="col-lg-12">
                         <?php
                         $form = $this->beginWidget('CActiveForm', array(
-                            'id' => 'tour-images-form',
+                            'id' => 'pluggin-images-form',
                             'enableAjaxValidation' => false,
                             'htmlOptions' => array(
                                 'enctype' => 'multipart/form-data'
@@ -30,8 +30,8 @@
                                 <div class="col-lg-6">
                                     <?php
                                     echo $form->hiddenField($model, "object_type");
-                                    if ($model->object_type == "tour") {
-                                        echo Tour::model()->find($model->id)->name;
+                                    if ($model->object_type == "pluggin") {
+                                        echo Pluggin::model()->find($model->id)->name;
                                         echo " --- ";
                                     } else if ($model->object_type == "diary") {
                                         echo MotoDairy::model()->find($model->id)->title;
@@ -82,16 +82,6 @@
                                 <div class="col-lg-6">
                                     <?php echo $form->textField($model, 'name', array('class' => 'form-control', 'maxlength' => 150)); ?>
                                     <?php echo $form->error($model, 'name'); ?>
-
-                                </div>
-
-                            </div><!-- group -->
-
-                            <div class="form-group">
-                                <?php echo $form->labelEx($model, 'short_description', array('class' => 'control-label col-lg-3')); ?>
-                                <div class="col-lg-6">
-                                    <?php echo $form->textField($model, 'short_description', array('class' => 'form-control', 'maxlength' => 150)); ?>
-                                    <?php echo $form->error($model, 'short_description'); ?>
 
                                 </div>
 

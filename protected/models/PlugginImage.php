@@ -1,11 +1,11 @@
 <?php
 
 /**
- * This is the model class for table "tour_image".
+ * This is the model class for table "pluggin_image".
  *
- * The followings are the available columns in table 'tour_image':
+ * The followings are the available columns in table 'pluggin_image':
  * @property string $id
- * @property string $tour_id
+ * @property string $pluggin_id
  * @property string $tag
  * @property string $is_default
  * @property string $lang_id
@@ -19,7 +19,7 @@
  * @property string $activity_log
  *
  * The followings are the available model relations:
- * @property Product $tour
+ * @property Product $pluggin
  */
 class PlugginImage extends DTActiveRecord {
 
@@ -68,7 +68,7 @@ class PlugginImage extends DTActiveRecord {
      * @return string the associated database table name
      */
     public function tableName() {
-        return 'tour_image';
+        return 'pluggin_image';
     }
 
     /**
@@ -79,14 +79,14 @@ class PlugginImage extends DTActiveRecord {
         // will receive user inputs.
         return array(
             array('lang_id,create_time, create_user_id, update_time, update_user_id', 'required'),
-            array('tour_id, create_user_id, update_user_id', 'length', 'max' => 11),
+            array('pluggin_id, create_user_id, update_user_id', 'length', 'max' => 11),
             array('tag, image_large, image_small, image_detail', 'length', 'max' => 150),
-            array('alt_title,_copy_path,image_large,lang_id,upload_key,tour_id, is_default,activity_log', 'safe'),
+            array('alt_title,_copy_path,image_large,lang_id,upload_key,pluggin_id, is_default,activity_log', 'safe'),
             array('image_large', 'file', 'allowEmpty' => $this->isNewRecord ? false : true,
                 'types' => 'jpg,jpeg,gif,png,JPG,JPEG,GIF,PNG'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, tour_id, tag, image_large, image_small, image_detail, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on' => 'search'),
+            array('id, pluggin_id, tag, image_large, image_small, image_detail, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on' => 'search'),
         );
     }
 
@@ -97,7 +97,7 @@ class PlugginImage extends DTActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'tour' => array(self::BELONGS_TO, 'Tour', 'tour_id'),
+            'pluggin' => array(self::BELONGS_TO, 'Pluggin', 'pluggin_id'),
             'lang' => array(self::BELONGS_TO, 'Language', 'lang_id'),
         );
     }

@@ -1,15 +1,15 @@
 <?php
-/* @var $this TourController */
-/* @var $model Tour */
+/* @var $this PlugginController */
+/* @var $model Pluggin */
 
 $this->breadcrumbs = array(
-    'Tours' => array('index'),
+    'Pluggins' => array('index'),
     'Manage',
 );
 
 $this->menu = array(
-    array('label' => 'List Tour', 'url' => array('index')),
-    array('label' => 'Create Tour', 'url' => array('create')),
+    array('label' => 'List Pluggin', 'url' => array('index')),
+    array('label' => 'Create Pluggin', 'url' => array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -18,7 +18,7 @@ $('.search-form').toggle();
 return false;
 });
 $('.search-form form').submit(function(){
-$('#tour-grid').yiiGridView('update', {
+$('#pluggin-grid').yiiGridView('update', {
 data: $(this).serialize()
 });
 return false;
@@ -32,7 +32,7 @@ return false;
 <div class="row">
     <!--  page header -->
     <div class="col-lg-12">
-        <h1 class="page-header">Manage Tours</h1>
+        <h1 class="page-header">Manage Pluggins</h1>
     </div>
     <!-- end  page header -->
 </div>
@@ -42,7 +42,7 @@ return false;
     $this->renderPartial('_search', array(
         'model' => $model,
     ));
-    $en_lang = Language::model()->getLanuageId("en", "id");
+    /*$en_lang = Language::model()->getLanuageId("en", "id");*/
     ?>
 </div><!-- search-form -->
 <div class="row">
@@ -64,16 +64,10 @@ return false;
                         'filter' => $model,
                         'columns' => array(
                             'name',
-                            'short_title',
-                            'tour_type',
+                            'meta_title',
                             array(
-                                'name' => 'category_id',
-                                'value' => 'isset($data->category)?$data->category->name:""'
-                            ),
-                            array(
-                                'header' => 'home Page ',
-                                'value' => '$data->getHomePageLink("' . $en_lang->id . '")',
-                                "type" => 'raw'
+                                'name' => 'plateform_id',
+                                'value' => 'isset($data->plateform)?$data->plateform->name:""'
                             ),
                             array(
                                 'class' => 'CButtonColumn',
