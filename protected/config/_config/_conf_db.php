@@ -8,7 +8,7 @@ $conf_component_db = array(
     'connectionString' => 'mysql:host=localhost;dbname=plugginserverone', //myprojectnet
     'emulatePrepare' => true,
     'username' => 'root',
-    'password' => 'root',
+    'password' => 'admin',
     'charset' => 'utf8',
     'initSQLs'=>array('SET NAMES utf8'), 
     
