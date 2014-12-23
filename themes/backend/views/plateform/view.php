@@ -61,18 +61,3 @@ $this->menu = array(
     </div>
 </div>    
 <div class="clear"></div>
-<?php
-Yii::app()->getClientScript()->registerScriptFile(Yii::app()->theme->baseUrl . '/assets/scripts/jquery.ba-bbq1.js', CClientScript::POS_END);
-?>
-<?php
-$criteria = new CDbCriteria();
-$criteria->addCondition("parent =" . $model->id);
-$lang = new CActiveDataProvider('Plateform', array(
-    'criteria' => $criteria,
-        ));
-
-if (count($lang->getTotalItemCount()) > 0) {
-    $this->renderPartial("//plateform/_languages", array("languages" => $lang));
-}
-?>
-<?php /*$this->renderPartial("//plateform/_lang_form", array("model" => $model->plateform, "id" => $model->id));*/ ?>

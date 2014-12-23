@@ -60,10 +60,9 @@
                         <ul class="dropdown-menu dropdown-user">
                             <li><a href="<?php echo $this->createUrl("//users/profile"); ?>"><i class="fa fa-user fa-fw"></i>User Profile</a>
                             </li>
-                            <li><a href='<?php echo $this->createUrl("/configurations/load", array("m" => "TourType", "child_id" => "new")); ?>'><i class="fa fa-gear fa-fw"></i>Configuration</a>
+                            <li><a href='<?php echo $this->createUrl("/configurations/load", array("m" => "Misc",)); ?>'><i class="fa fa-gear fa-fw"></i>Configuration</a>
                             </li>
-                            <li><a href='<?php echo $this->createUrl("/configurations/load", array("m" => "ContactUsSetting", "id"=>1, "child_id" => "new")); ?>'><i class="fa fa-gear fa-fw"></i>Contact Us</a>
-                            </li>
+                        
                             <li class="divider"></li>
                             <li><a href="<?php echo $this->createUrl("/site/logout"); ?>"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
                             </li>

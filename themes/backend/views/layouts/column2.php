@@ -1,13 +1,5 @@
 <?php $this->beginContent('//layouts/main'); ?>
-<?php
-$pluggins_array = array(
-    "motoDairy",
-    "banner",
-    "motoGallery",
-    "teamImage",
-    "innerSlider",
-        )
-?>
+
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <!-- side-menu -->

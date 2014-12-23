@@ -46,7 +46,7 @@ class PlateformController extends Controller {
      */
     public function actionView($id, $related = "", $related_id = "") {
         $model = $this->loadModel($id);
-        $this->manageRelations($model, $related, $related_id);
+        
         $this->render('view', array(
             'model' => $model,
         ));
@@ -154,63 +154,6 @@ class PlateformController extends Controller {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'Plateform-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
-        }
-    }
-
-    //manage relationships here
-
-    public function manageRelations($model, $related = "", $related_id = "") {
-        
-        switch ($related) {
-            /*case "PlateformLangs":
-                if (!empty($related_id)) {
-                    $model->$related = PlateformLang::model()->findByPk($related_id);
-                } else {
-                    $model->$related = new PlateformLang;
-                }
-                $model->$related->parent_id = $model->id;
-                if (isset($_POST['PlateformLang'])) {
-                    $model->$related->attributes = $_POST['PlateformLang'];
-                    if ($model->$related->save()) {
-                        $this->redirect(array('view', 'id' => $model->id, "related" => $related, "related_id" => $related_id));
-                    }
-                }
-                break;*/
-            case "Plateform":
-                if (!empty($related_id)) {
-                    $model->$related = Plateform::model()->findByPk($related_id);
-                } else {
-                    $model->$related = new Plateform;
-                }
-                $model->$related->parent_id = $model->id;
-                if (isset($_POST['Plateform'])) {
-                    $model->$related->attributes = $_POST['Plateform'];
-                    if ($model->$related->save()) {
-                        $this->redirect(array('view', 'id' => $model->id, "related" => $related, "related_id" => $related_id));
-                    }
-                }
-                break;
-            default:
-                //$model->Plateforms = new Plateform;
-                //$model->plateform->parent = $model->id;
-                break;
-        }
-    }
-
-    /**
-     * 
-     * @param type $model
-     * @param type $related
-     * @param type $related_id
-     */
-    public function deleteRelations($related = "", $related_id = "") {
-
-        switch ($related) {
-            case "Plateform":
-                Plateform::model()->deleteByPk($related_id);
-                break;
-            default:
-                break;
         }
     }
 
