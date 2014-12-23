@@ -1,64 +1,63 @@
-<?php
-//loading css and js files for own pages
-$cs = Yii::app()->clientScript;
 
-$cs->registerCssFile(Yii::app()->theme->baseUrl . '/css/ebook_style.css');
+<link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/apps.css" rel="stylesheet">
+
+
+<!-- Carousel
+  ================================================== -->
+
+<?php
+$sliders = ProductSlider::model()->findAll();
+$slider_content = $this->renderPartial('//default/_slider', array("sliders" => $sliders));
 ?>
-<section id="banner">
-    <article>
-        <?php
-        $criteria = new CDbCriteria();
-        $criteria->limit = 2;
-        $categories = Category::model()->findAll($criteria);
-        $count = 0;
-        foreach ($categories as $cat):
-            if ($count == 0) {
-                $this->renderPartial("//product/_apps_banner", array("cat" => $cat));
-            } else if ($count == 1) {
-                $this->renderPartial("//product/_ebooks_banner", array("cat" => $cat));
-            }
-            $count++;
-        endforeach;
-        ?>
-    </article>
-</section>
-<section id="content">
+
+
+
+
+
+
+
+<section id="contents">
 
 </section>
+
+
 <?php
-/**
- * slug is empty then automatic first will be called as loaded
- * category
- */
 if ($slug == "") {
+
     Yii::app()->clientScript->registerScript('click_categories', "
-            jQuery('.category_labels').first().trigger('click');
+            dtech_app.updateElementAjax('" . $this->createUrl('/web/product/products', array('slug' => $slug)) . "','contents');
         ", CClientScript::POS_READY);
-} else {
-    Yii::app()->clientScript->registerScript('click_categories', "
-            jQuery('#category_" . $slug . "').trigger('click');
+} else if ($slug == "e-books") {
+
+    Yii::app()->clientScript->registerScript('click_categoriesa', "
+        dtech_app.updateElementAjax('" . $this->createUrl('/web/product/products', array('slug' => $slug)) . "','contents');
+     
+                
+        ", CClientScript::POS_READY);
+} else if ($slug == "apps") {
+
+    Yii::app()->clientScript->registerScript('click_categoriesa', "
+        dtech_app.updateElementAjax('" . $this->createUrl('/web/product/products', array('slug' => $slug)) . "','contents');
+     
+                
+        ", CClientScript::POS_READY);
+} else if ($slug == "books") {
+
+
+    $page = isset($_REQUEST['page']) ? ($_REQUEST['page']) : 0;
+//    if (!empty($_REQUEST['page'])) {
+//        Yii::app()->clientScript->registerScript('click_categoriesdsada', "
+//        dtech_app.updatePage('" . $this->createUrl('/web/product/viewProducts', array('slug' => $slug, "page" => $page)) . "','contents','search-form');
+//     
+//                
+//        ", CClientScript::POS_READY);
+//    }
+
+    Yii::app()->clientScript->registerScript('click_categoriesdsada', "
+        dtech_app.updateElementAjax('" . $this->createUrl('/web/product/viewProducts', array('slug' => $slug, "page" => $page)) . "','contents');
+     
+                
         ", CClientScript::POS_READY);
 }
-
-Yii::app()->clientScript->registerScript('click_nav_menu', '
+   
     
-    jQuery("body").click(function() {
-            jQuery(".subs div").hide();
-
-        });
-    $("#d_nav > li > a").live("click",function () { // binding onclick
-            if ($(this).parent().hasClass("selected")) {
-                $("#d_nav .selected div div").slideUp(100); // hiding popups
-                $("#d_nav .selected").removeClass("selected");
-            } else {
-                $("#d_nav .selected div div").slideUp(100); // hiding popups
-                $("#d_nav .selected").removeClass("selected");
-
-            if ($(this).next(".subs").length) {
-                $(this).parent().addClass("selected"); // display popup
-                $(this).next(".subs").children().slideDown(200);
-            }
-        }
-    });
-', CClientScript::POS_READY);
-?>

@@ -15,7 +15,7 @@ include '_config/_conf_params.php';
 
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-    'name' => 'Motolao',
+    'name' => 'Plugin Server',
     'theme' => 'backend',
     'homeUrl' => array('/web/default/index'),
     // preloading 'log' component

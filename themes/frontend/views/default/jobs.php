@@ -3,28 +3,13 @@
 $cs = Yii::app()->clientScript;
 
 $cs->registerCssFile(Yii::app()->theme->baseUrl . '/css/jobs.css');
-$cs->registerCssFile(Yii::app()->theme->baseUrl . '/css/contact_us.css');
-$cs->registerCssFile(Yii::app()->theme->baseUrl . '/css/ebook_style.css');
+
 ?>
 
 
 <section id="banner">
-    <article>
-        <?php
-        $criteria = new CDbCriteria();
-        $criteria->limit = 2;
-        $categories = Category::model()->findAll($criteria);
-        $count = 0;
-        foreach ($categories as $cat):
-            if ($count == 0) {
-                $this->renderPartial("//product/_apps_banner", array("cat" => $cat));
-            } else if ($count == 1) {
-                $this->renderPartial("//product/_ebooks_banner", array("cat" => $cat));
-            }
-            $count++;
-        endforeach;
-        ?>
-    </article>
+
+    
 </section>
 <section id="jobs">
     <article>
@@ -53,7 +38,7 @@ $cs->registerCssFile(Yii::app()->theme->baseUrl . '/css/ebook_style.css');
             $form = $this->beginWidget('CActiveForm', array(
                 'id' => 'job-form',
                 'enableAjaxValidation' => false,
-                'htmlOptions' => array('enctype' => 'multipart/form-data'),
+                'htmlOptions' => array('enctype' => 'multipart/form-data', 'data-ajax'=>'false'),
             ));
             ?>
             <div class="upload_cv">
@@ -62,7 +47,8 @@ $cs->registerCssFile(Yii::app()->theme->baseUrl . '/css/ebook_style.css');
                 <?php echo $form->textField($model, 'cv_file_name', array('placeholder' => 'Upload your CV (pdf or word file)', 'id' => 'cv_file_name')); ?>
 
                 <div class="cv_div">
-                    <input type="button" value="choose file to upload" style="" />
+                    
+                    <input type="button" value="choose file to upload" style="top:128px" ></input>
                     <?php echo $form->fileField($model, 'cv_file', array('id' => 'cv_file')); ?>
                 </div>
                 <?php echo CHtml::submitButton('Submit', array("class" => "choose_file")); ?>
@@ -77,6 +63,7 @@ $cs->registerCssFile(Yii::app()->theme->baseUrl . '/css/ebook_style.css');
 </section>
 <script type="text/javascript">
     document.getElementById("cv_file").onchange = function() {
+        
         document.getElementById("cv_file_name").value = this.value;
     };
 

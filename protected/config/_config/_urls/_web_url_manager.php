@@ -7,6 +7,14 @@
  */
 $rules_web = array(
     /** other urls * */
+    '' => '/web/default/index',
+    'about-us/<target:[\w-\.]+>/' => '/web/default/aboutUs',
+    'about-us' => '/web/default/aboutUs',
+    'ideas' => '/web/default/ideas',
+    'notification' => '/web/default/notification',
+    'contact-us' => '/web/default/contactus',
+    'slider/<slug:[\w-\.]+>/' => '/web/default/loadSlider',
+    
     '<controller:\w+>/<id:\d+>' => '<controller>/view',
     '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
     '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
