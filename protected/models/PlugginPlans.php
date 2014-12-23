@@ -1,26 +1,30 @@
 <?php
 
 /**
- * This is the model class for table "conf_plans".
+ * This is the model class for table "pluggin_plans".
  *
- * The followings are the available columns in table 'conf_plans':
+ * The followings are the available columns in table 'pluggin_plans':
  * @property string $id
- * @property string $name
+ * @property string $pluggin_id
+ * @property string $price
+ * @property string $plan
+ * @property string $currency
  * @property string $create_time
  * @property string $create_user_id
  * @property string $update_time
  * @property string $update_user_id
  * @property string $activity_log
+ *
+ * The followings are the available model relations:
+ * @property ConfPlans $plan0
  */
-class ConfPlans extends DTActiveRecord {
-
-    public $confViewName = '//confPlans/index';
+class PlugginPlans extends DTActiveRecord {
 
     /**
      * @return string the associated database table name
      */
     public function tableName() {
-        return 'conf_plans';
+        return 'pluggin_plans';
     }
 
     /**
@@ -30,13 +34,14 @@ class ConfPlans extends DTActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('name, create_time, create_user_id, update_time, update_user_id', 'required'),
-            array('name', 'length', 'max' => 150),
-            array('create_user_id, update_user_id', 'length', 'max' => 11),
+            array('pluggin_id, plan, create_time, create_user_id, update_time, update_user_id', 'required'),
+            array('pluggin_id, plan, create_user_id, update_user_id', 'length', 'max' => 11),
+            array('price', 'length', 'max' => 8),
+            array('currency', 'length', 'max' => 6),
             array('activity_log', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, name, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on' => 'search'),
+            array('id, pluggin_id, price, plan, currency, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on' => 'search'),
         );
     }
 
@@ -47,6 +52,8 @@ class ConfPlans extends DTActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
+            'plan' => array(self::BELONGS_TO, 'ConfPlans', 'plan'),
+            'pluggin' => array(self::BELONGS_TO, 'Pluggin', 'pluggin_id'),
         );
     }
 
@@ -56,7 +63,10 @@ class ConfPlans extends DTActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'ID',
-            'name' => 'Name',
+            'pluggin_id' => 'Pluggin',
+            'price' => 'Price',
+            'plan' => 'Plan',
+            'currency' => 'Currency',
             'create_time' => 'Create Time',
             'create_user_id' => 'Create User',
             'update_time' => 'Update Time',
@@ -83,7 +93,10 @@ class ConfPlans extends DTActiveRecord {
         $criteria = new CDbCriteria;
 
         $criteria->compare('id', $this->id, true);
-        $criteria->compare('name', $this->name, true);
+        $criteria->compare('pluggin_id', $this->pluggin_id, true);
+        $criteria->compare('price', $this->price, true);
+        $criteria->compare('plan', $this->plan, true);
+        $criteria->compare('currency', $this->currency, true);
         $criteria->compare('create_time', $this->create_time, true);
         $criteria->compare('create_user_id', $this->create_user_id, true);
         $criteria->compare('update_time', $this->update_time, true);
@@ -99,7 +112,7 @@ class ConfPlans extends DTActiveRecord {
      * Returns the static model of the specified AR class.
      * Please note that you should have this exact method in all your CActiveRecord descendants!
      * @param string $className active record class name.
-     * @return ConfPlans the static model class
+     * @return PlugginPlans the static model class
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
