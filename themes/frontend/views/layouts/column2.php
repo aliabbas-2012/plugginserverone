@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="shortcut icon" href="<?php echo Yii::app()->theme->baseUrl; ?>/images/ico/72x72favicon.png">
+        <link rel="shortcut icon" href="<?php echo Yii::app()->theme->baseUrl; ?>/images/fav_icon.png">
 
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -65,9 +65,9 @@
                             </div>
                             <div class="navbar-collapse collapse">
                                 <?php
-                                $criteria = new CDbCriteria();
+                                /*$criteria = new CDbCriteria();
                                 $criteria->limit = 2;
-                                $categories = Category::model()->findAll($criteria);
+                                $categories = Category::model()->findAll($criteria);*/
                                 ?>
                                 <ul class="nav navbar-nav coll-nav">
 
@@ -88,14 +88,6 @@
                                     <li class="coll-dash">
                                         -
                                     </li>
-                                    <li>
-                                        <?php
-                                        echo CHtml::link($categories[0]->name, $this->createUrl("/web/product/products", array("slug" => $categories[0]->slug)), array('data-ajax' => "false", "id" => $categories[0]->slug));
-                                        ?>
-                                    </li>
-                                    <li class="coll-dash">
-                                        -
-                                    </li>
                                     <li><?php
                                         echo CHtml::link("Catalogue", $this->createUrl("default/underConstruction"), array(
                                         'data-ajax' => "false"
@@ -105,14 +97,6 @@
 
                                 </ul>
                                 <ul class="navigate nav navbar-nav">
-                                    <li>
-                                        <?php
-                                        echo CHtml::link($categories[1]->name, $this->createUrl("/web/product/products", array("slug" => $categories[1]->slug)), array('data-ajax' => "false", "id" => $categories[1]->slug));
-                                        ?>
-                                    </li>
-                                    <li class="coll-dash">
-                                        -
-                                    </li>
                                     <li><?php
                                         echo CHtml::link("Contact Us", $this->createUrl("/web/default/contactUs"), array(
                                             'data-ajax' => "false"
@@ -136,7 +120,7 @@
                                 </ul>
                             </div>
                             <div class="logo_image">
-                                <?php echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl . "/images/pub_logo_02.png"), Yii::app()->homeUrl, array('data-ajax' => "false")); ?>
+                                <?php echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl . "/images/pluginserver.png"), Yii::app()->homeUrl, array('data-ajax' => "false")); ?>
 
                             </div>
                         </div>

@@ -63,7 +63,7 @@
 
                                         <?php echo $form->textField($model, 'email', array("placeholder" => "Email * ")); ?>
 
-                                        <?php echo $form->textField($model, 'subject', array("placeholder" => "App Type (E-book, App)")); ?>
+                                        <?php echo $form->textField($model, 'subject', array("placeholder" => "Enquery Type")); ?>
 
                                         <?php echo $form->textArea($model, 'body', array("placeholder" => "Message")); ?>
                                         
@@ -80,8 +80,8 @@
                     //                    width: 98%;'));
                                                 ?><br/>
                                                 <?php // echo CHtml::CheckBox('', false, array('value' => 'off')); ?>
-                                                <?php echo $form->CheckBox($model, 'subscriber_status', array('value' => "on", 'uncheckValue' => 'off')); ?>
-                                                <?php echo $form->labelEx($model, 'subscriber_status'); ?>
+                                                <?php /*echo $form->CheckBox($model, 'subscriber_status', array('value' => "on", 'uncheckValue' => 'off')); ?>
+                                                <?php echo $form->labelEx($model, 'subscriber_status');*/ ?>
                                             </h4>
                                             <p>We always have some exciting news to share.</p>
                                         </div>
@@ -100,12 +100,12 @@
                 <div class="right_contact">
                     <a href="javascript:void(0)" class="main_logo">
                         <?php
-                        echo CHtml::image(Yii::app()->theme->baseUrl . "/images/darussalam_main_logo_03.png")
+                        echo CHtml::image(Yii::app()->theme->baseUrl . "/images/pluginserver_responsive.png")
                         ?>
 
                     </a>
-                    <h6 style="text-align:center; font-family: ArnoPro-Regular; color:#000000; font-size:24px; font-weight:bold;">Your authentic source of knowledge</h6>
-                    <p style="text-align:justify; font-family: ArnoPro-Regular; color:#402c20; font-size:12px;">Darussalam is a Multilingual International Islamic Publishing House, headquartered in Riyadh, Kingdom of Saudi Arabia, and branches and agents in major cities around the world. The foremost obligation of Darussalam is to publish authentic Islamic books in the light of the Qur´an and the Sahih Ahâdith in all major International languages.</p>
+                    <h6 style="text-align:center; font-family: ArnoPro-Regular; color:#000000; font-size:24px; font-weight:bold;">Seo Logica Plugin Server</h6>
+                    <p style="text-align:justify; font-family: ArnoPro-Regular; color:#402c20; font-size:12px;">Seo Logica Plugin Server is one of the best plugins providers for different plateforms like, Joomla, WordPress, Druppal etc.</p>
                 </div>  
             </div>     
         </div>

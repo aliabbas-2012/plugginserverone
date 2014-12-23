@@ -6,7 +6,7 @@
         <meta name="description" content="Darussalam Publishers offers multilingual Islamic Books, E-Books on Amazon Kindle, iBooks Store, Islamic Android, iOS Apps, Children Learning and Educational Toys.">
         <meta name="keywords" content="darussalam, darussalam publishers, islamic apps, islamic apps for android, ios free apps, islamic books, free islamic books, ibooks, amazon kindle books, amazon kindle e books, islamic learning, learn quran, hadiths" />
         <meta name="author" content="">
-        <link rel="shortcut icon" href="<?php echo Yii::app()->theme->baseUrl; ?>/images/ico/fav_icon.png">
+        <link rel="shortcut icon" href="<?php echo Yii::app()->theme->baseUrl; ?>/images/fav_icon.png">
     <a href="https://plus.google.com/b/106173933592983959516/+Darussalampublishers" rel="publisher"> </a>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="google-site-verification" content="TNff8WzEgCkK-LBRTediAvbgmn0wA7xtvb3e9BAGeGU" />
@@ -78,19 +78,6 @@
                                     ));
                                     ?>
                                 </li>
-                                <li class="coll-dash">
-                                    -
-                                </li>
-                                <li class="coll-dash">
-                                    -
-                                </li>
-                                <li><?php
-                                    echo CHtml::link("Catalogue", $this->createUrl("default/underConstruction"), array(
-                                        'data-ajax' => "false"
-                                    ));
-                                    ?>
-                                </li>
-
                             </ul>
                             <ul class="navigate nav navbar-nav">
                                 <li>
@@ -128,7 +115,7 @@
                             <h1 style="display:none;">Darussalam Publishers</h1>
                         </div>
                         <div class="mini_logo">
-                            <?php echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl . "/images/pluginserver.png"), Yii::app()->homeUrl, array('data-ajax' => "false")); ?>
+                            <?php echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl . "/images/pluginserver_responsive.png"), Yii::app()->homeUrl, array('data-ajax' => "false")); ?>
                         </div>
                     </div>
                 </div>

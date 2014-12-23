@@ -416,8 +416,10 @@ class DefaultController extends Controller {
     }
 
     public function actionFaq() {
-        throw new CHttpException(404, 'The requested page does not exist.');
-        $this->render("//default/faq");
+        /*throw new CHttpException(404, 'The requested page does not exist.');
+        $this->render("//default/faq");*/
+        $this->render("//default/underconstruction");
+        
     }
 
     public function actionQuranReader() {
@@ -450,7 +452,7 @@ class DefaultController extends Controller {
     }
 
     public function actionUnderConstruction() {
-        // $this->layout = "//layouts/column2";
+         $this->layout = "//layouts/column2";
         $this->render("//default/underconstruction");
     }
 
