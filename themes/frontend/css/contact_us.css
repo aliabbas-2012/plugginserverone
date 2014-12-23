@@ -1,0 +1,63 @@
+
+.contact_content { }
+
+.left_contact { margin-left: auto; margin-right: auto; width:100%; float:left; padding: 100px 20px; background:#eaeaea; } 
+
+.right_contact { width:100%; float:left; padding: 100px 0px;}
+
+.contact_us_table { padding:0 10px; margin: 0px 0 0 0px; }
+
+.contact_us_table h3 { font-family: ArnoPro-Regular; color:#000000; font-size:48px; padding: 0; margin: 0; border-bottom: 1px solid #c4c4c4; }
+
+.contact_us_table p { color:#474747; font-size:14px; padding: 0; margin: 7px 0 0 0; font-family: ArnoPro-Regular; }
+
+.contact_us_table input[type='text'] { font-family: ArnoPro-Regular; width:100%; padding: 5px; margin: 5px 0; border:none; border:1px solid #c7c7c7; color:#b9b9b9; font-size:14px; }
+
+.contact_us_table textarea { color:#b9b9b9; font-size:14px; font-family: ArnoPro-Regular; height:205px; width:100%; padding: 5px; margin: 5px 0; border:none; border:1px solid #c7c7c7; }
+
+.contact_us_table input[type='submit'] { font-family: ArnoPro-Regular; width:87px; border:none; background:#454545; color:#c7c7c7; font-size:14px; padding: 3px 0 0 0; margin: 4px 0 0 0; cursor:pointer; height:23px; border:1px solid #c7c7c7; }
+
+.main_logo { margin-right:auto; margin-left:auto; text-align:center; display:block; }
+
+.contact_design { margin-top:30px; margin-right:auto; margin-left:auto; display:block; }
+
+.check_box_contact { float:left; width:100%; border-top:1px solid #c4c4c4; border-bottom:1px solid #c4c4c4; padding: 0px 0 5px 0; margin: 10px 0 20px 0; }
+
+.check_box_contact h4 { font-family: ArnoPro-Regular; color:#474747; font-size:14px; font-weight:normal; padding: 0; margin: 0; line-height:10px !important; }
+
+.check_box_contact p { font-family: ArnoPro-Regular; color:#474747; font-size:14px; padding-left: 23px; margin: 0; }
+
+.right_contact input[type='submit'] { background: none repeat scroll 0 0 #454545; border: medium none; color: #C7C7C7; cursor: pointer; font-family: ArnoPro-Regular; font-size: 21px; height: 27px; margin: 4px 0 0; padding: 1px 0 0; width: 120px; }
+
+
+.ui-btn-text { position:relative; margin-left: 10px; } 
+
+/**
+* captcha class
+*/
+
+.g_cp_link { text-decoration: none; font-family: arial; color:#000000; font-size:15px; padding: 0; margin: 0; }
+
+.g_cp_link:hover{ color: red; }
+
+.contact_us_table input.error { border:1px solid red; }
+
+.contact_us_table input[type='text']{ color:#000000; }
+
+.contact_us_table textArea{ color:#000000; }
+
+.b { margin:0 auto; float:left; position:relative; }
+
+.contact_us_part { }
+
+@media (max-width: 1024px) { 
+
+	.left_contact { width:68%; margin: 0 auto; float:none; }
+	
+}
+
+@media (max-width: 640px) { 
+
+	.left_contact { width:100%; }
+	
+}

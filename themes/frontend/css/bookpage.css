@@ -1,0 +1,19 @@
+/* 
+    Document   : bookpage
+    Created on : Dec 4, 2013, 4:24:44 PM
+    Author     : mudassar
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+.book-listing { position: absolute; }
+
+.book-listing ul { list-style:none; }
+
+.book-listing ul li { list-style:none; }
+
+.book-listing ul li a { color: #FFFFFF; padding: 3px 10px; }

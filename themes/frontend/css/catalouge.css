@@ -1,0 +1,121 @@
+
+.catalouge { margin: 40px 0; }
+
+.catalouge p { text-align:justify; color:#3e3e3e; font-size:12px; font-family:"Times New Roman", Times, serif; }
+
+.catalouge h3 { color:#725633; font-size:28px; font-family:"Times New Roman", Times, serif; }
+
+.catalouge-links { border-top: 1px solid #e3e3e3; width:120px; margin-top:40px; }
+
+.catalouge-upper { background:#efefef; float:left; padding: 20px 0; width:100%; }
+
+.catalouge-lower { background:none; float:left; padding: 20px 0; width:100%; }
+
+.catalouge-g-plus { float:left; padding: 8px 0 0 10px; width: 40px; }
+
+.catalouge-g-plus a img { padding-right:10px; }
+
+.catalouge-g-plus p { padding: 5px 0px 0 5px; color:#3e3e3e; font-size:12px; font-family:"Times New Roman", Times, serif; }
+
+.cat-left-arrow { position:absolute; left:300px; top:83%; }
+
+.cat-right-arrow { position:absolute; right:300px; top:83%; }
+
+.cat-left-arrow:hover { opacity: 0.7; }
+
+.cat-right-arrow:hover { opacity: 0.7; }
+
+.cat-left { padding-left:51px !important; margin-top:20px; }
+
+.cat-main-right h3 { color:#725633; font-size:27px; font-family:"Times New Roman", Times, serif; font-weight:normal; }
+
+.cat-main-right { padding-left:121px !important; }
+
+.cat-main-left { padding-right:141px !important; margin-top:18px; }
+
+.cat-right { padding-right:141px !important; }
+
+.cat-right h3 { color:#725633; font-size:27px; font-family:"Times New Roman", Times, serif; font-weight:normal; }
+
+.catalogue-one { top:37%; }
+
+.catalogue-two { top:45%; }
+
+.catalogue-three { top:53%; }
+
+/** ali abbas worked for custom carousal **/
+#carousel-wrap {
+
+    width: 960px;
+    overflow: hidden;
+    margin-right: auto;
+    margin-left: auto;
+	margin-top:50px;
+	margin-bottom:50px;
+}
+
+#catimonial-list {
+    overflow: hidden;
+    padding: 10px;
+    width: 9600px;
+}
+#catimonial-list>li {
+    overflow: hidden;
+    padding: 0;
+    width: 960px;
+    display: inline-block;
+}
+
+@media (max-width: 1499px) { 
+
+    .cat-left-arrow { left:5%; }
+
+    .cat-right-arrow { right:5%; }
+
+    #carousel-wrap { width:800px !important; }
+
+    #catimonial-list>li { width:800px !important; } 
+
+}
+
+@media (max-width: 1299px) { 
+
+    #carousel-wrap { width:700px !important; }
+
+    #catimonial-list>li { width:700px !important; } 
+
+}
+
+@media (max-width: 1099px) { 
+
+    #carousel-wrap { width:600px !important; }
+
+    #catimonial-list>li { width:600px !important; } 
+	
+	.cat-right { text-align:center; padding-right: 0 !important; }
+	
+	.cat-left { text-align:center; padding-right: 0 !important; }
+	
+	.cat-main-right { text-align:center; padding-left: 0 !important; float:left; }
+	
+	.cat-main-left { text-align:center; padding-right: 0 !important; }
+	
+	.catalouge-links { margin: 0 auto; }
+
+}
+
+@media (max-width: 799px) { 
+
+    #carousel-wrap { width:500px !important; }
+
+    #catimonial-list>li { width:500px !important; } 
+
+}
+
+@media (max-width: 499px) { 
+
+    #carousel-wrap { width:400px !important; }
+
+    #catimonial-list>li { width:400px !important; } 
+
+}
