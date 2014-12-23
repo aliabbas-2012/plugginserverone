@@ -1,0 +1,8 @@
+.left_banner div {
+	float:right;
+	margin-right:100px;
+	text-align:center;
+}
+.right_banner div {
+    float:left;
+}

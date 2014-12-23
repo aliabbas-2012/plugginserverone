@@ -1,0 +1,72 @@
+/* 
+    Document   : custom_style
+    Created on : Oct 7, 2013, 10:35:31 AM
+    Author     : ubaid
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.custom_image{
+    height: 214px;
+    
+}
+.pagination_span{
+    float:right;
+    margin-right: 24px;
+    font-family: Arial,Helvetica,sans-serif ;
+    color: #1D8FBB;
+    font-size: 14px;
+}
+.about_content p{
+    margin-top: 0px !important;
+}
+#under_footer article p{
+    float: right;
+}
+#under_footer article p a {
+    color:#474747;
+    text-decoration: none;
+
+}
+.tickercontainer{
+    color: #C7C7C7;
+    font-size: 14px;
+}
+ul.newsticker{
+    font: 16px Verdana;
+}
+ul.newsticker li{
+    margin: -4px;
+}
+
+
+.cross a {
+    background: url("../images/cross_03.jpg") repeat scroll 0 0 transparent;
+    border: 1px solid #AFAFAF;
+    box-shadow: 0 0 0 0 #E1E1E1;
+    float: right;
+    height: 45px;
+    transition: transform 0.3s ease 0s, border 0.3s ease 0s, margin 0.3s ease 0s, box-shadow 0.2s ease 0s, opacity 0.3s ease 0s, top 0.3s ease 0s;
+    width: 45px;
+    margin-top: -1px;
+}
+.cross a:hover { transform:rotate(360deg); border:1px solid rgba(175, 175, 175, 0); box-shadow: 0 0 0 4px #E1E1E1; margin-top: 3px; margin-right: 3px; }
+
+.right_banner_pad_img img { margin: 0 0px 0 100px; height: 199px; width: 250px !important; }
+
+.right_banner_small_img { margin: 10px 0 0 40px; width: 100%; }
+
+.right_banner_small_img a img { margin: 0 10px; }
+
+.amazon_link { margin: 10px 0 0 70px; float: left; }
+
+.google_link { float: left;}
+header{
+    position: fixed;
+    z-index: 1;
+}
+#header{
+    margin-top: 46px;
+    position: fixed;
+ 
+}

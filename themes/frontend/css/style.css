@@ -1,0 +1,159 @@
+
+body, html { padding: 0; margin: 0; }
+
+body { background:url(../images/pattern.jpg) repeat; }
+
+img{ max-width:100% !important; max-height:100% !important; }
+
+a { outline:none; }
+
+a img{ max-width:100% !important; max-height:100% !important; border:none; outline:none; }
+
+@font-face { font-family: Albertus Medium; src:url(../fonts/Albertus%20Medium.ttf); }
+
+@font-face { font-family: ArnoPro-Regular; src:url(../fonts/ArnoPro-Regular.otf); }
+
+@font-face { font-family: Humanist_521_BT; src:url(../fonts/Humanist_521_BT.ttf); }
+
+header { width:100%; background:url(../images/header_bg_02.jpg) repeat; min-height:45px; padding: 0; margin: 0; float:left; border-bottom:1px solid #FFF; }
+
+header article { padding: 0; margin: 0 auto; width:960px; }
+
+header article nav { width:50%; padding: 0; margin: 0; float:left; }
+
+header article nav ul { list-style:none; padding: 0; margin: 0; }
+
+header article nav ul li { padding: 10px; margin: 0; display:inline; float:left; color:#FFF; }
+
+header article nav ul li a { padding: 0; margin: 0; color:#FFF; font-family: Albertus Medium; font-size:15px; text-decoration:none; }
+
+header article nav ul li a:hover { color:#484848 }
+
+.logo { left:47%; padding: 0; margin-left:auto; margin-right:auto; position:absolute; z-index:1000; }
+
+.logo a { border:none; }
+
+header article .right_nav { width:50%; padding: 0; margin: 0; float:left; }
+
+header article .right_nav ul { float:right; list-style:none; padding: 0; margin: 0; }
+
+header article .right_nav ul li { padding: 10px; margin: 0; display:inline; float:left; color:#FFF; }
+
+header article .right_nav ul li:first-child { display:none; }
+
+header article .right_nav ul li a { padding: 0; margin: 0; color:#FFF; font-family: Albertus Medium; font-size:15px; text-decoration:none; }
+
+header article .right_nav ul li a:hover { color:#484848 }
+
+#header { width:100%; float:left; padding: 0; margin: 0; border-top:1px solid #88ba95; background:#484848; min-height:30px; }
+
+#header article { padding: 0; margin: 0 auto; width:960px; }
+
+#header article p { text-align:center; width:100%; padding: 7px 0 0 0; margin: 0; color:#848484; font-size:15px; font-family: ArnoPro-Regular; }
+
+.main_head_banner { max-height:683px; }
+
+#banner { display:block; float:left; padding: 0; margin: 0; width:100%; background:url(../images/right_banner_bg_03.jpg) repeat; }
+
+.left_banner { background:url(../images/left_banner_bg_03.jpg) repeat; width:40%; float:left; padding:172px 0 0px 0; margin:0; text-align:center; cursor:pointer; background-size:auto; min-height:511px; background-position:2% 7%; }
+
+/*.left_banner a img:hover { opacity:0.7; }*/
+
+.left_banner h1 { padding: 0; margin: 0; font-family: ArnoPro-Regular; color:#FFF; font-size:95px; font-weight:normal; }
+
+.left_banner a img { padding: 0; margin: 0 5px; }
+
+.middle_banner { height:683px; padding: 0; margin: 0; float:left; width:13%; text-align:center; }
+
+.middle_banner img { width:100% !important; height:100% !important; }
+
+.right_banner { background:url(../images/right_banner_bg_03.jpg) repeat; width:43%; float:left; padding:172px 0 0px 0; margin:0; text-align:center; cursor:pointer; background-size:auto; padding-left: 20px; min-height:511px; }
+
+/*.right_banner a img:hover { opacity:0.7; }*/
+
+.right_banner h1 { padding: 0; margin: 10px 0 0 75px; font-family: ArnoPro-Regular; color:#FFF; font-size:95px; font-weight:normal; }
+
+.right_banner a img { padding: 0; }
+
+#content { width:100%; float:left; padding: 0; margin: 40px 0; display:block; }
+
+#content article { width:960px; padding: 0; margin: 0 auto; }
+
+#content article h2 { font-family: ArnoPro-Regular; color:#000000; font-size:76px; font-weight:normal; padding: 0; margin: 0; text-align:center; }
+
+.quran_part { width:25%; padding: ; margin: 0; float:left; background:url(../images/quran_bg_03.png) no-repeat center; height:152px; background-size:contain; }
+
+.quran_part p { color:#FFF; padding: 10px 90px 0 20px; margin: 0; font-size:25px; font-family: Humanist_521_BT; }
+
+.book_part { width:25%; padding: ; margin: 0; float:left; background:url(../images/books_img_03.png) no-repeat center; height:150px; background-size:contain; }
+
+.book_part p { color:#FFF; padding: 10px 90px 0 20px; margin: 0; font-size:25px; font-family: Humanist_521_BT; }
+
+.toy_part { width:25%; padding: ; margin: 0; float:left; background:url(../images/educational_toys_img_03.png) no-repeat center; height:150px; background-size:contain; }
+
+.toy_part p { color:#FFF; padding: 10px 90px 0 20px; margin: 0; font-size:25px; font-family: Humanist_521_BT; }
+
+.device_part { width:25%; padding: ; margin: 0; float:left; background:url(../images/digital_device_img_03.png) no-repeat center; height:150px; background-size:contain; }
+
+.device_part p { color:#FFF; padding: 10px 90px 0 20px; margin: 0; font-size:25px; font-family: Humanist_521_BT; }
+
+footer { padding: 0; margin: 0px 0 0 0; float:left; width:100%; background:#484848; min-height:37px; }
+
+footer article { width:960px; padding: 0; margin: 0 auto; }
+
+footer article p { color:#faf6e8; padding: 10px; font-size:13px; margin: 0; font-family:Arial, Helvetica, sans-serif; }
+
+#under_footer { padding: 0; margin: 0px 0 0 0; float:left; width:100%; }
+
+#under_footer article { width:960px; padding: 0; margin: 0 auto; }
+
+#under_footer article p { font-weight:bold; color:#5c5c5c; padding: 10px; font-size:13px; margin: 0; font-family:Arial, Helvetica, sans-serif; }
+
+.dots_img { width:100%; float:left; text-align:center; }
+
+.dots_img img { padding: 0; margin: 20px 0 0 0;}
+
+.slider_part {   margin: 0 auto 0 19.8%; padding: 0; width:960px; z-index:1000 !important; position:relative; }
+
+@media only screen and (max-width: 1400px) { 
+
+.slider_part {   margin: 38px auto 0 18.8%; padding: 0; width:960px; z-index:1000 !important; position:relative; }
+}
+
+.slide_bg { width:19%; padding: 0; margin: 0; float:left; margin-top:-130px; margin-left:27px; }
+
+.slide_bg a img { width:154px !important; height:51px !important; }
+
+.slide_right_bg { width:50%; padding: 0; margin: 0; float:left; margin-top:-130px; margin-left:210px; }
+/*some changes here*/
+
+.slide_right_bg a img { width:154px !important; height:51px !important; }  
+
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url(../images/cloading.gif)
+                50% 50% 
+                no-repeat;
+}
+body.loading {
+    overflow: hidden;   
+}
+body.loading .modal {
+    display: block;
+}
+.clear{
+    clear: both;
+}
+.adds_link {
+    cursor: default;
+}
+.darussalam_ecom {
+    cursor: pointer;
+}

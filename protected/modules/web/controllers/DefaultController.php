@@ -16,8 +16,8 @@ class DefaultController extends PublicController {
     public function actionIndex() {
 
         $this->page_key = "home";
-        $this->setMetaInformation();
-        $this->render('//default/index');
+        //$this->setMetaInformation();
+        $this->render('//site/index');
     }
 
     public function actionTeam() {

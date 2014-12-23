@@ -1,0 +1,96 @@
+
+#idea { padding: 0; margin: 0; width:100%; float:left; }
+
+#idea article { width:960px; padding: 0; margin: 0 auto; font-family: ArnoPro-Regular; }
+
+.upper_idea { padding: 45px 0 0 0; margin: 0; width:100%; text-align:center; float:left; }
+
+.upper_idea h1 { padding: 0; margin: 0; font-weight:normal; color:#f3b704; font-size:53px; }
+
+.upper_idea h2 { padding: 0; margin: 0; font-weight:normal; color:#474747; font-size:32px; }
+
+.lower_idea { width:100%; float:left; padding: 0; margin: 0; }
+
+.left_idea { padding: 20px 0; margin: 0; float:left; width:40%; }
+
+.left_idea img { margin-left:auto; margin-right:auto; display:block; }
+
+.right_idea { padding: 20px 0; margin: 0; float:left; width:60%; }
+
+.right_upper_idea { width:100%; float:left; }
+
+.app_btn { border:none; color:#b9b9b9; font-size:18px; font-family: ArnoPro-Regular; background:#484848; padding: 0; margin: 0; width:121px; height:26px; text-align:center; }
+
+.book_btn { background: white;border:none; color:#484848; font-size:18px; font-family: ArnoPro-Regular; background:#none; padding: 0; margin: 0 0px; width:121px; height:26px; text-align:center; border:1px solid #c3c3c3; }
+
+.right_upper_idea span { color:#484848; font-size:12px; font-family: ArnoPro-Regular; padding: 0; margin: 0px 0 0 0; }
+
+.right_middle_idea { padding: 15px 0; margin: 0; float:left; width:100%; }
+
+.right_middle_idea input[type=text] { background: #ffffff; border: none; font-size:14px; color:gray; padding: 0 0px 0 10px; margin: 4px 0; height:30px; border:1px solid #c7c7c7; font-family: ArnoPro-Regular; width:98%; }
+
+.right_middle_idea textarea { background: #ffffff; border: none; font-size:14px; color:gray; padding: 5px 0px 0 10px; margin: 4px 0; height:90px; border:1px solid #c7c7c7; font-family: ArnoPro-Regular; width:98%; resize:none; }
+
+.wireframe_diagram { width:70% !important; float:left; }
+
+.choose_file { border:none; color:#C7C7C7; font-size:19px; font-family: ArnoPro-Regular; background:#484848; padding: 3px 0 0 0; margin: 4px 0 0 0; width:27%; height:31px; text-align:center; float:right; }
+
+.right_middle_idea input[type=submit] { border:none; color:#C7C7C7 font-size:21px; font-family: ArnoPro-Regular; background:#484848; padding: 3px 0 0 0; margin: 20px 0 0 0; width:88px; height:29px; text-align:center; float:right; border:1px solid #c7c7c7; }
+
+.lower_idea { padding: 0 0 13px 0;text-align: justify; margin: 0; width:100%; float:left; }
+
+.lower_idea h3 { color: #474747; font-size:20px; font-family: ArnoPro-Regular; padding: 0; margin: 0; }
+
+.lower_idea p { color: #474747; font-size:12px; font-family: ArnoPro-Regular; padding: 0; margin: 0; }
+
+.idea_file { width: 400px !important; float: left !important; overflow: hidden; }
+
+.idea_file input { display: block !important;
+                   width: 357px !important;
+                   height: 27px !important;
+                   opacity: 1000 !important;
+                   overflow: hidden !important; }
+
+.activ_idea{
+    background: none repeat scroll 0 0 #484848;
+    border: medium none;
+    color: #e6e6e6;
+    font-family: ArnoPro-Regular;
+    font-size: 18px;
+    height: 26px;
+    margin: 0 0px;
+    padding: 0;
+    text-align: center;
+    width: 121px;
+
+}
+
+.right_middle_idea input.error {
+    border: 1px solid red;
+}
+
+#cv_file{
+    cursor: pointer;
+    font-size: 28px;
+    height: 45px;
+    margin: -35px 0 0;
+    opacity: 0;
+    
+}
+
+
+::-webkit-input-placeholder {
+    color: #B9B9B9;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    color: #B9B9B9;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+    color: #B9B9B9;  
+}
+
+:-ms-input-placeholder {  
+    color: #B9B9B9;  
+}
