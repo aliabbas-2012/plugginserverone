@@ -166,6 +166,10 @@
     <?php echo $content; ?>
     <div class="all_sect">
         <div class="container marketing">
+            <h2>More About Plugin Server or Plugins provider</h2>
+            
+        </div>
+        <!--<div class="container marketing">
             <div class="row-fluid fivecolumns">
                 <div class="span2 quick">
                     <section>QUICK</section>
@@ -193,7 +197,7 @@
                     <article>Languages</article>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
     <div class="footer_sect">
         <div class="container marketing">
@@ -211,38 +215,17 @@
                                 'data-ajax' => "false"
                             ));
                             ?></li>
-                        <li> <?php
-                            echo CHtml::link("Press Releases", $this->createUrl("/web/default/underConstruction"), array
-                                (
-                                'data-ajax' => "false"
-                            ));
-                            ?></li>
-
-                        <li>
-                            <?php
-                            echo CHtml::link("Our Location", $this->createUrl("/web/default/located"), array
-                                (
-                                'data-ajax' => "false"
-                            ));
-                            ?>
-                        </li>
                     </ul>
                 </div><!-- /.col-lg-3 -->
                 <div class="col-lg-3 footer_list">
                     <section>Contact Us</section>
                     <ul>
                         <li><?php
-                            echo CHtml::link("Affiliate Program", $this->createUrl("/web/default/underConstruction"), array
+                            echo CHtml::link("Affiliate Plugins", $this->createUrl("/web/default/underConstruction"), array
                                 (
                                 'data-ajax' => "false"
                             ));
                             ?></li>
-                        <!--                        <li><?php /*
-                              echo CHtml::link("Careers", $this->createUrl("/web/default/career"), array
-                              (
-                              'data-ajax' => "false"
-                              ));
-                             */ ?></li>-->
                         <li><?php
                             echo CHtml::link("Feedback", $this->createUrl("/web/default/underConstruction"), array
                                 (
@@ -268,13 +251,6 @@
                             ));
                             ?></li>
                         <li><?php
-                            echo CHtml::link("Catalogue", $this->createUrl("/web/product/catlogue"), array
-                                (
-                                'data-ajax' => "false"
-                            ));
-                           
-                            ?></li>
-                        <li><?php
                             echo CHtml::link("Gallery", $this->createUrl("/web/default/gallery"), array
                                 (
                                 'data-ajax' => "false"
@@ -283,39 +259,27 @@
 
                     </ul>
                 </div><!-- /.col-lg-3 -->
-                <div class="col-lg-3 footer_not_list">
-                    <section>We're seeking</section>
-                    <article>top talent</article>
-                    <p><?php
-                        echo CHtml::link("Careers at Darussalam >>", $this->createUrl("/web/default/career"), array
-                            (
-                            'data-ajax' => "false"
-                        ));
-                        ?></p>
-                    <img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/small_mosque_03.png" />
-                </div><!-- /.col-lg-3 -->
             </div><!-- /.row -->
             <div class="row footer_facebook">
                 <div class="col-lg-6 left-footer_facebook">
-                    <div class="fb-like"  data-href="http://www.facebook.com/darussalam.sns" data-colorscheme="dark" data-width="80%" data-height="50px" data-layout="standard" data-action="like" data-show-faces="false" data-share="false"></div>
-<!--                        <a href="#"><img src="<?php // echo Yii::app()->theme->baseUrl;        ?>/images/f_btn_03.png" title="Facebook" alt="Facebook" /></a> <span>30000  people like this.</span>-->
+                    <div class="fb-like"  data-href="" data-colorscheme="dark" data-width="80%" data-height="50px" data-layout="standard" data-action="like" data-show-faces="false" data-share="false"></div>
                      <a href="//plus.google.com/106173933592983959516?prsrc=3"
                        rel="publisher" target="_top" style="text-decoration:none;display:inline-block;color:#333;text-align:center; font:13px/16px arial,sans-serif;white-space:nowrap;">
-                        <span style="display:inline-block;font-weight:bold;vertical-align:top;margin-right:5px; margin-top:8px;">Darussalam Publishers</span><span style="display:inline-block;vertical-align:top;margin-right:15px; margin-top:8px;">on</span>
+                        <span style="display:inline-block;font-weight:bold;vertical-align:top;margin-right:5px; margin-top:8px;">Plugin Server</span><span style="display:inline-block;vertical-align:top;margin-right:15px; margin-top:8px;">on</span>
                         <img src="//ssl.gstatic.com/images/icons/gplus-32.png" alt="Google+" style="border:0;width:32px;height:32px;"/>
                     </a>
                 </div><!-- /.col-lg-6 -->
                 <div class="col-lg-6 right-footer_facebook">
                     <span>Follow Us</span>
 <!--                        <a href="#"><img src="<?php /* echo Yii::app()->theme->baseUrl; ?>/images/skype_03.png" onmouseover="this.src = '<?php echo Yii::app()->theme->baseUrl; ?>/images/skype_hover.png'" onmouseout="this.src = '<?php echo Yii::app()->theme->baseUrl; */ ?>/images/skype_03.png'" title="Skype" alt="Skype"></a>-->
-                    <a href="http://twitter.com/darussalamsns" target="_blank"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/twitter_03.png" onmouseover="this.src = '<?php echo Yii::app()->theme->baseUrl; ?>/images/twitter_hover.png'" onmouseout="this.src = '<?php echo Yii::app()->theme->baseUrl; ?>/images/twitter_03.png'" title="Twitter" alt="Twitter"></a>
-                    <a href="http://www.facebook.com/darussalam.sns" target="_blank"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/facebook_03.png" onmouseover="this.src = '<?php echo Yii::app()->theme->baseUrl; ?>/images/facebook_hover.png'" onmouseout="this.src = '<?php echo Yii::app()->theme->baseUrl; ?>/images/facebook_03.png'" title="Facebook" alt="Facebook"></a>
-                    <a href="http://www.linkedin.com/company/3553479?trk=tyah&trkInfo=tas%3Adarussalam%20%2Cidx%3A1-3-3" target="_blank"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/linked_in_03.png" onmouseover="this.src = '<?php echo Yii::app()->theme->baseUrl; ?>/images/linked_in_hover.png'" onmouseout="this.src = '<?php echo Yii::app()->theme->baseUrl; ?>/images/linked_in_03.png'" title="Linkedin" alt="Linkedin"></a>
+                    <a href="" target="_blank"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/twitter_03.png" onmouseover="this.src = '<?php echo Yii::app()->theme->baseUrl; ?>/images/twitter_hover.png'" onmouseout="this.src = '<?php echo Yii::app()->theme->baseUrl; ?>/images/twitter_03.png'" title="Twitter" alt="Twitter"></a>
+                    <a href="" target="_blank"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/facebook_03.png" onmouseover="this.src = '<?php echo Yii::app()->theme->baseUrl; ?>/images/facebook_hover.png'" onmouseout="this.src = '<?php echo Yii::app()->theme->baseUrl; ?>/images/facebook_03.png'" title="Facebook" alt="Facebook"></a>
+                    <a href="" target="_blank"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/linked_in_03.png" onmouseover="this.src = '<?php echo Yii::app()->theme->baseUrl; ?>/images/linked_in_hover.png'" onmouseout="this.src = '<?php echo Yii::app()->theme->baseUrl; ?>/images/linked_in_03.png'" title="Linkedin" alt="Linkedin"></a>
                    
                 </div><!-- /.col-lg-6 -->
             </div><!-- /.row -->
             <div class="row footer_p">
-                <p>© Darussalam Publishers LTD. +0966 651.4700 | Suite 700 | KSA</p>
+                <p>© Plugin Server LTD.</p>
                 <p>All rights reserved. Various trademarks held by their respective owners.</p>
             </div><!-- /.row -->
         </div>
@@ -326,7 +290,7 @@
             <footer>
                 <!-- Place this code where you want the badge to render. -->
 
-                <p>Designed &amp; Developed by DTECH</p>
+                <p>Designed &amp; Developed by Plugin Server</p>
             </footer>
         </div>
     </div><!-- /.container -->
@@ -343,34 +307,7 @@
             }
         });
     </script>
-    <div id="fb-root"> </div>
-    <script>
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id))
-                return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=395003540638224";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
-    <script>
-        (function(i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function() {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-        ga('create', 'UA-44777740-2', 'darussalampublishers.com');
-        ga('send', 'pageview');
-
-    </script>
 
     <!--     AddThis Smart Layers BEGIN 
          Go to http://www.addthis.com/get/smart-layers to customize -->

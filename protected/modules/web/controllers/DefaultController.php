@@ -179,11 +179,11 @@ class DefaultController extends Controller {
      */
     public function actionContactUs() {
         $this->layout = "//layouts/frontend";
-        SeoMeta::model()->configureSeoFields("contact-us", $this);
-        SeoOpenGraph::model()->configureSeoOpenGraphFields("contact-us", $this);
-        $model = new ContactFeedback();
-        if (isset($_POST['ContactFeedback'])) {
-            $model->attributes = $_POST['ContactFeedback'];
+        //SeoMeta::model()->configureSeoFields("contact-us", $this);
+        //SeoOpenGraph::model()->configureSeoOpenGraphFields("contact-us", $this);
+        $model = new ContactForm();
+        if (isset($_POST['ContactForm'])) {
+            $model->attributes = $_POST['ContactForm'];
             if ($model->save()) {
 
                 $email['To'] = Yii::app()->params['adminEmail'];

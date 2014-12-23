@@ -16,22 +16,18 @@
 
                     <img src="<?php  echo Yii::app()->theme->baseUrl; ?>/sliderlayer/bg1.jpg" class="ls-bg" alt="Slide background">
 
-                    <img class="ls-s-1" src="<?php  echo Yii::app()->theme->baseUrl; ?>/sliderlayer/mosque-img.png"alt="Ladybug" style="top: 50px; left: 66%; slidedirection : bottom; slideoutdirection : fade; durationin : 200; durationout : 4500; easingin : easeOutQuad; rotatein : 0; ">
+                    <img class="ls-s-1" src="<?php  echo Yii::app()->theme->baseUrl; ?>/sliderlayer/pub-clouds.png"alt="Ladybug" style="top: 50px; left: 66%; slidedirection : bottom; slideoutdirection : fade; durationin : 200; durationout : 4500; easingin : easeOutQuad; rotatein : 0; ">
 
                         <h5 class="ls-s1 text1" style="background:none; top: 100px; left: 48%; slidedirection : top; slideoutdirection : right; durationout : 750; easingin : easeOutBack; scalein : 0; scaleout : 0; color:#2e3c43; font-weight:normal; font-family:Helvetica Neue; font-size:62px;">
                         One of the
                     </h5>
 
                         <h5 class="ls-s1 text1" style="background:none; top:163px; left: 430px; slidedirection : top; slideoutdirection : right; durationout : 750; easingin : easeOutBack; scalein : 0; scaleout : 0; color:#FFF; font-family:Helvetica Neue Cond; font-size:52px;">
-                        Biggest &amp; Authentic
-                    </h5>
-
-                        <h5 class="ls-s1 text1" style="background:none; top:205px; left: 48%; slidedirection : top; slideoutdirection : right; durationout : 750; easingin : easeOutBack; scalein : 0; scaleout : 0; color:#FFF; font-family:Helvetica Neue Cond; font-size:52px;">
-                        sources of
+                        Biggest Plugin Provider
                     </h5>
 
                         <h5 class="ls-s1 text4" style="background:none; top:253px; left: 480px; slidedirection : top; slideoutdirection : right; durationout : 750; easingin : easeOutBack; scalein : 0; scaleout : 0; color:#FFF; font-family:Helvetica Neue Cond; font-size:41px;">
-                        Islamic knowledge
+                        of different Plateforms
                     </h5>
 
                 </div>
@@ -39,20 +35,17 @@
                 
                 <div class="ls-layer" style="slidedelay: 1500; transition2d: 76,77,78,79;">
 
-                    <img src="<?php  echo Yii::app()->theme->baseUrl; ?>/sliderlayer/bg2.jpg "class="ls-bg" alt="Slide background">
+                    <img src="<?php  echo Yii::app()->theme->baseUrl; ?>/sliderlayer/bg3.jpg "class="ls-bg" alt="Slide background">
 
-                        <h5 class="ls-s1 text1" style="top:143px; left: 530px; slidedirection : left; slideoutdirection : right; durationout : 750; easingin : easeOutBack; scalein : 0; scaleout : 0; font-family:Helvetica Neue; font-size:85px; background:none; color:#2e3c43;">
-                        1400+
-                    </h5>
                     <h5 class="ls-s-1 br5 c sl1" style="background:none; top: 237px; left: 440px; slidedirection : left; slideoutdirection : right; durationout : 750; easingin : easeOutBack; scalein : 0; scaleout : 0; color:#FFF; font-family:Helvetica Neue Cond; font-size:46px;">
-                        Books Published around
+                        WordPress Plugins
                     </h5>
 
                         <h5 class="ls-s-1 br5 c sl2" style="background:none; top:275px; left: 540px; slidedirection : left; slideoutdirection : right; durationout : 750; easingin : easeOutBack; scalein : 0; scaleout : 0; font-family:Helvetica Neue Cond; font-size:54px; color:#FFF;">
-                        the globe
+                        inside the plugin server
                     </h5>
 
-                    <img class="ls-s2" src="<?php  echo Yii::app()->theme->baseUrl; ?>/sliderlayer/banner-book-2.png" alt="Clown Fish" style="top: 18%; left: 50%; slidedirection : top; durationin : 750; ">
+                    <img class="ls-s2" src="<?php  echo Yii::app()->theme->baseUrl; ?>/sliderlayer/bg4.jpg" alt="Clown Fish" style="top: 18%; left: 50%; slidedirection : top; durationin : 750; ">
 
                 </div>
                 
@@ -64,34 +57,31 @@
 
                 <div class="ls-layer"style="slidedelay: 1500; transition2d: 92,93; ">
 
-                    <img src="<?php  echo Yii::app()->theme->baseUrl; ?>/sliderlayer/slider-3_02.jpg" class="ls-bg" alt="Slide background">
+                    <img src="<?php  echo Yii::app()->theme->baseUrl; ?>/sliderlayer/bg7a.jpg" class="ls-bg" alt="Slide background">
 
                         <h5 class="ls-s1 text4" style="top:81px; left: 35%; durationout : 750; slidedirection : top; slideoutdirection : bottom; durationout : 750; easingin : easeOutBack; scalein : 0; scaleout : 0; font-family:Helvetica Neue Bold Cond; color:#FFF; font-size:47px;">
-                        25+
+                        Joomla Plugin
                     </h5>
 
                         <h5 class="ls-s1 text4" style="top:131px; left: 415px; durationout : 750; slidedirection : top; slideoutdirection : bottom; durationout : 750; easingin : easeOutBack; scalein : 0; scaleout : 0; font-family:Helvetica Neue; color:#edc744; font-size:28px;">
-                        Multi-lingual translation of
+                        Inside the 
                     </h5>
                     <h5 class="ls-s1 text4" style="top:161px; left: 42%; durationout : 750; slidedirection : top; slideoutdirection : bottom; durationout : 750; easingin : easeOutBack; scalein : 0; scaleout : 0; font-family:Helvetica Neue Cond; color:#edc744; font-size:63px;">
-                        Holy Quran
-                    </h5>
-                    <h5 class="ls-s1 text4" style="top:231px; left: 46%; durationout : 750; slidedirection : top; slideoutdirection : bottom; durationout : 750; easingin : easeOutBack; scalein : 0; scaleout : 0; font-family:Helvetica Neue Cond; color:#29acc0; font-size:18px;">
-                        English - Urdu - French - Bangali - Indonesian - Hindi
+                        Plugin Server
                     </h5>
 
                 </div>
 
                 <div class="ls-layer" style="slidedelay: 1500; transition2d: 105;">
 
-                    <img src="<?php  echo Yii::app()->theme->baseUrl; ?>/sliderlayer/bg5.jpg" class="ls-bg" alt="Slide background">
+                    <img src="<?php  echo Yii::app()->theme->baseUrl; ?>/sliderlayer/bg41.jpg" class="ls-bg" alt="Slide background">
 
                         <h5 class="ls-s-1 text-f" style="top:130px; left: 50%; slidedirection : top; slideoutdirection : bottom; durationout : 750; easingin : easeOutBack; scalein : 0; scaleout : 0; font-family:Helvetica Neue; font-size:61px; color:#000;">
-                        Team of diligent
+                        Druppal Plugin
                     </h5>
 
                         <h5 class="ls-s-1 text7" style="top:191px; left: 49%; slidedirection : top; slideoutdirection : bottom; durationout : 750; easingin : easeOutBack; scalein : 0; scaleout : 0; font-size:74px; color:#000; font-family:Helvetica Neue Cond;">
-                        Religious Scholars
+                        inside Plugin Server
                     </h5>
                 </div>
 
@@ -160,9 +150,9 @@
         ?>
 
         <div class="col-lg-3 index_apps">
-            <h2><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/designed_img_03.png" /> Catalogue</h2>
+            <h2><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/designed_img_03.png" /> WordPress Plugins</h2>
             <div class="index_books">
-                <?php echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl . "/images/book_03.png"),$this->createUrl("default/underConstruction"), 
+                <?php echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl . "/images/plugin_01.png"),$this->createUrl("default/underConstruction"), 
  array('data-ajax' => 'false')); ?>
             </div>
             <p><?php echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl . "/images/more_button.jpg"),$this->createUrl("default/underConstruction"), 
@@ -176,10 +166,21 @@
 
 
         <div class="col-lg-3 index_apps">
-            <h3><img src="<?php  echo Yii::app()->theme->baseUrl; ?>/images/designed_img_03.png" /> Educational Toys</h3>
+            <h3><img src="<?php  echo Yii::app()->theme->baseUrl; ?>/images/designed_img_03.png" />Joomla Plugins</h3>
             <div class="index_toys">
 
-                <?php echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl . "/images/educational_toys_03.png"), $this->createUrl("/web/default/underConstruction"), array('data-ajax' => 'false')); ?>
+                <?php echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl . "/images/plugin_02.png"), $this->createUrl("/web/default/underConstruction"), array('data-ajax' => 'false')); ?>
+
+
+            </div>
+            <p> <?php echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl . "/images/more_button.jpg"), $this->createUrl("/web/default/underConstruction"), array('data-ajax' => 'false')); ?></p>
+
+        </div><!-- /.col-lg-3 -->
+        <div class="col-lg-3 index_apps">
+            <h3><img src="<?php  echo Yii::app()->theme->baseUrl; ?>/images/designed_img_03.png" /> Druppal Plugins</h3>
+            <div class="index_toys">
+
+                <?php echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl . "/images/plugin_03.png"), $this->createUrl("/web/default/underConstruction"), array('data-ajax' => 'false')); ?>
 
 
             </div>
