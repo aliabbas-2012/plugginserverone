@@ -48,7 +48,8 @@
 
 
                                 <?php echo CHtml::submitButton('Save', array('class' => 'btn btn-primary')); ?>
-
+                                or
+                                <?php echo CHtml::link(" Cancel",$this->createUrl("/configurations/load", array("m" => "Plans",)),array('class' => 'btn btn-cancel')); ?>
                                 <?php
                                 $this->endWidget();
                                 ?>

@@ -15,7 +15,7 @@ class DTURLBehaviour extends CBehavior
     public function beginRequest(CEvent $event)
     {
         $route = Yii::app()->getUrlManager()->parseUrl(Yii::app()->getRequest());
-        $controllers = array("product");
+        $controllers = array("pluggin");
         return true;
   
     }

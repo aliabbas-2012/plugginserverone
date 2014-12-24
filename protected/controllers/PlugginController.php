@@ -1,6 +1,6 @@
 <?php
 
-class PlugginController extends Controller {
+class PlugginController extends AdminController {
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -24,10 +24,10 @@ class PlugginController extends Controller {
      * @return array access control rules
      */
     public function accessRules() {
+
         return array(
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'index', 'view', 'delete',  ),
-              
+                'actions' => array_merge(parent::alloweActions(), array('create', 'update', 'index', 'view', 'delete',)),
                 'users' => array('@'),
             ),
             array('deny', // deny all users
@@ -42,14 +42,13 @@ class PlugginController extends Controller {
      */
     public function actionView($id, $related = "", $related_id = "") {
         $model = $this->loadModel($id);
-  
+
         $this->render('view', array(
             'model' => $model,
             'related' => $related,
             'related_id' => $related_id,
         ));
     }
-
 
     /**
      * Creates a new model.

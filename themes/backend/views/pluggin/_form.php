@@ -1,3 +1,7 @@
+<?php
+Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/css/gridform.css');
+Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . '/js/functions.js');
+?>
 <div class="row">
     <div class="col-lg-12">
         <!-- Form Elements -->
@@ -39,7 +43,7 @@
                         </div><!-- group -->
 
 
-            
+
 
 
                         <div class="form-group">
@@ -82,7 +86,7 @@
                         </div><!-- group -->
 
 
-       
+
                         <div class="form-group">
                             <?php echo $form->labelEx($model, 'description', array('class' => 'control-label col-lg-2')); ?>
                             <div class="col-lg-4">
@@ -99,6 +103,14 @@
 
                         </div><!-- group -->
 
+                        <?php
+                        if ($this->action->id != "update") {
+
+                            echo ' <div class="form-group">';
+                            $this->renderPartial('pluggin_plans/_container', array('model' => $model, "type" => "field"));
+                            echo '</div>';
+                        }
+                        ?>
 
                         <div class="form-group">
                             <div class="col-lg-2"></div>

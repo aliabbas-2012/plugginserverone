@@ -31,7 +31,9 @@ $rules_admin = array(
     'pluggin/<id:[\w-\.]+>/delete-<related:[\w-\.]+>' => '/pluggin/delete',
     'pluggin/<id:[\w-\.]+>/delete' => '/pluggin/delete',
     'pluggin/create' => '/pluggin/create',
-
+    'admin/pluggin/deleteChildByAjax' => '/pluggin/deleteChildByAjax',
+    'admin/pluggin/editChild' => '/pluggin/editChild',
+    'admin/pluggin/loadChildByAjax' => '/pluggin/loadChildByAjax',
 );
 /* * ----------- advertinsg -----------* */
 ?>

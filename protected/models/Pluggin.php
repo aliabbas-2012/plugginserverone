@@ -46,8 +46,6 @@ class Pluggin extends DTActiveRecord {
         );
     }
 
-
-
     /**
      * @return array relational rules.
      */
@@ -62,6 +60,24 @@ class Pluggin extends DTActiveRecord {
             'pluggin_images_display' => array(self::HAS_ONE, 'PlugginImage', 'pluggin_id', 'order' => 'id DESC '),
             'pluggin_images_display_def_count' => array(self::STAT, 'PlugginImage', 'pluggin_id', 'condition' => 'is_default=1 '),
             'pluggin_images_display_count' => array(self::STAT, 'PlugginImage', 'pluggin_id', 'order' => 'id DESC '),
+        );
+    }
+
+    /**
+     * Behaviour
+     *
+     */
+    public function behaviors() {
+        return array(
+            'CSaveRelationsBehavior' => array(
+                'class' => 'CSaveRelationsBehavior',
+                'relations' => array(
+                    'basicFeatures' => array("message" => "Please, fill required fields"),
+                ),
+            ),
+            'CMultipleRecords' => array(
+                'class' => 'CMultipleRecords'
+            ),
         );
     }
 
@@ -102,7 +118,7 @@ class Pluggin extends DTActiveRecord {
         $criteria = new CDbCriteria;
         $criteria->compare('id', $this->id, true);
         $criteria->compare('name', $this->name, true);
-   
+
         $criteria->compare('plateform_id', $this->plateform_id);
 
         if ($id = $this->getPlateformId($this->name) != '') {
@@ -169,14 +185,13 @@ class Pluggin extends DTActiveRecord {
      * for url
      * before save 
      */
-    /*public function setSlug() {
-        if (empty($this->url)) {
-            $this->url = $this->name;
-        }
-        $this->url = strtolower(trim($this->url));
-        $this->url = str_replace(" ", "-", $this->url);
-        $this->url = str_replace("_", "-", $this->url);
-        $this->url = MyHelper::convert_no_sign($this->url);
-    }*/
-
+    /* public function setSlug() {
+      if (empty($this->url)) {
+      $this->url = $this->name;
+      }
+      $this->url = strtolower(trim($this->url));
+      $this->url = str_replace(" ", "-", $this->url);
+      $this->url = str_replace("_", "-", $this->url);
+      $this->url = MyHelper::convert_no_sign($this->url);
+      } */
 }
