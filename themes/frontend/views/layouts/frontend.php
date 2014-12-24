@@ -86,7 +86,13 @@
                                     ?>
                                 </li>
                                 <li class="coll-dash">
+                                    <?php echo CHtml::link("Sign Up",$this->createUrl("/web/user/register")); ?>
+                                </li>
+                                <li class="coll-dash">
                                     -
+                                </li>
+                                <li class="coll-dash">
+                                    <?php echo CHtml::link("Sign In",$this->createUrl("/web/user/login")); ?>
                                 </li>
                                 <li><?php
                                     echo CHtml::link("Contact Us", $this->createUrl("/web/default/contactUs"), array(
@@ -250,8 +256,8 @@
             <div class="row footer_facebook">
                 <div class="col-lg-6 left-footer_facebook">
                     <div class="fb-like"  data-href="" data-colorscheme="dark" data-width="80%" data-height="50px" data-layout="standard" data-action="like" data-show-faces="false" data-share="false"></div>
-                     <a href="//plus.google.com/106173933592983959516?prsrc=3"
-                       rel="publisher" target="_top" style="text-decoration:none;display:inline-block;color:#333;text-align:center; font:13px/16px arial,sans-serif;white-space:nowrap;">
+                     <a href="//plus.google.com/"
+                       rel="plugin server" target="_top" style="text-decoration:none;display:inline-block;color:#333;text-align:center; font:13px/16px arial,sans-serif;white-space:nowrap;">
                         <span style="display:inline-block;font-weight:bold;vertical-align:top;margin-right:5px; margin-top:8px;">Plugin Server</span><span style="display:inline-block;vertical-align:top;margin-right:15px; margin-top:8px;">on</span>
                         <img src="//ssl.gstatic.com/images/icons/gplus-32.png" alt="Google+" style="border:0;width:32px;height:32px;"/>
                     </a>
