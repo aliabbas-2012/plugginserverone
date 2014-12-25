@@ -33,14 +33,14 @@ if (!isset($_POST[$mName])) {
             <?php
             if ($this->action->id == 'view') {
                 echo CHtml::link($plusImage . ' ' . $heading, 'javascript:;', array('class' => $relationName . '-buttonsc'));
-            }
-            else
+            } else {
                 echo $plusImage . " ";
                 echo "<div class='col-lg-8'>";
-                    echo '<div class="panel-heading">';
-                        echo $heading;
-                    echo "</div>";
+                echo '<div class="panel-heading">';
+                echo $heading;
                 echo "</div>";
+                echo "</div>";
+            }
             ?>
         </div>
         <div class="col-lg-2">
@@ -79,7 +79,8 @@ if (!isset($_POST[$mName])) {
             <div class="form_body">
                 <div class="grid_title col-lg-12">
                     <div class="title col-lg-5" ><?php echo CHtml::activeLabelEx($relateModelobj, 'plan'); ?></div>
-                    <div class="title col-lg-5" ><?php echo CHtml::activeLabelEx($relateModelobj, 'price'); ?></div>
+                    <div class="title col-lg-3" ><?php echo CHtml::activeLabelEx($relateModelobj, 'price'); ?></div>
+                    <div class="title col-lg-2" ><?php echo CHtml::activeLabelEx($relateModelobj, 'currency'); ?></div>
 
 
                 </div>

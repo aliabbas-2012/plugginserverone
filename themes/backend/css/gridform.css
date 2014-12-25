@@ -72,7 +72,7 @@ div.grid_title .title label {
 }
 
 .grid_fields .field select {
-    width: 100%;
+    width: 90%;
     margin: 0px 2px 2px 4px;
 }
 
@@ -85,8 +85,15 @@ div.grid_title .title label {
 
 .grid_fields .field input {
     margin: 0px 2px 2px 4px;
-    width: 94%;
+    width: 90%;
 }
+.grid_fields .field input.error,
+.grid_fields .field select.error
+{
+    border:red 1px solid;
+}
+
+
 .grid_fields .field input[type="file"]  {
     margin: 0px 2px 2px 4px;
     width: 80% !important;
@@ -214,4 +221,7 @@ div.field div.errorMessage
 }
 .add_new {
     padding-top:10px;
+}
+.clear {
+    clear:both;
 }

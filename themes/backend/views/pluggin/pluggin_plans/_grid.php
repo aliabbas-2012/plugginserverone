@@ -2,28 +2,37 @@
 $relationName = "pluggin_plans";
 $mName = "PlugginPlans";
 ?>
-
+<div class="clear"></div>
 <div class="<?php echo $relationName; ?> child" style="<?php echo 'display:' . (isset($_POST[$mName]) ? 'block' : 'none'); ?>">
     <?php
     $config = array(
         'criteria' => array(
-            'condition' => 'product_id=' . $model->primaryKey,
+            'condition' => 'pluggin_id=' . $model->primaryKey,
         )
     );
     $mNameobj = new $mName;
     $mName_provider = new CActiveDataProvider($mName, $config);
     $this->widget('zii.widgets.grid.CGridView', array(
         'id' => $mName . '-grid',
+        'htmlOptions' => array(
+            'class' => 'table-responsive'
+        ),
+        'itemsCssClass' => 'table table-striped table-bordered table-hover',
         'dataProvider' => $mName_provider,
         'columns' => array(
             array(
-                'name' => 'plateform_id',
-                'value' => '$data->plateform->name',
+                'name' => 'plan',
+                'value' => '$data->plan_rel->name',
                 "type" => "raw",
             ),
             array(
-                'name' => 'link',
-                'value' => '$data->link',
+                'name' => 'price',
+                'value' => '$data->price',
+                "type" => "raw",
+            ),
+            array(
+                'name' => 'currency',
+                'value' => '$data->currency',
                 "type" => "raw",
             ),
             array
@@ -64,7 +73,7 @@ $mName = "PlugginPlans";
     ));
     ?>
 </div>
-    <?php
-    $this->widget('ext.lyiightbox.LyiightBox2', array(
-    ));
-    ?>
+<?php
+//    $this->widget('ext.lyiightbox.LyiightBox2', array(
+//    ));
+?>

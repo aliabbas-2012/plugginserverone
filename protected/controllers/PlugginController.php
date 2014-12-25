@@ -42,6 +42,7 @@ class PlugginController extends AdminController {
      */
     public function actionView($id, $related = "", $related_id = "") {
         $model = $this->loadModel($id);
+        $this->manageChildrens($model);
 
         $this->render('view', array(
             'model' => $model,
@@ -62,6 +63,7 @@ class PlugginController extends AdminController {
 
         if (isset($_POST['Pluggin'])) {
             $model->attributes = $_POST['Pluggin'];
+            $this->checkCilds($model);
             if ($model->save()) {
                 Yii::app()->user->setFlash("success", "Data has been saved successfully");
                 $this->redirect(array('view', 'id' => $model->id));
@@ -152,6 +154,25 @@ class PlugginController extends AdminController {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
+    }
+
+    private function checkCilds($model) {
+
+        if (isset($_POST['PlugginPlans'])) {
+            $model->setRelationRecords('pluggin_plans', is_array($_POST['PlugginPlans']) ? $_POST['PlugginPlans'] : array());
+        }
+
+        return true;
+    }
+
+    /**
+     * will be used to manage child at 
+     * view mode
+     * @param type $model 
+     */
+    private function manageChildrens($model) {
+       
+        $this->manageChild($model, "pluggin_plans", "pluggin");
     }
 
 }

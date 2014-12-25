@@ -34,11 +34,12 @@ class PlugginPlans extends DTActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('pluggin_id, plan, create_time, create_user_id, update_time, update_user_id', 'required'),
-            array('pluggin_id, plan, create_user_id, update_user_id', 'length', 'max' => 11),
+            array('plan, create_time, create_user_id, update_time, update_user_id', 'required'),
+            array('plan, create_user_id, update_user_id', 'length', 'max' => 11),
             array('price', 'length', 'max' => 8),
             array('currency', 'length', 'max' => 6),
-            array('activity_log', 'safe'),
+            array('pluggin_id,activity_log', 'safe'),
+            array('price', 'numerical', 'integerOnly' => FALSE),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, pluggin_id, price, plan, currency, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on' => 'search'),
@@ -52,7 +53,7 @@ class PlugginPlans extends DTActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'plan' => array(self::BELONGS_TO, 'ConfPlans', 'plan'),
+            'plan_rel' => array(self::BELONGS_TO, 'ConfPlans', 'plan'),
             'pluggin' => array(self::BELONGS_TO, 'Pluggin', 'pluggin_id'),
         );
     }
@@ -116,6 +117,11 @@ class PlugginPlans extends DTActiveRecord {
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
+    }
+    
+    public function afterValidate() {
+ 
+        return parent::afterValidate();
     }
 
 }

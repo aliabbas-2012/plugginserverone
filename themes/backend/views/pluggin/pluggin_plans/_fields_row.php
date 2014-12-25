@@ -22,10 +22,17 @@ $relationName = "pluggin_plans";
         echo CHtml::activeDropDownList($model, '[' . $index . ']plan', $data);
         ?>
     </div>
-    <div class="field col-lg-5">
+    <div class="field col-lg-3">
         <?php
 
-        echo CHtml::activeTextField($model, '[' . $index . ']price', $data);
+        echo CHtml::activeTextField($model, '[' . $index . ']price');
+        ?>
+    </div>
+    <div class="field col-lg-2">
+        <?php
+
+        echo CHtml::activeDropDownList($model, '[' . $index . ']currency', 
+                array("dollar"=>"Dollar","Euro"=>"Euro"));
         ?>
     </div>
 

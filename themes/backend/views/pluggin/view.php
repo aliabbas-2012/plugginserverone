@@ -60,4 +60,12 @@ $this->menu = array(
             </div>
         </div>
     </div>
-</div>    
+</div>   
+<?php
+Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/css/gridform.css');
+Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . '/js/functions.js');
+?>
+<?php
+$this->renderPartial('pluggin_plans/_container', array('model' => $model, "type" => "form"));
+?>
+
