@@ -25,6 +25,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/media/js/pa
         <?php
         $form = $this->beginWidget('CActiveForm', array(
             'id' => 'users-form',
+            'enableAjaxValidation' => false,
             'enableClientValidation' => false,
         ));
         ?>
@@ -106,7 +107,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/media/js/pa
             </div>
             <div class="row_input_type">
                 <?php echo $form->passwordField($model, 'password', array('class' => 'row_text_type password_test')); ?>
-                <?php //echo $form->passwordField($model, 'password', array('class' => 'row_text_type', 'onKeyUp' => 'javascript:validata_password(this.value)')); ?>
             </div>
             <div class="row_text">
                 <article><?php //echo $form->error($model, 'password');           ?></article>
@@ -126,15 +126,9 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/media/js/pa
         </div>
         <div class="row_input">
             <div class="row_input_type">
-                <?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('header_footer', 'Sign Up', array(), NULL, "en") : 'Save', array('class' => 'row_button')); ?>
+                <?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('header_footer', 'Sign Up', array(), NULL, "en") : 'Save', array('class' => 'row_button','data-ajax'=>'false')); ?>
             </div>
         </div>
         <?php $this->endWidget(); ?>
     </div>
 </div>
-<script>
-    function validata_password()
-    {
-        dtech.custom_alert('Quantity should be Numeric....!');
-    }
-</script>

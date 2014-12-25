@@ -11,17 +11,16 @@ $params = array(
     //278523
     'dateformat' => 'd/m/y',
     'site_logo' => '/img/logo.png',
-    'adminEmail' => 'no_reply@thepuzzzle.com',
-    'defaultFrom' => 'no_reply@thepuzzzle.com',
+    'systemName' => 'Plugin Server SeoLogic',
+    'adminEmail' => 'no_reply@seologica.com',
+    'defaultFrom' => 'no_reply@seologica.com',
     'dateformat' => 'm/d/y',
     'mailHost' => 'smtp.gmail.com',
     'smtp' => true,
     //'mailPort' => 587,
     'mailPort' => 465,
-    'mailUsername' => 'testservice733@gmail.com',
-    'mailPassword' => 'abc123AB1',
-    'mailUsername' => 'testservice2015@gmail.com',
-    'mailPassword' => 'abc123AB',
+    'mailUsername' => 'naeem.ch@darussalampk.com',
+    'mailPassword' => 'niki.00028',
     'mailSecuity' => 'ssl',
     'langs' => array(
         'af', // afrikaans.

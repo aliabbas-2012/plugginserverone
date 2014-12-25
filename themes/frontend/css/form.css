@@ -33,7 +33,7 @@ hr.style-two {
 }
 
 .form_container {
-    margin: 0 auto;
+    margin: 60px auto;
     padding: 1px;
     font-family: Segoe,"Segoe UI","DejaVu Sans","Trebuchet MS",Verdana,sans-serif;
     width: 960px; }
@@ -62,7 +62,7 @@ hr.style-two {
     background: none repeat scroll 0 0 #EDEDED;
     border: 1px solid #BDBDBD;
     border-radius: 10px 10px 10px 10px;
-    float: left;
+    /*float: left;*/
     padding: 12px 57px 0 38px;
     width: 41%;
 }
@@ -253,3 +253,7 @@ div.errorMessage {
 .row_input input {
     padding: 1px 0px 1px 3px;
 }
+
+.right_user_login{font-family: Segoe,"Segoe UI","DejaVu Sans","Trebuchet MS",Verdana,sans-serif;margin: 90px auto; padding: 1px; width: 460px; background-color: #EDEDED;border:1px solid #BDBDBD;border-radius:20px ;}
+.right_user_login .already_account{background: url("../images/save_bg_img_03.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);border: medium none;color: #FFFFFF;cursor: pointer;float: right;font-size: 14px;height: 31px;margin: 0 55px 4px 0;padding: 0;width: 61px;}
+.right_user_login .left_login{color: #333333;font-size: 12px !important;font-weight:bold;}

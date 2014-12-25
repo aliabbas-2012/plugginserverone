@@ -26,7 +26,7 @@ class UsersController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('register', 'activate', 'setNewPass', 'ProductReview', 'forgot'),
+                'actions' => array('login','register', 'activate', 'setNewPass', 'ProductReview', 'forgot'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -50,13 +50,6 @@ class UsersController extends Controller {
 
             $model->attributes = $_POST['Users'];
 
-           /* if ($model->site_id == NULL && $model->role_id == NULL && $model->status_id == NULL) {
-                $model->site_id = Yii::app()->session['site_id'];
-                $model->role_id = '3';
-                $model->status_id = Status::model()->gettingInactive();
-                $model->city_id = Yii::app()->session['city_id'];
-            }*/
-
             $model->activation_key = sha1(mt_rand(10000, 99999) . time() . $model->email);
             $activation_url = $this->createUrl('/web/users/activate', array('key' => $model->activation_key));
             
@@ -65,23 +58,20 @@ class UsersController extends Controller {
                 //Sending email part - For activation
 
                 $subject = "Your Activation Link";
-                $message = "
-                                    Please click this below to activate your account <br /><br />" .
-                        $this->createAbsoluteUrl('/web/users/activate', array('key' => $model->activation_key, 'user_id' => $model->id)) .
-                        "<br /><br /> Thanks you 
-                                ";
+                $message = "Please click this below to activate your account <br /><br />" .$this->createAbsoluteUrl('/web/users/activate', array('key' => $model->activation_key, 'id' => $model->id)) ."<br /><br /> Thanks you ";
 
+                $email['FromName'] = Yii::app()->params['systemName'];
                 $email['From'] = Yii::app()->params['adminEmail'];
                 $email['To'] = $model->email;
                 $email['Subject'] = "Your Activation Link";
                 $body = "You are now registered on " . Yii::app()->name . ", please validate your email <br/>" . $message;
                 //$body.=" going to this url: <br /> \n" . $model->getActivationUrl();
                 $email['Body'] = $body;
-                $email['Body'] = $this->renderPartial('/common/_email_template', array('email' => $email), true, false);
-
+                $email['Body'] = $this->renderPartial('//users/_email_template', array('email' => $email), true, false);
+                
                 $this->sendEmail2($email);
                 Yii::app()->user->setFlash('registration', 'Thank you for Registration...Please activate your account by visiting your email account.');
-                $this->redirect(array('/web/users/login'));  ///take him to login page....
+                $this->redirect($this->createUrl('/web/default/index'));  ///take him to login page....
             }
         }
 
@@ -96,6 +86,29 @@ class UsersController extends Controller {
     public function actionLogin(){
         
         $this->layout = "//layouts/frontend";
+        
+        $model = new LoginForm;
+        
+        // if it is ajax validation request
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+
+        // collect user input data
+        if (isset($_POST['LoginForm'])) {
+            $model->attributes = $_POST['LoginForm'];
+            var_dump($model->validate());
+            var_dump($model->login());
+            // validate user input and redirect to the previous page if valid
+            if ($model->validate() && $model->login()){
+                if(!empty(Yii::app()->user->returnUrl)){
+                    $this->redirect($this->createUrl("/web/default/index"));
+                }
+                $this->redirect(Yii::app()->user->returnUrl);
+            }
+        }
+        
         $this->render("//users/_login");
     }
     
@@ -110,31 +123,24 @@ class UsersController extends Controller {
         $obj = Users::model()->find($criteria);
        
         if (!empty($obj)) {
-            if ($obj->status_id == '1') {
+            if ($obj->is_active == '1') {
                 //already activated
                 Yii::app()->user->setFlash('login', 'Your account is already activated. Please try login or if you have missed your login information then go to forgot password section. Thank You');
                 $this->redirect($this->createUrl('/web/users/login'));
             } else if ($obj->activation_key != $activation_key) {
                 Yii::app()->user->setFlash('login', 'Your activation key not registered. Please resend activation key and activate your account. Thank You');
-                $this->redirect($this->createUrl('//users/login'));
+                $this->redirect($this->createUrl('/web/users/login'));
             }
 
             Yii::app()->user->setFlash('login', 'Thank You ! Your account has been activated....Now Please Login');
-
-            /**
-             * for joomla users
-             */
-
-            if ($obj->source == "outside") {
-                $this->redirect(array('//user/setNewPass', "key" => $activation_key, "id" => $id));
-            } else {
-                $modelUser = new User;
-                $modelUser->updateByPk($id, array('status_id' => '1'));
-               $this->redirect($this->createUrl('//users/login'));
-            }
+            
+            $modelUsers = new Users();
+            $modelUsers->updateByPk($id, array('is_active' => '1'));
+            $this->redirect($this->createUrl('/web/users/login'));
+            
         } else {
             Yii::app()->user->setFlash('login', 'User does not exist. Please signup and get activation link.');
-            $this->redirect($this->createUrl('//users/login'));
+            $this->redirect($this->createUrl('/web/users/login'));
         }
     }
 
@@ -185,16 +191,18 @@ class UsersController extends Controller {
 
                 $pass_new = substr(str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyz", 7)), 0, 9);
                 $body = "Your New Password : " . $pass_new;
+                $email['FromName'] = Yii::app()->params['systemName'];
                 $email['From'] = Yii::app()->params->adminEmail;
                 $email['To'] = $record->email;
                 $email['Subject'] = "Your New Password";
                 $email['Body'] = $body;
-                $email['Body'] = $this->renderPartial('/common/_email_template', array('email' => $email), true, false);
+                
+                $email['Body'] = $this->renderPartial('//users/_email_template', array('email' => $email), true, false);
                 $this->sendEmail2($email);
 
                 $id = $record->id;
-                $role_id = $record->role_id;
-                if ($role_id != 1) {
+                
+                
                     $modelUsers = new Users;
                     $pass_new = md5($pass_new);
                     if ($modelUsers->updateByPk($id, array('password' => "$pass_new"))) {
@@ -202,9 +210,6 @@ class UsersController extends Controller {
 
                         Yii::app()->user->setFlash('password_reset', 'Your passowrd has been sent to your Email.Please get your new password form your email account');
                     }
-                } else {
-                    Yii::app()->user->setFlash('superAdmin', 'Sorry we can not change your password  ');
-                }
             }
         }
 
@@ -307,14 +312,14 @@ class UsersController extends Controller {
      * 
      */
     public function actionCustomerHistory() {
-        Yii::app()->user->SiteSessions;
+        //Yii::app()->user->SiteSessions;
         $ip = Yii::app()->request->getUserHostAddress();
         $order_history = Users::model()->customerHistory();
         $this->render('//users/customer_history', array('history' => $order_history));
     }
 
     public function actionPrint($id) {
-        Yii::app()->user->SiteSessions;
+        //Yii::app()->user->SiteSessions;
         $model = Order::model()->findByPk($id);
 
         /**
@@ -336,7 +341,7 @@ class UsersController extends Controller {
      * to fetch
      */
     public function actionCustomerDetail($id) {
-        Yii::app()->user->SiteSessions;
+        //Yii::app()->user->SiteSessions;
         $model = Order::model()->findByPk($id);
 
         /**
@@ -359,7 +364,7 @@ class UsersController extends Controller {
      */
     public function actionOrderDetail($id) {
 
-        Yii::app()->user->SiteSessions;
+        //Yii::app()->user->SiteSessions;
         $model = new OrderDetail('Search');
         $model->unsetAttributes();  // clear any default values
         $model->order_id = $id;

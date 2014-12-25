@@ -12,7 +12,7 @@ $form = $this->beginWidget('CActiveForm', array(
 <div class="form_container">
     <div class="row_left_form row_center_form">
         <div class="shipping_address_heading">
-            <h2><?php echo Yii::t('common', 'Forgot password?', array(), NULL, $this->currentLang) ?></h2>
+            <h2><?php echo Yii::t('common', 'Forgot password?', array(), NULL, "en") ?></h2>
             <div class="clear"></div>
             <div id="errors" style="color: red">
                 <?php echo $form->errorSummary($model); ?>
@@ -34,7 +34,7 @@ $form = $this->beginWidget('CActiveForm', array(
         <div class="row_input">
             <div class="row_text">
                 <article>
-                    <?php echo Yii::t('common', 'Your Email', array(), NULL, $this->currentLang) ?>
+                    <?php echo Yii::t('common', 'Your Email', array(), NULL, "en") ?>
                 </article>
             </div>
             <div class="row_input_type">
@@ -45,24 +45,24 @@ $form = $this->beginWidget('CActiveForm', array(
         <div class="row_input">
 
             <?php
-            echo CHtml::submitButton(Yii::t('common', 'Send', array(), NULL, Yii::app()->controller->currentLang), array("class" => "row_button"));
+            echo CHtml::submitButton(Yii::t('common', 'Send', array(), NULL, "en"), array("class" => "row_button"));
             ?>
         </div>
-        <div class="row_input">
+        <!--<div class="row_input">
             <div class="row_text">
                 <article>
-                    <h2><?php echo Yii::t('common', 'Login with', array(), NULL, $this->currentLang) ?></h2>
+                    <h2><?php //echo Yii::t('common', 'Login with', array(), NULL, "en") ?></h2>
                 </article>
             </div>
             <div class="row_input_type">
                 <?php
-                echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl . "/images/icons/fb_log.png"), $this->createUrl('/web/hybrid/login/', array("provider" => "facebook")), array("onclick" => "dtech.doSocial('login-form',this);return false;"));
+                /*echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl . "/images/icons/fb_log.png"), $this->createUrl('/web/hybrid/login/', array("provider" => "facebook")), array("onclick" => "dtech.doSocial('login-form',this);return false;"));
                 echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl . "/images/icons/twitter.png"), $this->createUrl('/web/hybrid/login/', array("provider" => "twitter")), array("onclick" => "dtech.doSocial('login-form',this);return false;"));
                 echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl . "/images/icons/gplus.png"), $this->createUrl('/web/hybrid/login/', array("provider" => "google")), array("onclick" => "dtech.doSocial('login-form',this);return false;"));
-                echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl . "/images/icons/linkedin.png"), $this->createUrl('/web/hybrid/login/', array("provider" => "linkedin")), array("onclick" => "dtech.doSocial('login-form',this);return false;"));
+                echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl . "/images/icons/linkedin.png"), $this->createUrl('/web/hybrid/login/', array("provider" => "linkedin")), array("onclick" => "dtech.doSocial('login-form',this);return false;"));*/
                 ?>
             </div>
-        </div>
+        </div>-->
     </div>
 
 </div>
