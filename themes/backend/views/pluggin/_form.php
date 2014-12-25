@@ -19,7 +19,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . '/js/f
                             'id' => 'pluggin-form',
                             'enableAjaxValidation' => false,
                             'htmlOptions' => array(
-                                'class' => 'form-horizontal'
+                                'class' => 'form-horizontal',
+                                'enctype'=>"multipart/form-data"
                             )
                         ));
                         ?>
@@ -108,6 +109,9 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . '/js/f
 
                             echo ' <div class="form-group">';
                             $this->renderPartial('pluggin_plans/_container', array('model' => $model, "type" => "field"));
+                            echo '</div>';
+                            echo ' <div class="form-group">';
+                            $this->renderPartial('pluggin_images/_container', array('model' => $model, "type" => "field"));
                             echo '</div>';
                         }
                         ?>

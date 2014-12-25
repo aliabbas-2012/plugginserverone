@@ -67,5 +67,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . '/js/f
 ?>
 <?php
 $this->renderPartial('pluggin_plans/_container', array('model' => $model, "type" => "form"));
+$this->renderPartial('pluggin_images/_container', array('model' => $model, "type" => "form"));
 ?>
 

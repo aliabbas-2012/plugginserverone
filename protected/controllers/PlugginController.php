@@ -161,6 +161,9 @@ class PlugginController extends AdminController {
         if (isset($_POST['PlugginPlans'])) {
             $model->setRelationRecords('pluggin_plans', is_array($_POST['PlugginPlans']) ? $_POST['PlugginPlans'] : array());
         }
+        if (isset($_POST['PlugginImage'])) {
+            $model->setRelationRecords('pluggin_images', is_array($_POST['PlugginImage']) ? $_POST['PlugginImage'] : array());
+        }
 
         return true;
     }
@@ -173,6 +176,7 @@ class PlugginController extends AdminController {
     private function manageChildrens($model) {
        
         $this->manageChild($model, "pluggin_plans", "pluggin");
+        $this->manageChild($model, "pluggin_images", "pluggin");
     }
 
 }

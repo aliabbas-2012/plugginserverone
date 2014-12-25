@@ -225,3 +225,8 @@ div.field div.errorMessage
 .clear {
     clear:both;
 }
+
+.grid_fields .field input[type='checkbox']{
+    float:left;
+    width:10px;
+}

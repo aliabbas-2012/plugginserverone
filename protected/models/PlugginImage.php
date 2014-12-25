@@ -8,7 +8,6 @@
  * @property string $pluggin_id
  * @property string $tag
  * @property string $is_default
- * @property string $lang_id
  * @property string $image_large
  * @property string $image_small
  * @property string $image_detail
@@ -78,10 +77,10 @@ class PlugginImage extends DTActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('lang_id,create_time, create_user_id, update_time, update_user_id', 'required'),
+            array('create_time, create_user_id, update_time, update_user_id', 'required'),
             array('pluggin_id, create_user_id, update_user_id', 'length', 'max' => 11),
             array('tag, image_large, image_small, image_detail', 'length', 'max' => 150),
-            array('alt_title,_copy_path,image_large,lang_id,upload_key,pluggin_id, is_default,activity_log', 'safe'),
+            array('alt_title,_copy_path,image_large,upload_key,pluggin_id, is_default,activity_log', 'safe'),
             array('image_large', 'file', 'allowEmpty' => $this->isNewRecord ? false : true,
                 'types' => 'jpg,jpeg,gif,png,JPG,JPEG,GIF,PNG'),
             // The following rule is used by search().
@@ -98,7 +97,7 @@ class PlugginImage extends DTActiveRecord {
         // class name for the relations automatically generated below.
         return array(
             'pluggin' => array(self::BELONGS_TO, 'Pluggin', 'pluggin_id'),
-            'lang' => array(self::BELONGS_TO, 'Language', 'lang_id'),
+           
         );
     }
 
@@ -110,10 +109,9 @@ class PlugginImage extends DTActiveRecord {
             'id' => 'ID',
             'tour_id' => 'Tour',
             'tag' => 'Tag',
-            'lang_id' => 'Language',
             'image_large' => 'Image Large',
             'image_small' => 'Image Small',
-            'is_default' => 'display Image',
+            'is_default' => 'display',
             'image_detail' => 'Image Detail',
             'create_time' => 'Create Time',
             'create_user_id' => 'Create User',
@@ -134,7 +132,7 @@ class PlugginImage extends DTActiveRecord {
         $criteria = new CDbCriteria;
 
         $criteria->compare('id', $this->id, true);
-        $criteria->compare('tour_id', $this->tour_id, true);
+        $criteria->compare('pluggin_id', $this->pluggin_id, true);
         $criteria->compare('tag', $this->tag, true);
         $criteria->compare('image_large', $this->image_large, true);
         $criteria->compare('image_small', $this->image_small, true);
@@ -202,10 +200,21 @@ class PlugginImage extends DTActiveRecord {
      */
     public function beforeValidate() {
         $this->upload_insance = DTUploadedFile::getInstance($this, 'image_large');
+         //CVarDumper::dump($_POST,10,true);
+         //CVarDumper::dump($_FILES,10,true);
+         CVarDumper::dump($this->upload_insance,10,true);
         if (!empty($this->upload_insance)) {
             $this->image_large = $this->upload_insance;
         }
         return parent::beforeValidate();
+    }
+    
+    public function afterValidate() {
+        CVarDumper::dump($this->attributes,10,true);
+       
+       
+        die;
+        return parent::afterValidate();
     }
 
     /**
@@ -320,7 +329,7 @@ class PlugginImage extends DTActiveRecord {
     public function updateAllToUndefault() {
         if (!empty($this->tour_id)) {
             $connection = Yii::app()->db;
-            $sql = "UPDATE " . $this->tableName() . " t SET t.is_default=0 WHERE t.tour_id ='" . $this->tour_id . "' ";
+            $sql = "UPDATE " . $this->tableName() . " t SET t.is_default=0 WHERE t.pluggin_id ='" . $this->tour_id . "' ";
             $command = $connection->createCommand($sql);
             $command->execute();
         }
