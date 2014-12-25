@@ -402,7 +402,8 @@ class DefaultController extends Controller {
     }
 
     public function actionGallery() {
-        $this->render("//default/gallery");
+        //$this->render("//default/gallery");
+        $this->render("//default/underconstruction");
     }
 
     public function actionRamzanPackage() {

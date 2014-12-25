@@ -15,6 +15,10 @@ $rules_web = array(
     'contact-us' => '/web/default/contactus',
     'slider/<slug:[\w-\.]+>/' => '/web/default/loadSlider',
     
+    /*Users Links */
+    'login' => '/web/users/login',
+    'signup' => '/web/users/register',
+    
     '<controller:\w+>/<id:\d+>' => '<controller>/view',
     '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
     '<controller:\w+>/<action:\w+>' => '<controller>/<action>',

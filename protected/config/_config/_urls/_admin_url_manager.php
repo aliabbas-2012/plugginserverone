@@ -7,9 +7,8 @@
  */
 $rules_admin = array(
     /** admin url ** */
-    'admin' => '/site/login',
+    'admin/login' => '/site/login',
     'gii' => 'gii',
-    'login' => '/site/login',
     'config/<m:[\w-\.]+>' => '/configurations/load',
     //plateform create 
     'plateform/index' => '/plateform/index',
