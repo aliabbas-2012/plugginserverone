@@ -29,7 +29,7 @@ class Users extends DTActiveRecord {
      * @return Users the static model class
      */
     public $new_password;
-    public $new_password_repeat;
+    public $password2;
     public $name;
 
     public static function model($className = __CLASS__) {
@@ -50,14 +50,15 @@ class Users extends DTActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('username, first_name, last_name, password, email, create_time, create_user_id, update_time, update_user_id', 'required'),
+            array('username, first_name, last_name, password, password2, email, create_time, create_user_id, update_time, update_user_id', 'required'),
             array('email,username', 'unique'),
             array('is_active, deleted', 'numerical', 'integerOnly' => true),
             array('username, first_name, last_name, activation_key', 'length', 'max' => 50),
             array('password, email, ip_address', 'length', 'max' => 255),
+            array('password2', 'compare', 'compareAttribute' => 'password'),
             array('type', 'length', 'max' => 9),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
-            array('name,activity_log', 'safe'),
+            array('name,activity_log,password2', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, username, first_name, last_name, password, email, ip_address, type, is_active, activation_key, deleted, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on' => 'search'),
@@ -84,6 +85,7 @@ class Users extends DTActiveRecord {
             'first_name' => 'First Name',
             'last_name' => 'Last Name',
             'password' => 'Password',
+            'password2' => 'Confirm Password',
             'email' => 'Email',
             'ip_address' => 'Ip Address',
             'type' => 'Type',
@@ -150,7 +152,7 @@ class Users extends DTActiveRecord {
      */
     public function beforeValidate() {
         if ($this->username != "admin" && $this->isNewRecord) {
-            $this->password = "test123";
+            //$this->password = "test123";
             $this->type = "non-admin";
             $this->is_active = 0;
         }
@@ -180,7 +182,7 @@ class Users extends DTActiveRecord {
 
     public function validatePassword($password, $old_password) {
 
-        return md5($password) === $old_password;
+        return (md5($password) === $old_password);
         //return $password;
     }
 

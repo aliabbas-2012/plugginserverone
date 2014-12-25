@@ -3,14 +3,11 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Darussalam Publishers offers multilingual Islamic Books, E-Books on Amazon Kindle, iBooks Store, Islamic Android, iOS Apps, Children Learning and Educational Toys.">
-        <meta name="keywords" content="darussalam, darussalam publishers, islamic apps, islamic apps for android, ios free apps, islamic books, free islamic books, ibooks, amazon kindle books, amazon kindle e books, islamic learning, learn quran, hadiths" />
+        <meta name="description" content="Plugin server, Joomla, wordpress, Druppal">
+        <meta name="keywords" content="Plugin server providing plugins for Joomla, wordpress, Druppal" />
         <meta name="author" content="">
         <link rel="shortcut icon" href="<?php echo Yii::app()->theme->baseUrl; ?>/images/fav_icon.png">
-    <a href="https://plus.google.com/b/106173933592983959516/+Darussalampublishers" rel="publisher"> </a>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="google-site-verification" content="TNff8WzEgCkK-LBRTediAvbgmn0wA7xtvb3e9BAGeGU" />
-    <meta name="msvalidate.01" content="5E17E6B5F43253938AAE12DEA5B3F701" />
+    <a href="https://plus.google.com/" rel="Plugin server"> </a>
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     <!-- Bootstrap core CSS -->
     <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/bootstrap.css" rel="stylesheet">
@@ -31,14 +28,6 @@
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.li-scroller.1.0.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/darussalamapp.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/lean-slider.js"></script>
-
-
-
-    <script type="text/javascript">
-        jQuery(function() {
-//            jQuery("ul#ticker01").liScroll();
-        })
-    </script>
 </head>
 <!-- NAVBAR ================================================== -->
 <body>
@@ -86,13 +75,17 @@
                                     ?>
                                 </li>
                                 <li class="coll-dash">
-                                    <?php echo CHtml::link("Sign Up",$this->createUrl("/web/user/register")); ?>
+                                    <?php echo CHtml::link("Sign Up",$this->createUrl("/web/users/register"),array(
+                                        'data-ajax' => "false"
+                                    )); ?>
                                 </li>
                                 <li class="coll-dash">
                                     -
                                 </li>
                                 <li class="coll-dash">
-                                    <?php echo CHtml::link("Sign In",$this->createUrl("/web/user/login")); ?>
+                                    <?php echo CHtml::link("Sign In",$this->createUrl("/web/users/login"),array(
+                                        'data-ajax' => "false"
+                                    )); ?>
                                 </li>
                                 <li><?php
                                     echo CHtml::link("Contact Us", $this->createUrl("/web/default/contactUs"), array(
@@ -118,7 +111,7 @@
                         </div>
                         <div class="logo_image">
                             <?php echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl . "/images/pluginserver.png"), Yii::app()->homeUrl, array('data-ajax' => "false")); ?>
-                            <h1 style="display:none;">Darussalam Publishers</h1>
+                            <h1 style="display:none;">Plugin Server</h1>
                         </div>
                         <div class="mini_logo">
                             <?php echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl . "/images/pluginserver_responsive.png"), Yii::app()->homeUrl, array('data-ajax' => "false")); ?>
@@ -167,7 +160,7 @@
                 <div class="span2 quick">
                     <section>QUICK</section>
                     <article>FACTS</article>
-                    <p>about Darussalam Publishers</p>
+                    <p>about PluginServer</p>
                 </div>
                 <div class="span2 likes">
                     <a href="#" title="Facebook"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/Serving_Islam_2.png" onmouseover="this.src = '<?php echo Yii::app()->theme->baseUrl; ?>/images/Serving_Islam.png'" onmouseout="this.src = '<?php echo Yii::app()->theme->baseUrl; ?>/images/Serving_Islam_2.png'"></a>
