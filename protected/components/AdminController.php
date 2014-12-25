@@ -64,4 +64,18 @@ class AdminController extends Controller {
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 
+    /**
+     * used for reusibility
+     * @param type $id
+     * @param type $mName
+     */
+    public function deleteChildren($id, $mName) {
+        /* Get regarding model */
+        $model = new $mName;
+
+        $model = $model->findByPk($id);
+
+        $model->deleteByPk($id);
+    }
+
 }

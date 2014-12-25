@@ -119,23 +119,23 @@ function add_newSub_child_row(u, module_name, field_container, field_row, show_g
         }
     });
 }
-if (jQuery(".grid_fields").length > 0) {
-    jQuery(".grid_fields").live('mouseover', function() {
-        jQuery(this).find('.del-icon').show();
-    });
-    jQuery(".grid_fields").live('mouseout', function() {
-        jQuery(this).find('.del-icon').hide();
-    });
-}
-if (jQuery(".main").length > 0) {
-    jQuery(".main").live('mouseover', function() {
-        jQuery(this).find('.del-icon').show();
-    });
-    jQuery(".main").live('mouseout', function() {
-        jQuery(this).find('.del-icon').hide();
-    });
-
-}
+//if (jQuery(".grid_fields").length > 0) {
+//    jQuery(".grid_fields").live('mouseover', function() {
+//        jQuery(this).find('.del-icon').show();
+//    });
+//    jQuery(".grid_fields").live('mouseout', function() {
+//        jQuery(this).find('.del-icon').hide();
+//    });
+//}
+//if (jQuery(".main").length > 0) {
+//    jQuery(".main").live('mouseover', function() {
+//        jQuery(this).find('.del-icon').show();
+//    });
+//    jQuery(".main").live('mouseout', function() {
+//        jQuery(this).find('.del-icon').hide();
+//    });
+//
+//}
 /**
  * 
  * Delete form fields Loaded by ajax in child forms or parent forms

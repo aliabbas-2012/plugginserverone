@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/media/bootstrap-gallery/css/bootstrap-image-gallery.css" />
         <!-- Page-Level CSS -->
         <link href="<?php echo Yii::app()->theme->baseUrl ?>/assets/plugins/morris/morris-0.4.3.min.css" rel="stylesheet" />
+                <script src="<?php echo Yii::app()->theme->baseUrl; ?>/assets/plugins/jquery-1.10.2.js"></script>
         <script>
             // defining js base path
             var js_basePath = '<?php echo Yii::app()->theme->baseUrl; ?>';
@@ -125,7 +126,7 @@
         <?php
         //Yii::app()->getClientScript()->registerScriptFile(Yii::app()->theme->baseUrl . '/assets/plugins/jquery-1.10.2.js');
         ?>
-        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/assets/plugins/jquery-1.10.2.js"></script>
+
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/assets/plugins/bootstrap/bootstrap.min.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/assets/plugins/metisMenu/jquery.metisMenu.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/assets/plugins/pace/pace.js"></script>

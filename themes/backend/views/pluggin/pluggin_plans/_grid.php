@@ -65,7 +65,7 @@ $mName = "PlugginPlans";
                     ),
                     'delete' => array(
                         'label' => 'Delete',
-                        'url' => 'Yii::app()->controller->createUrl("deletePlateformByAjax",array("id" => $data->primaryKey, "mName" => "' . $mName . '"))',
+                        'url' => 'Yii::app()->controller->createUrl("deleteChildByAjax",array("id" => $data->primaryKey, "mName" => "' . $mName . '"))',
                     ),
                 ),
             ),

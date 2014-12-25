@@ -63,7 +63,10 @@ $this->menu = array(
 </div>   
 <?php
 Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/css/gridform.css');
-Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . '/js/functions.js');
+Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . '/js/functions.js',  CClientScript::POS_END);
+?>
+<?php
+Yii::app()->getClientScript()->registerScriptFile(Yii::app()->theme->baseUrl . '/assets/scripts/jquery.ba-bbq1.js', CClientScript::POS_END);
 ?>
 <?php
 $this->renderPartial('pluggin_plans/_container', array('model' => $model, "type" => "form"));

@@ -97,7 +97,6 @@ class PlugginImage extends DTActiveRecord {
         // class name for the relations automatically generated below.
         return array(
             'pluggin' => array(self::BELONGS_TO, 'Pluggin', 'pluggin_id'),
-           
         );
     }
 
@@ -107,7 +106,7 @@ class PlugginImage extends DTActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'ID',
-            'tour_id' => 'Tour',
+            'pluggin_id' => 'Pluggin',
             'tag' => 'Tag',
             'image_large' => 'Image Large',
             'image_small' => 'Image Small',
@@ -157,7 +156,7 @@ class PlugginImage extends DTActiveRecord {
         $this->oldSmallImg = $this->image_small;
         $this->oldDetailImg = $this->image_detail;
         //set alt and title for images
-        $this->alt_title = !empty($this->tag) ? $this->tag : $this->tour->name;
+        $this->alt_title = !empty($this->tag) ? $this->tag : $this->pluggin->name;
 
 
 
@@ -167,29 +166,29 @@ class PlugginImage extends DTActiveRecord {
         if (!empty($this->image_large)) {
 
 
-            $this->image_url['image_large'] = Yii::app()->baseUrl . "/uploads/tour/" . $this->tour->primaryKey;
-            $this->image_url['image_large'].= "/tour_images/" . $this->id . "/" . $this->image_large;
+            $this->image_url['image_large'] = Yii::app()->baseUrl . "/uploads/pluggin/" . $this->pluggin->primaryKey;
+            $this->image_url['image_large'].= "/pluggin_images/" . $this->id . "/" . $this->image_large;
         } else {
-            $this->image_url['image_large'] = Yii::app()->baseUrl . "/images/tour_images/noimages.jpeg";
+            $this->image_url['image_large'] = Yii::app()->baseUrl . "/images/pluggin_images/noimages.jpeg";
         }
 
         if (!empty($this->image_small)) {
 
-            $this->image_url['image_small'] = Yii::app()->baseUrl . "/uploads/tour/" . $this->tour->primaryKey;
-            $this->image_url['image_small'].= "/tour_images/" . $this->id . "/" . $this->image_small;
+            $this->image_url['image_small'] = Yii::app()->baseUrl . "/uploads/pluggin/" . $this->pluggin->primaryKey;
+            $this->image_url['image_small'].= "/pluggin_images/" . $this->id . "/" . $this->image_small;
         } else {
-            $this->image_url['image_small'] = Yii::app()->baseUrl . "/images/tour_images/noimages.jpeg";
+            $this->image_url['image_small'] = Yii::app()->baseUrl . "/images/pluggin_images/noimages.jpeg";
         }
 
         if (!empty($this->image_detail)) {
 
-            $this->image_url['image_detail'] = Yii::app()->baseUrl . "/uploads/tour/" . $this->tour->primaryKey;
-            $this->image_url['image_detail'].= "/tour_images/" . $this->id . "/" . $this->image_detail;
+            $this->image_url['image_detail'] = Yii::app()->baseUrl . "/uploads/pluggin/" . $this->pluggin->primaryKey;
+            $this->image_url['image_detail'].= "/pluggin_images/" . $this->id . "/" . $this->image_detail;
         } else {
-            $this->image_url['image_detail'] = Yii::app()->baseUrl . "/images/tour_images/noimages.jpeg";
+            $this->image_url['image_detail'] = Yii::app()->baseUrl . "/images/pluggin_images/noimages.jpeg";
         }
 
-        $this->get_transcript();
+       // $this->get_transcript();
         parent::afterFind();
     }
 
@@ -199,21 +198,18 @@ class PlugginImage extends DTActiveRecord {
      * @return type
      */
     public function beforeValidate() {
-        $this->upload_insance = DTUploadedFile::getInstance($this, 'image_large');
-         //CVarDumper::dump($_POST,10,true);
-         //CVarDumper::dump($_FILES,10,true);
-         CVarDumper::dump($this->upload_insance,10,true);
+        $this->upload_insance = DTUploadedFile::getInstance($this, '[' . $this->upload_key . ']image_large');
+        //CVarDumper::dump($_POST,10,true);
+        //CVarDumper::dump($_FILES,10,true);
+        
         if (!empty($this->upload_insance)) {
             $this->image_large = $this->upload_insance;
         }
         return parent::beforeValidate();
     }
-    
+
     public function afterValidate() {
-        CVarDumper::dump($this->attributes,10,true);
-       
-       
-        die;
+        
         return parent::afterValidate();
     }
 
@@ -266,7 +262,7 @@ class PlugginImage extends DTActiveRecord {
         if (!empty($this->upload_insance)) {
 
 
-            $folder_array = array("tour", $this->tour->id, "tour_images", $this->getPrimaryKey());
+            $folder_array = array("pluggin", $this->pluggin->id, "pluggin_images", $this->getPrimaryKey());
 
             $upload_path = DTUploadedFile::creeatRecurSiveDirectories($folder_array);
             $this->upload_insance->saveAs($upload_path . str_replace(" ", "_", $this->image_large));
@@ -292,7 +288,7 @@ class PlugginImage extends DTActiveRecord {
 
         if (!empty($this->oldLargeImg) && $this->oldLargeImg != $this->image_large) {
             $path = Yii::app()->basePath . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR;
-            $path.= "uploads" . DIRECTORY_SEPARATOR . "tour" . DIRECTORY_SEPARATOR . $this->tour->primaryKey . DIRECTORY_SEPARATOR . "tour_images";
+            $path.= "uploads" . DIRECTORY_SEPARATOR . "pluggin" . DIRECTORY_SEPARATOR . $this->pluggin->primaryKey . DIRECTORY_SEPARATOR . "pluggin_images";
             $large_path = $path . DIRECTORY_SEPARATOR . $this->id . DIRECTORY_SEPARATOR . $this->oldLargeImg;
 
             DTUploadedFile::deleteExistingFile($large_path);
@@ -300,7 +296,7 @@ class PlugginImage extends DTActiveRecord {
 
         if (!empty($this->oldSmallImg) && $this->oldSmallImg != $this->image_small) {
             $path = Yii::app()->basePath . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR;
-            $path.= "uploads" . DIRECTORY_SEPARATOR . "tour" . DIRECTORY_SEPARATOR . $this->tour->primaryKey . DIRECTORY_SEPARATOR . "tour_images";
+            $path.= "uploads" . DIRECTORY_SEPARATOR . "pluggin" . DIRECTORY_SEPARATOR . $this->pluggin->primaryKey . DIRECTORY_SEPARATOR . "pluggin_images";
 
             $small_path = $path . DIRECTORY_SEPARATOR . $this->id . DIRECTORY_SEPARATOR . $this->oldSmallImg;
 
@@ -309,7 +305,7 @@ class PlugginImage extends DTActiveRecord {
 
         if (!empty($this->oldDetailImg) && $this->oldDetailImg != $this->image_detail) {
             $path = Yii::app()->basePath . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR;
-            $path.= "uploads" . DIRECTORY_SEPARATOR . "tour" . DIRECTORY_SEPARATOR . $this->tour->primaryKey . DIRECTORY_SEPARATOR . "tour_images";
+            $path.= "uploads" . DIRECTORY_SEPARATOR . "pluggin" . DIRECTORY_SEPARATOR . $this->pluggin->primaryKey . DIRECTORY_SEPARATOR . "pluggin_images";
 
             $detail_path = $path . DIRECTORY_SEPARATOR . $this->id . DIRECTORY_SEPARATOR . $this->oldDetailImg;
 
@@ -327,9 +323,9 @@ class PlugginImage extends DTActiveRecord {
      *  to be undefault
      */
     public function updateAllToUndefault() {
-        if (!empty($this->tour_id)) {
+        if (!empty($this->pluggin_id)) {
             $connection = Yii::app()->db;
-            $sql = "UPDATE " . $this->tableName() . " t SET t.is_default=0 WHERE t.pluggin_id ='" . $this->tour_id . "' ";
+            $sql = "UPDATE " . $this->tableName() . " t SET t.is_default=0 WHERE t.pluggin_id ='" . $this->pluggin_id . "' ";
             $command = $connection->createCommand($sql);
             $command->execute();
         }
