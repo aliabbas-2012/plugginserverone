@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table 'plugin_site_info':
  * @property string $id
- * @property string $ip_address
+ * @property string $user_id
  * @property string $plugin_id
  * @property string $site_name
  * @property integer $deleted
@@ -33,14 +33,14 @@ class PluginSiteInfo extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('ip_address, plugin_id, site_name, create_time, create_user_id, update_time, update_user_id', 'required'),
+			array('site_name, create_time, create_user_id, update_time, update_user_id', 'required'),
 			array('deleted', 'numerical', 'integerOnly'=>true),
-			array('ip_address, site_name', 'length', 'max'=>255),
-			array('plugin_id, create_user_id, update_user_id', 'length', 'max'=>11),
+			array('user_id, plugin_id, create_user_id, update_user_id', 'length', 'max'=>11),
+			array('site_name', 'length', 'max'=>255),
 			array('activity_log', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, ip_address, plugin_id, site_name, deleted, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on'=>'search'),
+			array('id, user_id, plugin_id, site_name, deleted, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,7 +62,7 @@ class PluginSiteInfo extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'ip_address' => 'Ip Address',
+			'user_id' => 'User',
 			'plugin_id' => 'Plugin',
 			'site_name' => 'Site Name',
 			'deleted' => 'Deleted',
@@ -93,7 +93,7 @@ class PluginSiteInfo extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
-		$criteria->compare('ip_address',$this->ip_address,true);
+		$criteria->compare('user_id',$this->user_id,true);
 		$criteria->compare('plugin_id',$this->plugin_id,true);
 		$criteria->compare('site_name',$this->site_name,true);
 		$criteria->compare('deleted',$this->deleted);

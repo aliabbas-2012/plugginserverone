@@ -7,7 +7,6 @@
  * @property string $id
  * @property string $user_id
  * @property string $plugin_id
- * @property string $plan_id
  * @property integer $payment_status
  * @property integer $is_active
  * @property string $start_date
@@ -37,13 +36,13 @@ class UserPlans extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, plugin_id, plan_id, start_date, end_date, create_time, create_user_id, update_time, update_user_id', 'required'),
+			array('start_date, end_date, create_time, create_user_id, update_time, update_user_id', 'required'),
 			array('payment_status, is_active, deleted', 'numerical', 'integerOnly'=>true),
-			array('user_id, plugin_id, plan_id, create_user_id, update_user_id', 'length', 'max'=>11),
+			array('user_id, plugin_id, create_user_id, update_user_id', 'length', 'max'=>11),
 			array('activity_log', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, plugin_id, plan_id, payment_status, is_active, start_date, end_date, deleted, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on'=>'search'),
+			array('id, user_id, plugin_id, payment_status, is_active, start_date, end_date, deleted, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,7 +66,6 @@ class UserPlans extends CActiveRecord
 			'id' => 'ID',
 			'user_id' => 'User',
 			'plugin_id' => 'Plugin',
-			'plan_id' => 'Plan',
 			'payment_status' => 'Payment Status',
 			'is_active' => 'Is Active',
 			'start_date' => 'Start Date',
@@ -102,7 +100,6 @@ class UserPlans extends CActiveRecord
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('user_id',$this->user_id,true);
 		$criteria->compare('plugin_id',$this->plugin_id,true);
-		$criteria->compare('plan_id',$this->plan_id,true);
 		$criteria->compare('payment_status',$this->payment_status);
 		$criteria->compare('is_active',$this->is_active);
 		$criteria->compare('start_date',$this->start_date,true);
