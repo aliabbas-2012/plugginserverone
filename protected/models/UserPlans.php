@@ -6,7 +6,7 @@
  * The followings are the available columns in table 'user_plans':
  * @property string $id
  * @property string $user_id
- * @property string $plugin_id
+ * @property string $pluggin_plan_id
  * @property integer $payment_status
  * @property integer $is_active
  * @property string $start_date
@@ -38,11 +38,11 @@ class UserPlans extends CActiveRecord
 		return array(
 			array('start_date, end_date, create_time, create_user_id, update_time, update_user_id', 'required'),
 			array('payment_status, is_active, deleted', 'numerical', 'integerOnly'=>true),
-			array('user_id, plugin_id, create_user_id, update_user_id', 'length', 'max'=>11),
+			array('user_id, pluggin_plan_id, create_user_id, update_user_id', 'length', 'max'=>11),
 			array('activity_log', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, plugin_id, payment_status, is_active, start_date, end_date, deleted, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on'=>'search'),
+			array('id, user_id, pluggin_plan_id, payment_status, is_active, start_date, end_date, deleted, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -54,8 +54,8 @@ class UserPlans extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-                    "user" => array(self::BELONGS_TO, "Users", "user_id"),
-                    "plugin" => array(self::BELONGS_TO, "Pluggin", "plugin_id"),
+                    "user" => array(self::BELONGS_TO,"Users",'user_id'),
+                    "plugin_plan" => array(self::BELONGS_TO,"PlugginPlans", 'pluggin_plan_id'),
 		);
 	}
 
@@ -67,7 +67,7 @@ class UserPlans extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'user_id' => 'User',
-			'plugin_id' => 'Plugin',
+			'pluggin_plan_id' => 'Pluggin Plan',
 			'payment_status' => 'Payment Status',
 			'is_active' => 'Is Active',
 			'start_date' => 'Start Date',
@@ -101,7 +101,7 @@ class UserPlans extends CActiveRecord
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('user_id',$this->user_id,true);
-		$criteria->compare('plugin_id',$this->plugin_id,true);
+		$criteria->compare('pluggin_plan_id',$this->pluggin_plan_id,true);
 		$criteria->compare('payment_status',$this->payment_status);
 		$criteria->compare('is_active',$this->is_active);
 		$criteria->compare('start_date',$this->start_date,true);

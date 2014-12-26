@@ -9,7 +9,7 @@ class m141226_174348_tbl_plugin_site_info extends DTDbMigration
         $columns = array(
             'id' => 'int(11) unsigned NOT NULL AUTO_INCREMENT',
             'user_id' => 'int(11) unsigned DEFAULT NULL',
-            'plugin_id' => 'int(11) unsigned DEFAULT NULL',
+            'pluggin_id' => 'int(11) unsigned DEFAULT NULL',
             'site_name' => 'varchar(255) NOT NULL',
             'deleted' => 'tinyint(1) NOT NULL DEFAULT 0',
             'create_time' => 'datetime NOT NULL',

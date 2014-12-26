@@ -6,7 +6,7 @@
  * The followings are the available columns in table 'plugin_site_info':
  * @property string $id
  * @property string $user_id
- * @property string $plugin_id
+ * @property string $pluggin_id
  * @property string $site_name
  * @property integer $deleted
  * @property string $create_time
@@ -35,12 +35,12 @@ class PluginSiteInfo extends CActiveRecord
 		return array(
 			array('site_name, create_time, create_user_id, update_time, update_user_id', 'required'),
 			array('deleted', 'numerical', 'integerOnly'=>true),
-			array('user_id, plugin_id, create_user_id, update_user_id', 'length', 'max'=>11),
+			array('user_id, pluggin_id, create_user_id, update_user_id', 'length', 'max'=>11),
 			array('site_name', 'length', 'max'=>255),
 			array('activity_log', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, plugin_id, site_name, deleted, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on'=>'search'),
+			array('id, user_id, pluggin_id, site_name, deleted, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,7 +53,7 @@ class PluginSiteInfo extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
                     "user" => array(self::BELONGS_TO,"Users",'user_id'),
-                    "plugin" => array(self::BELONGS_TO,"Users", 'plugin_id'),
+                    "plugin" => array(self::BELONGS_TO,"Pluggin", 'pluggin_id'),
 		);
 	}
 
@@ -65,7 +65,7 @@ class PluginSiteInfo extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'user_id' => 'User',
-			'plugin_id' => 'Plugin',
+			'pluggin_id' => 'Pluggin',
 			'site_name' => 'Site Name',
 			'deleted' => 'Deleted',
 			'create_time' => 'Create Time',
@@ -96,7 +96,7 @@ class PluginSiteInfo extends CActiveRecord
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('user_id',$this->user_id,true);
-		$criteria->compare('plugin_id',$this->plugin_id,true);
+		$criteria->compare('pluggin_id',$this->pluggin_id,true);
 		$criteria->compare('site_name',$this->site_name,true);
 		$criteria->compare('deleted',$this->deleted);
 		$criteria->compare('create_time',$this->create_time,true);

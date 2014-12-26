@@ -10,7 +10,7 @@ class m141226_173759_tbl_user_plans extends DTDbMigration {
         $columns = array(
             'id' => 'int(11) unsigned NOT NULL AUTO_INCREMENT',
             'user_id' => 'int(11) unsigned DEFAULT NULL',
-            'plugin_id' => 'int(11) unsigned DEFAULT NULL',
+            'pluggin_plan_id' => 'int(11) unsigned DEFAULT NULL',
             'payment_status' => 'tinyint(1) NOT NULL DEFAULT 0',
             'is_active' => 'tinyint(1) NOT NULL DEFAULT 0',
             'start_date' => 'datetime NOT NULL',
