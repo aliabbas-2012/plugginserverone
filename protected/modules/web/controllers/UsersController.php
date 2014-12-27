@@ -74,7 +74,7 @@ class UsersController extends Controller {
 
                 $this->sendEmail2($email);
                 Yii::app()->user->setFlash('registration', 'Thank you for Registration...Please activate your account by visiting your email account.');
-                PlugginSiteInfo::model()->updateSitinfoUser($model->id,$model->_url,$model->_pluggin);
+                PlugginSiteInfo::model()->updateSitinfoUser($model->id, $model->_url, $model->_pluggin);
                 $this->redirect($this->createUrl('/web/default/index'));  ///take him to login page....
             }
         }
@@ -92,8 +92,9 @@ class UsersController extends Controller {
         $this->layout = "//layouts/frontend";
 
         $model = new LoginForm;
-        $model->_url = $url;
-        $model->_pluggin = $pluggin;
+
+
+
 
         // if it is ajax validation request
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
@@ -104,10 +105,17 @@ class UsersController extends Controller {
         // collect user input data
         if (isset($_POST['LoginForm'])) {
             $model->attributes = $_POST['LoginForm'];
-        
+
+            $model->_url = $url;
+            $model->_pluggin = $pluggin;
+
             // validate user input and redirect to the previous page if valid
             if ($model->validate() && $model->login()) {
-                PlugginSiteInfo::model()->updateSitinfoUser(Yii::app()->user->id,$model->_url,$model->_pluggin);
+                echo Yii::app()->user->id;
+
+                PlugginSiteInfo::model()->updateSitinfoUser(Yii::app()->user->id, $model->_url, $model->_pluggin);
+                
+                
                 if (!empty(Yii::app()->user->returnUrl)) {
                     $this->redirect($this->createUrl("/web/default/index"));
                 }

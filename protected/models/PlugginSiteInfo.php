@@ -145,14 +145,17 @@ class PlugginSiteInfo extends DTActiveRecord {
      * @param type $pluggin_id
      */
     public function updateSitinfoUser($user_id, $site_name, $pluggin_id) {
+       
         if (!empty($site_name) && !empty($pluggin_id)) {
             $criteria = new CDbCriteria;
-            $criteria->compare('site_name', $site_name, true);
-            $criteria->compare('pluggin_id', $pluggin_id, true);
-
+            $criteria->compare('site_name', $site_name, false);
+            $criteria->compare('pluggin_id', $pluggin_id, false);
+          
             if ($model = $this->find($criteria)) {
-                $this->update($model->id, array("user_id" => $user_id));
+                 
+                $this->updateByPk($model->id, array("user_id" => $user_id));
             }
+
         }
     }
 
