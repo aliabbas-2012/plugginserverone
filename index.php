@@ -1,5 +1,8 @@
 <?php
 
+if (!ini_get('date.timezone')) {
+    date_default_timezone_set('GMT');
+}
 error_reporting(E_ALL);
 // change the following paths if necessary
 $yii = dirname(__FILE__) . '/../../frameworks/yii-1.1.15.022a51/framework/yii.php';
