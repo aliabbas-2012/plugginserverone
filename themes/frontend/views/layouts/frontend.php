@@ -22,7 +22,7 @@
     <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/li-scroller.css" rel="stylesheet" />
     <link href="<?php echo Yii::app()->theme->baseUrl; ?>/css/lean-slider.css" rel="stylesheet" />
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.js"></script>
-    <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.mobile-1.3.2.js"></script>
+
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/bootstrap.min.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/holder.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.li-scroller.1.0.js"></script>
@@ -69,22 +69,44 @@
                                 </li>
                             </ul>
                             <ul class="navigate nav navbar-nav">
-                             
-                                <li class="coll-dash">
-                                    <?php
-                                    echo CHtml::link("Sign Up", $this->createUrl("/web/users/register"), array(
-                                        'data-ajax' => "false"
-                                    ));
+                                <?php
+                                if (!isset(Yii::app()->user->id)):
                                     ?>
-                                </li>
+                                    <li class="coll-dash">
+                                        <?php
+                                        echo CHtml::link("Sign Up", $this->createUrl("/web/users/register"), array(
+                                            'data-ajax' => "false"
+                                        ));
+                                        ?>
+                                    </li>
 
-                                <li class="coll-dash">
+                                    <li class="coll-dash">
+                                        <?php
+                                        echo CHtml::link("Sign In", $this->createUrl("/web/users/login"), array(
+                                            'data-ajax' => "false"
+                                        ));
+                                        ?>
+                                    </li>
                                     <?php
-                                    echo CHtml::link("Sign In", $this->createUrl("/web/users/login"), array(
-                                        'data-ajax' => "false"
-                                    ));
+                                else:
                                     ?>
-                                </li>
+                                    <li class="coll-dash">
+                                        <?php
+                                        echo CHtml::link("Welcom to ".Yii::app()->user->name, 'javascript:void(0)', array(
+                                            'data-ajax' => "false"
+                                        ));
+                                        ?>
+                                    </li>
+                                    <li class="coll-dash">
+                                        <?php
+                                        echo CHtml::link("Logout", $this->createUrl("/site/logout"), array(
+                                            'data-ajax' => "false"
+                                        ));
+                                        ?>
+                                    </li>
+                                <?php
+                                endif;
+                                ?>
 
 
                             </ul>
@@ -202,6 +224,7 @@
             }
 
         });
+
         jQuery(".submenu").mouseup(function()
         {
             return false
@@ -215,7 +238,7 @@
             jQuery(".submenu").hide();
             jQuery(".account").attr('id', '');
         });
-
+        jQuery(".submit-btn").unbind("click");
     });
 
 </script>

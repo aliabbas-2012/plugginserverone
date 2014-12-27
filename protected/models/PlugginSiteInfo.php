@@ -21,7 +21,8 @@ class PlugginSiteInfo extends DTActiveRecord {
      * will only be use as bit in api
      * @var type 
      */
-    public $_exist,$_model;
+    public $_exist, $_model;
+
     /**
      * @return string the associated database table name
      */
@@ -37,7 +38,7 @@ class PlugginSiteInfo extends DTActiveRecord {
         // will receive user inputs.
         return array(
             array('site_name,pluggin_id, create_time, create_user_id, update_time, update_user_id', 'required'),
-            array("site_name",'validatePluggin'),
+            array("site_name", 'validatePluggin'),
             array('deleted', 'numerical', 'integerOnly' => true),
             array('user_id, pluggin_id, create_user_id, update_user_id', 'length', 'max' => 11),
             array('site_name', 'length', 'max' => 255),
@@ -55,7 +56,7 @@ class PlugginSiteInfo extends DTActiveRecord {
         $criteria = new CDbCriteria;
         $criteria->compare('site_name', $this->site_name, true);
         $criteria->compare('pluggin_id', $this->pluggin_id, true);
-        
+
         if ($model = $this->find($criteria)) {
             $this->addError("site_name", "already Exist this pluggin for this url");
             $this->addError("pluggin_id", "already Exist this url for this pluggin");
@@ -135,6 +136,24 @@ class PlugginSiteInfo extends DTActiveRecord {
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
+    }
+
+    /**
+     * 
+     * @param type $user_id
+     * @param type $site_name
+     * @param type $pluggin_id
+     */
+    public function updateSitinfoUser($user_id, $site_name, $pluggin_id) {
+        if (!empty($site_name) && !empty($pluggin_id)) {
+            $criteria = new CDbCriteria;
+            $criteria->compare('site_name', $site_name, true);
+            $criteria->compare('pluggin_id', $pluggin_id, true);
+
+            if ($model = $this->find($criteria)) {
+                $this->update($model->id, array("user_id" => $user_id));
+            }
+        }
     }
 
 }

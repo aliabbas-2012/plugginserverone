@@ -33,7 +33,7 @@
                             <?php echo $form->passwordField($login_model, 'password', $htmlOptions = array("class" => "login_text")); ?>
                             <?php
                             echo $form->hiddenField($login_model, '_url');
-                            echo $form->hiddenField($login_model, '_host');
+                            echo $form->hiddenField($login_model, '_pluggin');
                             ?>
                         </td>
                     </tr>
@@ -56,32 +56,5 @@
             </td>
         </tr>
     </table>
-    <!--<h2>Sign in with</h2>
-    <div id="login_images">
-        <div class="login_img">
-            <?php
-            //echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl . "/images/facebook_img_03.jpg"), $this->createUrl('/web/hybrid/login/', array("provider" => "facebook")));
-            ?>
-            <span>Facebook</span>
-        </div>
-        <div class="login_img">
-            <?php
-            //echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl . "/images/linkedin_img_03.jpg"), $this->createUrl('/web/hybrid/login/', array("provider" => "linkedin")));
-            ?>
-            <span>Linkedin</span>
-        </div>
-        <div class="login_img">
-            <?php
-            //echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl . "/images/twitter_img_03.jpg"), $this->createUrl('/web/hybrid/login/', array("provider" => "twitter")));
-            ?>
-            <span>Twitter</span>
-        </div>
-        <div class="login_img">
-            <?php
-            //echo CHtml::link(CHtml::image(Yii::app()->theme->baseUrl . "/images/google_img_03.jpg"), $this->createUrl('/web/hybrid/login/', array("provider" => "google")));
-            ?>
-            <span>Google</span>
-        </div>
-    </div>-->
-</div>
+
  <?php $this->endWidget(); ?>

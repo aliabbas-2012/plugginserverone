@@ -2,7 +2,7 @@
 Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/css/form.css');
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl. "/sliderlayer/jquery.js");
 Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/media/css/password_strength.css');
-Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/media/js/password_strength_plugin.js');
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/media/js/password_strength_plugin.js',  CClientScript::POS_END);
 ?>
 <script>
     jQuery(function() {
@@ -126,7 +126,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/media/js/pa
         </div>
         <div class="row_input">
             <div class="row_input_type">
-                <?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('header_footer', 'Sign Up', array(), NULL, "en") : 'Save', array('class' => 'row_button','data-ajax'=>'false')); ?>
+                <?php echo CHtml::submitButton('Sign Up', array('class' => 'row_button submit-btn','data-ajax'=>'false')); ?>
             </div>
         </div>
         <?php $this->endWidget(); ?>
