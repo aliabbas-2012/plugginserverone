@@ -74,7 +74,7 @@ class Controller extends CController {
 
         if (get_class($this->getModule()) == "WebModule") {
 
-            Yii::app()->theme = "frontend";
+            Yii::app()->theme = "abound";
             $this->layout = "//layouts/column2";
           
         } else {

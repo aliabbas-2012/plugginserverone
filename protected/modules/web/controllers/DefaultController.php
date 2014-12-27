@@ -29,22 +29,6 @@ class DefaultController extends Controller {
     }
 
     /**
-     * cache settings
-     * @return type
-     */
-//    public function filters() {
-//
-//        return array(
-//            array(
-//                'DTOutputCache -quranReader',
-//                'duration' => Yii::app()->params['cacheTime'],
-//                'varyByRoute' => true,
-//                'is_cached_allowd' => true,
-//           ),
-//        );
-//    }
-
-    /**
      * redirect site to for having www  lazmi
      * @param type $action
      * @return type
@@ -59,6 +43,7 @@ class DefaultController extends Controller {
      */
     public function actionIndex() {
         $this->layout = "//layouts/frontend";
+
 
 
         $this->render('//default/index');
