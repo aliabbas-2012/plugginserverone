@@ -31,6 +31,8 @@ class Users extends DTActiveRecord {
     public $new_password;
     public $password2;
     public $name;
+    public $_url;
+    public $_pluggin;
 
     public static function model($className = __CLASS__) {
         return parent::model($className);
@@ -59,6 +61,7 @@ class Users extends DTActiveRecord {
             array('type', 'length', 'max' => 9),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             array('name,activity_log,password2', 'safe'),
+            array("_pluggin,_url", 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, username, first_name, last_name, password, email, ip_address, type, is_active, activation_key, deleted, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on' => 'search'),

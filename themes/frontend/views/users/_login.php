@@ -32,7 +32,8 @@
                         <td class="right_login">
                             <?php echo $form->passwordField($login_model, 'password', $htmlOptions = array("class" => "login_text")); ?>
                             <?php
-                            //echo $form->hiddenField($login_model, 'LoginForm');
+                            echo $form->hiddenField($login_model, '_url');
+                            echo $form->hiddenField($login_model, '_host');
                             ?>
                         </td>
                     </tr>

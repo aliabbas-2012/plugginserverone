@@ -69,11 +69,7 @@
                                 </li>
                             </ul>
                             <ul class="navigate nav navbar-nav">
-                                <li>
-                                    <?php
-                                    //echo CHtml::link($categories[1]->name, $this->createUrl("/web/product/products", array("slug" => $categories[1]->slug)), array('data-ajax' => "false", "id" => $categories[1]->slug));
-                                    ?>
-                                </li>
+                             
                                 <li class="coll-dash">
                                     <?php
                                     echo CHtml::link("Sign Up", $this->createUrl("/web/users/register"), array(

@@ -13,8 +13,8 @@ class UsersController extends Controller {
         return array(
             'accessControl', // perform access control for CRUD operations
             'postOnly + delete', // we only allow deletion via POST request
-            /*"https +array('changePass','setNewPass')",*/
-            /*"http + array(activate','register','updateProfile','updateProfile','forgot','productReview','customerHistory','orderDetail','print','customerDetail')"*/
+                /* "https +array('changePass','setNewPass')", */
+                /* "http + array(activate','register','updateProfile','updateProfile','forgot','productReview','customerHistory','orderDetail','print','customerDetail')" */
         );
     }
 
@@ -26,7 +26,7 @@ class UsersController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('login','register', 'activate', 'setNewPass', 'ProductReview', 'forgot'),
+                'actions' => array('login', 'register', 'activate', 'setNewPass', 'ProductReview', 'forgot'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -42,23 +42,26 @@ class UsersController extends Controller {
         );
     }
 
-    public function actionRegister() {
+    public function actionRegister($url = '', $pluggin = '') {
         $this->layout = "//layouts/frontend";
         $model = new Users;
-        
+
+        $model->_url = $url;
+        $model->_pluggin = pluggin;
+
         if (isset($_POST['Users'])) {
 
             $model->attributes = $_POST['Users'];
 
             $model->activation_key = sha1(mt_rand(10000, 99999) . time() . $model->email);
             $activation_url = $this->createUrl('/web/users/activate', array('key' => $model->activation_key));
-            
+
             if ($model->save()) {
 
                 //Sending email part - For activation
 
                 $subject = "Your Activation Link";
-                $message = "Please click this below to activate your account <br /><br />" .$this->createAbsoluteUrl('/web/users/activate', array('key' => $model->activation_key, 'id' => $model->id)) ."<br /><br /> Thanks you ";
+                $message = "Please click this below to activate your account <br /><br />" . $this->createAbsoluteUrl('/web/users/activate', array('key' => $model->activation_key, 'id' => $model->id)) . "<br /><br /> Thanks you ";
 
                 $email['FromName'] = Yii::app()->params['systemName'];
                 $email['From'] = Yii::app()->params['adminEmail'];
@@ -68,7 +71,7 @@ class UsersController extends Controller {
                 //$body.=" going to this url: <br /> \n" . $model->getActivationUrl();
                 $email['Body'] = $body;
                 $email['Body'] = $this->renderPartial('//users/_email_template', array('email' => $email), true, false);
-                
+
                 $this->sendEmail2($email);
                 Yii::app()->user->setFlash('registration', 'Thank you for Registration...Please activate your account by visiting your email account.');
                 $this->redirect($this->createUrl('/web/default/index'));  ///take him to login page....
@@ -83,12 +86,14 @@ class UsersController extends Controller {
     /**
      * This will be responsible for logging in the user to the system
      */
-    public function actionLogin(){
-        
+    public function actionLogin($url = '', $pluggin = '') {
+
         $this->layout = "//layouts/frontend";
-        
+
         $model = new LoginForm;
-        
+        $model->_url = $url;
+        $model->_pluggin = pluggin;
+
         // if it is ajax validation request
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
             echo CActiveForm::validate($model);
@@ -101,17 +106,17 @@ class UsersController extends Controller {
             var_dump($model->validate());
             var_dump($model->login());
             // validate user input and redirect to the previous page if valid
-            if ($model->validate() && $model->login()){
-                if(!empty(Yii::app()->user->returnUrl)){
+            if ($model->validate() && $model->login()) {
+                if (!empty(Yii::app()->user->returnUrl)) {
                     $this->redirect($this->createUrl("/web/default/index"));
                 }
                 $this->redirect(Yii::app()->user->returnUrl);
             }
         }
-        
+
         $this->render("//users/_login");
     }
-    
+
     public function actionActivate() {
         $this->layout = "//layouts/frontend";
         //Yii::app()->user->SiteSessions;
@@ -121,7 +126,7 @@ class UsersController extends Controller {
         $criteria->select = '*';
         $criteria->condition = "id='" . $id . "'";
         $obj = Users::model()->find($criteria);
-       
+
         if (!empty($obj)) {
             if ($obj->is_active == '1') {
                 //already activated
@@ -133,11 +138,10 @@ class UsersController extends Controller {
             }
 
             Yii::app()->user->setFlash('login', 'Thank You ! Your account has been activated....Now Please Login');
-            
+
             $modelUsers = new Users();
             $modelUsers->updateByPk($id, array('is_active' => '1'));
             $this->redirect($this->createUrl('/web/users/login'));
-            
         } else {
             Yii::app()->user->setFlash('login', 'User does not exist. Please signup and get activation link.');
             $this->redirect($this->createUrl('/web/users/login'));
@@ -196,20 +200,20 @@ class UsersController extends Controller {
                 $email['To'] = $record->email;
                 $email['Subject'] = "Your New Password";
                 $email['Body'] = $body;
-                
+
                 $email['Body'] = $this->renderPartial('//users/_email_template', array('email' => $email), true, false);
                 $this->sendEmail2($email);
 
                 $id = $record->id;
-                
-                
-                    $modelUsers = new Users;
-                    $pass_new = md5($pass_new);
-                    if ($modelUsers->updateByPk($id, array('password' => "$pass_new"))) {
-                        //Users::updateAll(array('email=>'), $condition='', $params=array());
 
-                        Yii::app()->user->setFlash('password_reset', 'Your passowrd has been sent to your Email.Please get your new password form your email account');
-                    }
+
+                $modelUsers = new Users;
+                $pass_new = md5($pass_new);
+                if ($modelUsers->updateByPk($id, array('password' => "$pass_new"))) {
+                    //Users::updateAll(array('email=>'), $condition='', $params=array());
+
+                    Yii::app()->user->setFlash('password_reset', 'Your passowrd has been sent to your Email.Please get your new password form your email account');
+                }
             }
         }
 
@@ -269,112 +273,6 @@ class UsersController extends Controller {
 
             $this->render('//users/new_password', array('model' => $model));
         }
-    }
-
-    public function actionProductReview() {
-
-        $modelComment = new ProductReviews;
-        
-        if (isset($_POST['ProductReviews'])) {
-            $modelComment->attributes = $_POST['ProductReviews'];
-            $modelComment->added_date = time();
-            $modelComment->is_approved = '1';
-            $modelComment->id = Yii::app()->user->id;
-
-            if (!isset($_POST['ratingUsers'])) {
-                $modelComment->rating = 5;
-            } else {
-                $modelComment->rating = $_POST['ratingUsers'];
-            }
-
-            $product = Product::model()->findByPk($modelComment->product_id);
-
-            $url = $this->createUrl('/web/product/productDetail', array(
-                'country' => Yii::app()->session['country_short_name'],
-                'city' => Yii::app()->session['city_short_name'],
-                'city_id' => Yii::app()->session['city_id'],
-                "pcategory" => $product->parent_category->category_slug,
-                "slug" => $product->slag,
-            ));
-
-
-            if ($modelComment->save()) {
-                $this->redirect($url);
-            } else {
-                echo CHtml::errorSummary($modelComment);
-                $this->redirect($url);
-            }
-        }
-    }
-
-    /**
-     * show customer order history
-     * 
-     */
-    public function actionCustomerHistory() {
-        //Yii::app()->user->SiteSessions;
-        $ip = Yii::app()->request->getUserHostAddress();
-        $order_history = Users::model()->customerHistory();
-        $this->render('//users/customer_history', array('history' => $order_history));
-    }
-
-    public function actionPrint($id) {
-        //Yii::app()->user->SiteSessions;
-        $model = Order::model()->findByPk($id);
-
-        /**
-         * order detail part
-         * 
-         */
-        $model_d = new OrderDetail('Search');
-        $model_d->unsetAttributes();  // clear any default values
-        $model_d->order_id = $id;
-        if (isset($_GET['OrderDetail'])) {
-            $model_d->attributes = $_GET['Order'];
-        }
-
-        $this->renderPartial('//users/print', array('model' => $model, "model_d" => $model_d), false, false);
-    }
-
-    /**
-     * customer order detail
-     * to fetch
-     */
-    public function actionCustomerDetail($id) {
-        //Yii::app()->user->SiteSessions;
-        $model = Order::model()->findByPk($id);
-
-        /**
-         * order detail part
-         * 
-         */
-        $model_d = new OrderDetail('Search');
-        $model_d->unsetAttributes();  // clear any default values
-        $model_d->order_id = $id;
-        if (isset($_GET['OrderDetail'])) {
-            $model_d->attributes = $_GET['Order'];
-        }
-
-        $this->render('//users/order_detail', array('model' => $model, "model_d" => $model_d));
-    }
-
-    /**
-     * load products under history
-     * @param type $id
-     */
-    public function actionOrderDetail($id) {
-
-        //Yii::app()->user->SiteSessions;
-        $model = new OrderDetail('Search');
-        $model->unsetAttributes();  // clear any default values
-        $model->order_id = $id;
-        if (isset($_GET['Order'])) {
-            $model->attributes = $_GET['Order'];
-        }
-        $this->renderPartial('//users/_order_detail', array(
-            'model' => $model,
-        ));
-        Yii::app()->end();
     }
 
     /**
