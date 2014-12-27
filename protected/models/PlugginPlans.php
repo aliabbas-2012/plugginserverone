@@ -118,10 +118,27 @@ class PlugginPlans extends DTActiveRecord {
     public static function model($className = __CLASS__) {
         return parent::model($className);
     }
-    
+
     public function afterValidate() {
- 
+
         return parent::afterValidate();
+    }
+
+    /**
+     * Pluggin Plans
+     * @param type $pluggin_id
+     */
+    public function getPlugginPlans($pluggin_id) {
+        $criteria = new CDbCriteria;
+        $criteria->compare('pluggin_id', $pluggin_id, true);
+
+        $criteria->select = 'id';
+        $pluggin_plnas = CHtml::listData($this->findAll($criteria),"id","id");
+        $criteria = new CDbCriteria;
+        
+        $criteria->addInCondition("pluggin_plan_id", array_keys($pluggin_plnas));
+        
+        return UserPlans::model()->findAll($criteria);
     }
 
 }

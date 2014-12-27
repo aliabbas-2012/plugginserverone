@@ -31,7 +31,7 @@ return array(
         //'authManager' => $conf_component_authManager,
         'errorHandler' => array(
             // use 'site/error' action to display errors
-            'errorAction' => 'web/default/error', //error controoler/error actions
+            'errorAction' => 'web/error/error', //error controoler/error actions
         ),
         'log' => $logs,
         

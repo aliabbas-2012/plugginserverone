@@ -21,7 +21,7 @@ class PlugginSiteInfo extends DTActiveRecord {
      * will only be use as bit in api
      * @var type 
      */
-    public $_exist;
+    public $_exist,$_model;
     /**
      * @return string the associated database table name
      */
@@ -55,11 +55,12 @@ class PlugginSiteInfo extends DTActiveRecord {
         $criteria = new CDbCriteria;
         $criteria->compare('site_name', $this->site_name, true);
         $criteria->compare('pluggin_id', $this->pluggin_id, true);
-        $criteria->select = 'id';
+        
         if ($model = $this->find($criteria)) {
             $this->addError("site_name", "already Exist this pluggin for this url");
             $this->addError("pluggin_id", "already Exist this url for this pluggin");
             $this->addError("_exist", "already");
+            $this->_model = $model;
         }
     }
 

@@ -34,26 +34,21 @@ class ApiController extends Controller {
      * home page
      */
     public function actionIndex() {
-       
+
         if (!empty($_POST['pluggin_name']) && !empty($_POST['host_name'])) {
-            if(($id = Pluggin::model()->getPlugginId($_POST['pluggin_name']))!='') {
+            if (($id = Pluggin::model()->getPlugginId($_POST['pluggin_name'])) != '') {
                 $model = new PlugginSiteInfo;
                 $model->pluggin_id = $id;
                 $model->site_name = $_POST['host_name'];
                 $model->save();
-                if($model->hasErrors("_exist")){
-                    echo "ali";
+                if ($model->hasErrors("_exist")) {
+                    $this->findPlans($model->_model);
+                } else {
+                    echo 'Your pluggin  has been started for trial version.';
                 }
-                else {
-                    echo 'Your pluggin  has been started for trial version.'; 
-                }
+            } else {
+                throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
             }
-            else {
-                throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.'); 
-            }
-            
-
-            
         } else {
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
         }
@@ -62,8 +57,17 @@ class ApiController extends Controller {
     /**
      * 
      */
-    private function registerPluggin() {
-        
+    private function findPlans($pluggin_site) {
+        $pluggin_plans = PlugginPlans::model()->getPlugginPlans($pluggin_site->pluggin_id);
+        if (empty($pluggin_plans)) {
+       
+            $hourdiff = round((strtotime(date("Y-m-d H:i:s")) - strtotime($pluggin_site->create_time)) / 3600, 1);
+            if($hourdiff>0){
+                throw new CHttpException(400, 'Your trial has been expired,Kindly purchase a plan.');
+            }
+        } else {
+            
+        }
     }
 
 }
