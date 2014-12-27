@@ -19,6 +19,9 @@ $rules_web = array(
     'login' => '/web/users/login',
     'signup' => '/web/users/register',
     
+    /* api **/
+    'api-index'=>'web/api/index',
+    
     '<controller:\w+>/<id:\d+>' => '<controller>/view',
     '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
     '<controller:\w+>/<action:\w+>' => '<controller>/<action>',

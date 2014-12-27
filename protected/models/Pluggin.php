@@ -150,6 +150,18 @@ class Pluggin extends DTActiveRecord {
             return $model->id;
         }
     }
+    /**
+     * 
+     * @param type $name
+     */
+    public function getPlugginId($name) {
+        $criteria = new CDbCriteria;
+        $criteria->compare('name', $name, true);
+        $criteria->select = 'id';
+        if ($model = $this->find($criteria)) {
+            return $model->id;
+        }
+    }
 
     /**
      * Returns the static model of the specified AR class.
