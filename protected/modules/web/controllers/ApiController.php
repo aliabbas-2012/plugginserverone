@@ -62,8 +62,8 @@ class ApiController extends Controller {
         if (empty($pluggin_plans)) {
        
             $hourdiff = round((strtotime(date("Y-m-d H:i:s")) - strtotime($pluggin_site->create_time)) / 3600, 1);
-            if($hourdiff>0){
-                throw new CHttpException(400, 'Your trial has been expired,Kindly purchase a plan.');
+            if($hourdiff>24){
+                $this->renderPartial("//api/_purchase_notification",array("pluggin_site"=>$pluggin_site)); 
             }
         } else {
             

@@ -404,8 +404,8 @@ class Controller extends CController {
     }
 
     public function createUrl($route, $params = array(), $ampersand = '&') {
-        if (get_class($this->getModule()) == "WebModule" && !isset($params['lang'])) {
-            $params['lang'] = Yii::app()->language;
+        if (get_class($this->getModule()) == "WebModule") {
+            
         } else {
             $params['admin'] = 1;
         }
