@@ -42,7 +42,7 @@ class DefaultController extends Controller {
      * home page
      */
     public function actionIndex() {
-        $this->layout = "//layouts/frontend";
+        $this->layout = "//layouts/column2";
 
 
 

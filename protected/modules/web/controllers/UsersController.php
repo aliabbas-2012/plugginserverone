@@ -41,7 +41,7 @@ class UsersController extends Controller {
     }
 
     public function actionRegister($url = '', $pluggin = '') {
-        $this->layout = "//layouts/frontend";
+        $this->layout = "//layouts/column2";
         $model = new Users;
 
         $model->_url = $url;
@@ -87,12 +87,9 @@ class UsersController extends Controller {
      */
     public function actionLogin($url = '', $pluggin = '') {
 
-        $this->layout = "//layouts/frontend";
+        $this->layout = "//layouts/column2";
 
         $model = new LoginForm;
-
-
-
 
         // if it is ajax validation request
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
@@ -121,11 +118,11 @@ class UsersController extends Controller {
             }
         }
 
-        $this->render("//users/_login");
+        $this->render("//users/_login",array("login_model"=>$model));
     }
 
     public function actionActivate() {
-        $this->layout = "//layouts/frontend";
+        $this->layout = "//layouts/column2";
         //Yii::app()->user->SiteSessions;
         $id = $_GET['id'];
         $activation_key = $_GET['key'];
@@ -170,7 +167,7 @@ class UsersController extends Controller {
     }
 
     public function actionUpdateProfile($id) {
-        $this->layout = "//layouts/frontend";
+        $this->layout = "//layouts/column2";
         $model = $this->loadModel($id);
 
         // Uncomment the following line if AJAX validation is needed
@@ -188,7 +185,7 @@ class UsersController extends Controller {
     }
 
     public function actionForgot() {
-        $this->layout = "//layouts/frontend";
+        $this->layout = "//layouts/column2";
         //Yii::app()->user->SiteSessions;
         if (isset($_POST['Users'])) {
             $record = Users::model()->find(array(
@@ -233,7 +230,7 @@ class UsersController extends Controller {
      */
 
     public function actionChangePass() {
-        $this->layout = "//layouts/frontend";
+        $this->layout = "//layouts/column2";
         //Yii::app()->user->SiteSessions;
         //Yii::app()->controller->layout = '//layouts/main';
         $model = new ChangePassword;
@@ -259,7 +256,7 @@ class UsersController extends Controller {
      * is made here
      */
     public function actionSetNewPass() {
-        $this->layout = "//layouts/frontend";
+        $this->layout = "//layouts/column2";
         //Yii::app()->user->SiteSessions;
         //Yii::app()->controller->layout = '//layouts/main';
 
