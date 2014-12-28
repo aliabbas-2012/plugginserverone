@@ -27,8 +27,10 @@ class UserPlugginController extends Controller {
     /**
      * 
      */
-    public function actionPlans($site_name,$pluggin_id){
-        echo "ali";
+    public function actionPlans($info_id,$pluggin_id){
+        
+        $model = Pluggin::model()->findByPk($pluggin_id);
+        $this->render("//userPluggin/plans",array("model"=>$model,'info_id'=>$info_id));
     }
 
 }

@@ -165,7 +165,7 @@ class PlugginSiteInfo extends DTActiveRecord {
         $criteria->compare('user_id', Yii::app()->user->id, false);
         $criteria->compare('pluggin_site_info_id', $this->id, false);
 
-        $url = Yii::app()->controller->createUrl("/web/userPluggin/plans", array("site_name" => $this->site_name, "pluggin_id" => $this->pluggin_id));
+        $url = Yii::app()->controller->createUrl("/web/userPluggin/plans", array("info_id" => $this->id, "pluggin_id" => $this->pluggin_id));
         if ($plans = UserPlans::model()->count($criteria) > 0) {
             return CHtml::link("Total Plans (" . $plans . ")", $url);
         } else {
