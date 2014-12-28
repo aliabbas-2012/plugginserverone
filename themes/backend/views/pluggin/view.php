@@ -71,5 +71,6 @@ Yii::app()->getClientScript()->registerScriptFile(Yii::app()->theme->baseUrl . '
 <?php
 $this->renderPartial('pluggin_plans/_container', array('model' => $model, "type" => "form"));
 $this->renderPartial('pluggin_images/_container', array('model' => $model, "type" => "form"));
+$this->renderPartial('user_registered_pluggins/_container', array('model' => $model, "type" => "form"));
 ?>
 

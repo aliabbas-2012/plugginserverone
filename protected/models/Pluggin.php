@@ -55,6 +55,7 @@ class Pluggin extends DTActiveRecord {
         return array(
             'plateform' => array(self::BELONGS_TO, 'Plateform', 'plateform_id'),
             'pluggin_plans' => array(self::HAS_MANY, 'PlugginPlans', 'pluggin_id'),
+            'user_registered_pluggins' => array(self::HAS_MANY, 'PlugginSiteInfo', 'pluggin_id'),
             'pluggin_images' => array(self::HAS_MANY, 'PlugginImage', 'pluggin_id'),
             'pluggin_images_display_def' => array(self::HAS_ONE, 'PlugginImage', 'pluggin_id', 'condition' => 'is_default=1 '),
             'pluggin_images_display' => array(self::HAS_ONE, 'PlugginImage', 'pluggin_id', 'order' => 'id DESC '),
