@@ -48,6 +48,12 @@ class UserPlugginController extends Controller {
     public function actionConfirmPurchase($id, $info = '') {
         $info = PlugginSiteInfo::model()->findByPk($info);
         $model = PlugginPlans::model()->findByPk($id);
+        
+        
+        if(UserPlans::model()->getActivePlan($info->id)==0){
+            Yii::app()->user->setFlash("error", 'You have your current plan , you cannot purchase new plan');
+            $this->redirect($this->createUrl("/web/userPluggin/plans", array("info_id" => $info->id, "pluggin_id" => $info->pluggin_id)));
+        }
 
         $purchase_plan = new UserPlans;
         $purchase_plan->user_id = Yii::app()->user->id;

@@ -102,6 +102,7 @@ class UserPlans extends DTActiveRecord {
         $criteria->compare('id', $this->id, true);
         $criteria->compare('user_id', $this->user_id, true);
         $criteria->compare('pluggin_plan_id', $this->pluggin_plan_id, true);
+        $criteria->compare('pluggin_site_info_id', $this->pluggin_site_info_id, true);
         $criteria->compare('payment_status', $this->payment_status);
         $criteria->compare('is_active', $this->is_active);
         $criteria->compare('start_date', $this->start_date, true);
@@ -150,9 +151,19 @@ class UserPlans extends DTActiveRecord {
         } else {
             $this->_admin_activation = "Unknown";
         }
-
-
         return parent::afterFind();
+    }
+    /*
+     * 
+     */
+    public function getActivePlan($site_info){
+        $criteria = new CDbCriteria();
+        $criteria->addCondition("end_date < :current_time AND pluggin_site_info_id = :site_info");
+        $criteria->params = array("current_time"=>date("Y-m-d"),"site_info"=>$site_info);
+
+        return $this->count($criteria);
+        
+        
     }
 
 }

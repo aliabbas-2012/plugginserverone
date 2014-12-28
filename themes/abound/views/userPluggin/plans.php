@@ -44,6 +44,16 @@
                     "type" => "raw",
                 ),
                 array(
+                    'header' => 'start_date',
+                    'value' => '$data->start_date',
+                    "type" => "raw",
+                ),
+                array(
+                    'header' => 'end_date',
+                    'value' => '$data->end_date',
+                    "type" => "raw",
+                ),
+                array(
                     'name' => '_running_status',
                     'value' => '$data->_running_status',
                     "type" => "raw",
