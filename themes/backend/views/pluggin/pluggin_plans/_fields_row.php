@@ -16,9 +16,7 @@ $relationName = "pluggin_plans";
         }
 
         $criteria = new CDbCriteria();
-        $criteria->select = "id,name";
-
-        $data = array("" => "Select") + CHtml::listData(ConfPlans::model()->findAll($criteria), "id", "name");
+        $data = array("" => "Select") + CHtml::listData(ConfPlans::model()->findAll($criteria), "id", "_duration");
         echo CHtml::activeDropDownList($model, '[' . $index . ']plan', $data);
         ?>
     </div>

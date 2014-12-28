@@ -44,6 +44,10 @@
                                 'value' => '$data->name'
                             ),
                             array(
+                                'name' => 'duration',
+                                'value' => '$data->duration'
+                            ),
+                            array(
                                 'class' => 'CButtonColumn',
                                 'template' => '{update}',
                                 'buttons' => array(

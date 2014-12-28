@@ -37,6 +37,15 @@
                             </div>
 
                         </div><!-- group -->
+                        <div class="form-group">
+                            <?php echo $form->labelEx($model, 'duration', array('class' => 'control-label col-lg-2')); ?>
+                            <div class="col-lg-4">
+                                <?php echo $form->dropDownList($model, 'duration', $model->duration_types,array('class' => 'form-control')); ?>
+                                <?php echo $form->error($model, 'duration'); ?>
+
+                            </div>
+
+                        </div><!-- group -->
 
 
                         </div><!-- group -->

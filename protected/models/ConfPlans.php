@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'conf_plans':
  * @property string $id
  * @property string $name
+ * @property string $duration
  * @property string $create_time
  * @property string $create_user_id
  * @property string $update_time
@@ -15,7 +16,15 @@
 class ConfPlans extends DTActiveRecord {
 
     public $confViewName = '//confPlans/index';
+    public $duration_types = array(
+        "" => "Select",
+        "Days" => "Days",
+        "Weeks" => "Weeks",
+        "Months" => "Months",
+        "Years" => "Years",
+    );
 
+    public $_duration;
     /**
      * @return string the associated database table name
      */
@@ -30,7 +39,8 @@ class ConfPlans extends DTActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('name, create_time, create_user_id, update_time, update_user_id', 'required'),
+            array('name,duration, create_time, create_user_id, update_time, update_user_id', 'required'),
+            array('name', 'numerical', 'integerOnly' => FALSE),
             array('name', 'length', 'max' => 150),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             array('activity_log', 'safe'),
@@ -84,6 +94,7 @@ class ConfPlans extends DTActiveRecord {
 
         $criteria->compare('id', $this->id, true);
         $criteria->compare('name', $this->name, true);
+        $criteria->compare('duration', $this->duration, true);
         $criteria->compare('create_time', $this->create_time, true);
         $criteria->compare('create_user_id', $this->create_user_id, true);
         $criteria->compare('update_time', $this->update_time, true);
@@ -103,6 +114,12 @@ class ConfPlans extends DTActiveRecord {
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
+    }
+    
+    public function afterFind() {
+        
+        $this->_duration = $this->name." ".$this->duration;
+        return parent::afterFind();
     }
 
 }

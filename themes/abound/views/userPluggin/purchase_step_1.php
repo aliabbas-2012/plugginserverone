@@ -32,8 +32,8 @@
                     'name' => 'Purchase',
                     'value' => CHtml::button("Purchase", array(
                         "class" => 'btn',
-                        'id'=>'purchase_btn',
-                        'url' => $this->createUrl('/web/userPluggin/confirmPurchase'))),
+                        'id' => 'purchase_btn',
+                        'url' => $this->createUrl('/web/userPluggin/confirmPurchase', array("id" => $model->id, "info" => $info->id)))),
                     "type" => "raw",
                 ),
             ),
@@ -44,6 +44,10 @@
 </div>
 <?php
 Yii::app()->clientScript->registerScript('purchase_btn_script', "
-    alert('hello world');
+     jQuery('#purchase_btn').click(function(){
+          if(confirm('Are you sure you want to purchase this plan')){
+               window.location = jQuery(this).attr('url');
+          }
+     })
 ", CClientScript::POS_READY);
 ?>
