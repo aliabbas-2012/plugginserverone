@@ -6,6 +6,18 @@
 
 class UserPlugginController extends Controller {
 
+    /**
+     * @return array action filters
+     */
+    public function filters() {
+        return array(
+            'accessControl', // perform access control for CRUD operations
+            'postOnly + delete', // we only allow deletion via POST request
+                /* "https +array('changePass','setNewPass')", */
+                /* "http + array(activate','register','updateProfile','updateProfile','forgot','productReview','customerHistory','orderDetail','print','customerDetail')" */
+        );
+    }
+
     public function accessRules() {
         return array(
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -48,9 +60,9 @@ class UserPlugginController extends Controller {
     public function actionConfirmPurchase($id, $info = '') {
         $info = PlugginSiteInfo::model()->findByPk($info);
         $model = PlugginPlans::model()->findByPk($id);
-        
-        
-        if(UserPlans::model()->getActivePlan($info->id)==0){
+
+
+        if (UserPlans::model()->getActivePlan($info->id) == 0) {
             Yii::app()->user->setFlash("error", 'You have your current plan , you cannot purchase new plan');
             $this->redirect($this->createUrl("/web/userPluggin/plans", array("info_id" => $info->id, "pluggin_id" => $info->pluggin_id)));
         }
@@ -83,7 +95,7 @@ class UserPlugginController extends Controller {
                 echo "";
         }
 
-        $purchase_plan->end_date = date("Y-m-d",$date);
+        $purchase_plan->end_date = date("Y-m-d", $date);
 
         if ($purchase_plan->save()) {
             Yii::app()->user->setFlash("success", 'You have purchased plan successfully');
@@ -93,8 +105,6 @@ class UserPlugginController extends Controller {
             Yii::app()->user->setFlash("error_array", $purchase_plan->getErrors());
             $this->redirect($this->createUrl("/web/userPluggin/plans", array("info_id" => $info->id, "pluggin_id" => $info->pluggin_id)));
         }
-
-       
     }
 
 }
