@@ -18,6 +18,7 @@
             'pagination' => array(
                 'pageSize' => 20,
             ),
+            'sort' => array('defaultOrder' => "create_time DESC")
         ));
         ?>
         <?php
@@ -42,6 +43,11 @@
                     'value' => '$data->plugin_plan->currency',
                     "type" => "raw",
                 ),
+                array(
+                    'name' => 'create_time',
+                    'value' => '$data->create_time',
+                    "type" => "raw",
+                ),
             ),
         ));
         ?>
@@ -62,6 +68,7 @@
             'pagination' => array(
                 'pageSize' => 20,
             ),
+            'sort' => array('defaultOrder' => "create_time DESC")
         ));
         $this->beginWidget('zii.widgets.CPortlet', array(
             'title' => "Other Available Plans",
