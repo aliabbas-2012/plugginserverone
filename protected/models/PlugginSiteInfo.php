@@ -125,7 +125,7 @@ class PlugginSiteInfo extends DTActiveRecord {
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
-             'pagination' => array(
+            'pagination' => array(
                 'pageSize' => 20,
             ),
         ));
@@ -161,14 +161,20 @@ class PlugginSiteInfo extends DTActiveRecord {
         }
     }
 
-    public function getPlansCountforGrid() {
+    public function getPlansCountforGrid($is_admin = false) {
 
         $criteria = new CDbCriteria;
 
-        $criteria->compare('user_id', Yii::app()->user->id, false);
+        if ($is_admin == false) {
+            $criteria->compare('user_id', Yii::app()->user->id, false);
+            $url = Yii::app()->controller->createUrl("/web/userPluggin/plans", array("info_id" => $this->id, "pluggin_id" => $this->pluggin_id));
+        } else {
+            $url = Yii::app()->controller->createUrl("/pluggin/plans", array("info_id" => $this->id, "pluggin_id" => $this->pluggin_id));
+        }
+
         $criteria->compare('pluggin_site_info_id', $this->id, false);
 
-        $url = Yii::app()->controller->createUrl("/web/userPluggin/plans", array("info_id" => $this->id, "pluggin_id" => $this->pluggin_id));
+
         if ($plans = UserPlans::model()->count($criteria) > 0) {
             return CHtml::link("Total Plans (" . $plans . ")", $url);
         } else {

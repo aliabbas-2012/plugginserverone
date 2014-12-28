@@ -21,6 +21,11 @@ $mName = "PlugginSiteInfo";
         'dataProvider' => $mName_provider,
         'columns' => array(
             'site_name',
+            array(
+                'header' => 'Plans',
+                'value' => '$data->getPlansCountforGrid(true)',
+                'type' => 'raw'
+            ),
         ),
     ));
     ?>

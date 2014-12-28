@@ -21,7 +21,7 @@
  */
 class UserPlans extends DTActiveRecord {
 
-    public $_running_status, $_admin_activation,$_dates;
+    public $_running_status, $_admin_activation, $_dates;
 
     /**
      * @return string the associated database table name
@@ -102,13 +102,14 @@ class UserPlans extends DTActiveRecord {
         $criteria->compare('id', $this->id, true);
         $criteria->compare('user_id', $this->user_id, true);
         $criteria->compare('pluggin_plan_id', $this->pluggin_plan_id, true);
-        $criteria->compare('pluggin_site_info_id', $this->pluggin_site_info_id, true);
+        $criteria->compare('pluggin_site_info_id', $this->pluggin_site_info_id, false);
         $criteria->compare('payment_status', $this->payment_status);
         $criteria->compare('is_active', $this->is_active);
         $criteria->compare('start_date', $this->start_date, true);
         $criteria->compare('end_date', $this->end_date, true);
         $criteria->compare('deleted', $this->deleted);
         $criteria->compare('create_time', $this->create_time, true);
+
         $criteria->compare('create_user_id', $this->create_user_id, true);
         $criteria->compare('update_time', $this->update_time, true);
         $criteria->compare('update_user_id', $this->update_user_id, true);
@@ -151,22 +152,22 @@ class UserPlans extends DTActiveRecord {
         } else {
             $this->_admin_activation = "Unknown";
         }
-        
-        $this->_dates['start_date'] = explode(" ",$this->start_date);
-        $this->_dates['end_date'] = explode(" ",$this->end_date);
+
+        $this->_dates['start_date'] = explode(" ", $this->start_date);
+        $this->_dates['end_date'] = explode(" ", $this->end_date);
         return parent::afterFind();
     }
+
     /*
      * 
      */
-    public function getActivePlan($site_info){
+
+    public function getActivePlan($site_info) {
         $criteria = new CDbCriteria();
         $criteria->addCondition("end_date < :current_time AND pluggin_site_info_id = :site_info");
-        $criteria->params = array("current_time"=>date("Y-m-d"),"site_info"=>$site_info);
+        $criteria->params = array("current_time" => date("Y-m-d"), "site_info" => $site_info);
 
         return $this->count($criteria);
-        
-        
     }
 
 }

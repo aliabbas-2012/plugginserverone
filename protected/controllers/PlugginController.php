@@ -27,7 +27,9 @@ class PlugginController extends AdminController {
 
         return array(
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array_merge(parent::alloweActions(), array('create', 'update', 'index', 'view', 'delete',)),
+                'actions' => array_merge(parent::alloweActions(), array('create', 'update', 'index', 'view', 'delete',
+                    'plans'
+                )),
                 'users' => array('@'),
             ),
             array('deny', // deny all users
@@ -131,6 +133,22 @@ class PlugginController extends AdminController {
         ));
     }
 
+    /*
+     * Plans registerd
+     */
+
+    public function actionPlans($info_id, $pluggin_id) {
+        $model = new UserPlans('search');
+        $model->pluggin_site_info_id = $info_id;
+        $model->is_active = 1;
+        
+        $pluggin = Pluggin::model()->findByPk($pluggin_id);
+        $this->render('plans', array(
+            'model' => $model,
+            'pluggin' => $pluggin,
+        ));
+    }
+
     /**
      * Returns the data model based on the primary key given in the GET variable.
      * If the data model is not found, an HTTP exception will be raised.
@@ -174,7 +192,7 @@ class PlugginController extends AdminController {
      * @param type $model 
      */
     private function manageChildrens($model) {
-       
+
         $this->manageChild($model, "pluggin_plans", "pluggin");
         $this->manageChild($model, "pluggin_images", "pluggin");
     }
