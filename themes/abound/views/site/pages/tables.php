@@ -226,18 +226,18 @@ $this->endWidget();
                 </tr>
             </tbody>
         </table>
-<?php $this->endWidget(); ?>
+        <?php $this->endWidget(); ?>
     </div>
 </div>
 
 
 <div class="row-fluid">
     <div class="span6">
-<?php
-$this->beginWidget('zii.widgets.CPortlet', array(
-    'title' => "HTML Table - Bordered",
-));
-?>
+        <?php
+        $this->beginWidget('zii.widgets.CPortlet', array(
+            'title' => "HTML Table - Bordered",
+        ));
+        ?>
 
         <table class="table table-bordered">
             <caption>Table Caption</caption>
@@ -270,7 +270,7 @@ $this->beginWidget('zii.widgets.CPortlet', array(
                 </tr>
             </tbody>
         </table>
-<?php $this->endWidget(); ?>
+        <?php $this->endWidget(); ?>
     </div>
     <div class="span6">
         <?php
@@ -309,15 +309,15 @@ $this->beginWidget('zii.widgets.CPortlet', array(
                 </tr>
             </tbody>
         </table>
-<?php $this->endWidget(); ?>
+        <?php $this->endWidget(); ?>
     </div>
 </div>
 
-        <?php
-        $this->beginWidget('zii.widgets.CPortlet', array(
-            'title' => 'HTML Table - Striped, bordered, row hovering and condensed',
-        ));
-        ?>
+<?php
+$this->beginWidget('zii.widgets.CPortlet', array(
+    'title' => 'HTML Table - Striped, bordered, row hovering and condensed',
+));
+?>
 
 <table class="table table-striped table-hover table-bordered table-condensed">
     <caption>Table Caption</caption>

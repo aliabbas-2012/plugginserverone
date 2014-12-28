@@ -10,7 +10,7 @@ class UserPlugginController extends Controller {
         return array(
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array(
-                    'index','plans'),
+                    'index', 'plans', 'purchase'),
                 'users' => array('@'),
             ),
             array('deny', // deny all users
@@ -22,15 +22,23 @@ class UserPlugginController extends Controller {
     public function actionIndex() {
         $model = new PlugginSiteInfo('search');
         $model->user_id = Yii::app()->user->id;
-        $this->render("//userPluggin/index",array("model"=>$model));
+        $this->render("//userPluggin/index", array("model" => $model));
     }
+
     /**
-     * 
+     * Plans detail
      */
-    public function actionPlans($info_id,$pluggin_id){
-        
+    public function actionPlans($info_id, $pluggin_id) {
+
         $model = Pluggin::model()->findByPk($pluggin_id);
-        $this->render("//userPluggin/plans",array("model"=>$model,'info_id'=>$info_id));
+        $this->render("//userPluggin/plans", array("model" => $model, 'info_id' => $info_id));
+    }
+
+    public function actionPurchase($id, $info='') {
+        $info = PlugginSiteInfo::model()->findByPk($info);
+        $model = PlugginPlans::model()->findByPk($id);
+        $this->render("//userPluggin/purchase_step_1",array("model" => $model,"info"=>$info));
+        
     }
 
 }

@@ -24,7 +24,7 @@
             'id' => 'user_plans',
             'columns' => array(
                 array(
-                    'name' => 'plugin_plan',
+                    'name' => 'pluggin_plan_id',
                     'value' => '$data->plugin_plan->plan',
                     "type" => "raw",
                 ),
@@ -81,6 +81,11 @@
                 array(
                     'name' => 'currency',
                     'value' => '$data->currency',
+                    "type" => "raw",
+                ),
+                array(
+                    'header' => 'Purchase',
+                    'value' => 'CHtml::link("Purchase",Yii::app()->controller->createUrl("/web/userPluggin/purchase",array("id"=>$data->id,"info"=>"'.$info_id.'")))',
                     "type" => "raw",
                 ),
             ),

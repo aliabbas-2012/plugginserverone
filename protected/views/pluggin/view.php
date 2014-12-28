@@ -39,9 +39,9 @@ array('label'=>'Create Pluggin', 'url'=>array('create')),
 		'pluggin_type',
 		'plateform_id',
 		'url',
-		'meta_title',
-		'meta_description',
-		'description',
+                'meta_title',
+                    'meta_description',
+                            'description',
 
                     ),
                     )); ?>
