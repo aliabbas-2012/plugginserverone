@@ -20,6 +20,11 @@
                     'name' => 'pluggin_id',
                     'value' => 'isset($data->plugin)?$data->plugin->name:""'
                 ),
+                array(
+                    'header' => 'Plans',
+                    'value' => '$data->getPlansCountforGrid()',
+                    'type'=>'raw'
+                ),
 
             ),
         ));

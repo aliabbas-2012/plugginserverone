@@ -10,7 +10,7 @@ class UserPlugginController extends Controller {
         return array(
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array(
-                    'index',),
+                    'index','plans'),
                 'users' => array('@'),
             ),
             array('deny', // deny all users
@@ -23,6 +23,12 @@ class UserPlugginController extends Controller {
         $model = new PlugginSiteInfo('search');
         $model->user_id = Yii::app()->user->id;
         $this->render("//userPluggin/index",array("model"=>$model));
+    }
+    /**
+     * 
+     */
+    public function actionPlans($site_name,$pluggin_id){
+        echo "ali";
     }
 
 }

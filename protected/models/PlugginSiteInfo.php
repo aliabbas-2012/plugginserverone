@@ -145,17 +145,31 @@ class PlugginSiteInfo extends DTActiveRecord {
      * @param type $pluggin_id
      */
     public function updateSitinfoUser($user_id, $site_name, $pluggin_id) {
-       
+
         if (!empty($site_name) && !empty($pluggin_id)) {
             $criteria = new CDbCriteria;
             $criteria->compare('site_name', $site_name, false);
             $criteria->compare('pluggin_id', $pluggin_id, false);
-          
+
             if ($model = $this->find($criteria)) {
-                 
+
                 $this->updateByPk($model->id, array("user_id" => $user_id));
             }
+        }
+    }
 
+    public function getPlansCountforGrid() {
+
+        $criteria = new CDbCriteria;
+
+        $criteria->compare('user_id', Yii::app()->user->id, false);
+        $criteria->compare('pluggin_site_info_id', $this->id, false);
+
+        $url = Yii::app()->controller->createUrl("/web/userPluggin/plans", array("site_name" => $this->site_name, "pluggin_id" => $this->pluggin_id));
+        if ($plans = UserPlans::model()->count($criteria) > 0) {
+            return CHtml::link("Total Plans (" . $plans . ")", $url);
+        } else {
+            return CHtml::link("No Plans (Make new plans)", $url);
         }
     }
 
