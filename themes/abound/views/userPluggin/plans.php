@@ -44,6 +44,16 @@
                     "type" => "raw",
                 ),
                 array(
+                    'name' => '_running_status',
+                    'value' => '$data->_running_status',
+                    "type" => "raw",
+                ),
+                array(
+                    'name' => 'is_active',
+                    'value' => '$data->_admin_activation',
+                    "type" => "raw",
+                ),
+                array(
                     'name' => 'create_time',
                     'value' => '$data->create_time',
                     "type" => "raw",

@@ -21,6 +21,8 @@
  */
 class UserPlans extends DTActiveRecord {
 
+    public $_running_status, $_admin_activation;
+
     /**
      * @return string the associated database table name
      */
@@ -38,7 +40,7 @@ class UserPlans extends DTActiveRecord {
             array('pluggin_site_info_id,start_date, end_date, create_time, create_user_id, update_time, update_user_id', 'required'),
             array('payment_status, is_active, deleted', 'numerical', 'integerOnly' => true),
             array('user_id, pluggin_plan_id, create_user_id, update_user_id', 'length', 'max' => 11),
-            array('activity_log', 'safe'),
+            array('_running_status,activity_log', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, user_id, pluggin_plan_id, payment_status, is_active, start_date, end_date, deleted, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on' => 'search'),
@@ -67,7 +69,8 @@ class UserPlans extends DTActiveRecord {
             'user_id' => 'User',
             'pluggin_plan_id' => 'Pluggin Plan',
             'payment_status' => 'Payment Status',
-            'is_active' => 'Is Active',
+            '_running_status' => 'Running Status',
+            'is_active' => 'Admin activation',
             'start_date' => 'Start Date',
             'end_date' => 'End Date',
             'deleted' => 'Deleted',
@@ -112,7 +115,7 @@ class UserPlans extends DTActiveRecord {
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
-             'pagination' => array(
+            'pagination' => array(
                 'pageSize' => 20,
             ),
         ));
@@ -126,6 +129,30 @@ class UserPlans extends DTActiveRecord {
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
+    }
+
+    public function afterFind() {
+        $image = Yii::app()->theme->baseUrl . "/images/icons/";
+        $created_date = explode(" ", $this->create_time);
+        if ($created_date[0] >= date("Y-m-d")) {
+            $this->_running_status = CHtml::image($image . "running.png") . " Running";
+        } else if ($created_date[0] >= date("Y-m-d")) {
+            $this->_running_status = CHtml::image($image . "expired.gif") . "Expired";
+        } else {
+            $this->_running_status = "Unknown";
+        }
+
+
+        if ($this->is_active == 1) {
+            $this->_admin_activation = CHtml::image($image . "enable.png") . " Enable";
+        } else if ($this->is_active == 0) {
+            $this->_admin_activation = CHtml::image($image . "disable.png") . "Disable";
+        } else {
+            $this->_admin_activation = "Unknown";
+        }
+
+
+        return parent::afterFind();
     }
 
 }
