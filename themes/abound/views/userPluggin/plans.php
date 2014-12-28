@@ -12,8 +12,12 @@
         <?php
         $criteria = new CDbCriteria;
         $criteria->compare('pluggin_site_info_id', $info_id, false);
+
         $dataProvider = new CActiveDataProvider('UserPlans', array(
             'criteria' => $criteria,
+            'pagination' => array(
+                'pageSize' => 20,
+            ),
         ));
         ?>
         <?php
@@ -25,7 +29,7 @@
             'columns' => array(
                 array(
                     'name' => 'pluggin_plan_id',
-                    'value' => '$data->plugin_plan->plan',
+                    'value' => '$data->plugin_plan->plan_rel->_duration',
                     "type" => "raw",
                 ),
                 array(
@@ -55,6 +59,9 @@
         $criteria->compare('pluggin_id', $model->id, false);
         $dataProvider = new CActiveDataProvider('PlugginPlans', array(
             'criteria' => $criteria,
+            'pagination' => array(
+                'pageSize' => 20,
+            ),
         ));
         $this->beginWidget('zii.widgets.CPortlet', array(
             'title' => "Other Available Plans",
@@ -85,7 +92,7 @@
                 ),
                 array(
                     'header' => 'Purchase',
-                    'value' => 'CHtml::link("Purchase",Yii::app()->controller->createUrl("/web/userPluggin/purchase",array("id"=>$data->id,"info"=>"'.$info_id.'")))',
+                    'value' => 'CHtml::link("Purchase",Yii::app()->controller->createUrl("/web/userPluggin/purchase",array("id"=>$data->id,"info"=>"' . $info_id . '")))',
                     "type" => "raw",
                 ),
             ),

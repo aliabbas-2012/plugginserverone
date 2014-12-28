@@ -23,8 +23,8 @@ class ConfPlans extends DTActiveRecord {
         "Months" => "Months",
         "Years" => "Years",
     );
-
     public $_duration;
+
     /**
      * @return string the associated database table name
      */
@@ -103,6 +103,9 @@ class ConfPlans extends DTActiveRecord {
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
+            'pagination' => array(
+                'pageSize' => 20,
+            ),
         ));
     }
 
@@ -115,10 +118,10 @@ class ConfPlans extends DTActiveRecord {
     public static function model($className = __CLASS__) {
         return parent::model($className);
     }
-    
+
     public function afterFind() {
-        
-        $this->_duration = $this->name." ".$this->duration;
+
+        $this->_duration = $this->name . " " . $this->duration;
         return parent::afterFind();
     }
 
