@@ -106,6 +106,9 @@ class PlugginPlans extends DTActiveRecord {
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
+            'pagination' => array(
+                'pageSize' => 20,
+            ),
         ));
     }
 
@@ -133,11 +136,11 @@ class PlugginPlans extends DTActiveRecord {
         $criteria->compare('pluggin_id', $pluggin_id, true);
 
         $criteria->select = 'id';
-        $pluggin_plnas = CHtml::listData($this->findAll($criteria),"id","id");
+        $pluggin_plnas = CHtml::listData($this->findAll($criteria), "id", "id");
         $criteria = new CDbCriteria;
-        
+
         $criteria->addInCondition("pluggin_plan_id", array_keys($pluggin_plnas));
-        
+
         return UserPlans::model()->findAll($criteria);
     }
 

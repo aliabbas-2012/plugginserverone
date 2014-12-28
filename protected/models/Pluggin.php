@@ -135,6 +135,9 @@ class Pluggin extends DTActiveRecord {
 
         return new CActiveDataProvider('Pluggin', array(
             'criteria' => $criteria,
+             'pagination' => array(
+                'pageSize' => 20,
+            ),
         ));
     }
 
