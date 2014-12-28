@@ -45,12 +45,12 @@
                 ),
                 array(
                     'header' => 'start_date',
-                    'value' => '$data->start_date',
+                    'value' => '$data->_dates["start_date"][0]',
                     "type" => "raw",
                 ),
                 array(
                     'header' => 'end_date',
-                    'value' => '$data->end_date',
+                    'value' => '$data->_dates["end_date"][0]',
                     "type" => "raw",
                 ),
                 array(

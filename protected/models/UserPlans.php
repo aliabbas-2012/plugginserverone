@@ -21,7 +21,7 @@
  */
 class UserPlans extends DTActiveRecord {
 
-    public $_running_status, $_admin_activation;
+    public $_running_status, $_admin_activation,$_dates;
 
     /**
      * @return string the associated database table name
@@ -151,6 +151,9 @@ class UserPlans extends DTActiveRecord {
         } else {
             $this->_admin_activation = "Unknown";
         }
+        
+        $this->_dates['start_date'] = explode(" ",$this->start_date);
+        $this->_dates['end_date'] = explode(" ",$this->end_date);
         return parent::afterFind();
     }
     /*
