@@ -19,7 +19,7 @@
  * @property string $update_user_id
  * @property string $activity_log
  */
-class UserPlans extends CActiveRecord {
+class UserPlans extends DTActiveRecord {
 
     /**
      * @return string the associated database table name

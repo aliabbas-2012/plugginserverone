@@ -48,20 +48,47 @@ class UserPlugginController extends Controller {
     public function actionConfirmPurchase($id, $info = '') {
         $info = PlugginSiteInfo::model()->findByPk($info);
         $model = PlugginPlans::model()->findByPk($id);
-        
+
         $purchase_plan = new UserPlans;
         $purchase_plan->user_id = Yii::app()->user->id;
         $purchase_plan->pluggin_site_info_id = $info->id;
         $purchase_plan->pluggin_plan_id = $model->id;
         $purchase_plan->is_active = 1;
         $purchase_plan->start_date = date("Y-m-d");
-        
-        if(strstr($model->plan_rel->name, 'Week')){
-            
+
+        $date = strtotime($purchase_plan->start_date);
+
+
+
+        switch ($model->plan_rel->duration) {
+            case "Days":
+                $date = strtotime("+" . $model->plan_rel->name . " day", $date);
+                break;
+            case "Weeks":
+                $date = strtotime("+" . $model->plan_rel->name . " week", $date);
+                break;
+            case "Months":
+                $date = strtotime("+" . $model->plan_rel->name . " months", $date);
+                break;
+            case "Years":
+                $date = strtotime("+" . $model->plan_rel->name . " years", $date);
+                break;
+            default:
+                echo "";
         }
-        
-        echo $model->plan_rel->name;
-       ///$purchase_plan->end_date = 1;
+
+        $purchase_plan->end_date = date("Y-m-d",$date);
+
+        if ($purchase_plan->save()) {
+            Yii::app()->user->setFlash("success", 'You have purchased plan successfully');
+            $this->redirect($this->createUrl("/web/userPluggin/plans", array("info_id" => $info->id, "pluggin_id" => $info->pluggin_id)));
+        } else {
+
+            Yii::app()->user->setFlash("error_array", $purchase_plan->getErrors());
+            $this->redirect($this->createUrl("/web/userPluggin/plans", array("info_id" => $info->id, "pluggin_id" => $info->pluggin_id)));
+        }
+
+       
     }
 
 }
