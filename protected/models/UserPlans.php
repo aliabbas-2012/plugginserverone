@@ -135,10 +135,10 @@ class UserPlans extends DTActiveRecord {
 
     public function afterFind() {
         $image = Yii::app()->theme->baseUrl . "/images/icons/";
-        $created_date = explode(" ", $this->create_time);
-        if ($created_date[0] >= date("Y-m-d")) {
+        $end_date = explode(" ", $this->end_date);
+        if ($end_date[0] >= date("Y-m-d")) {
             $this->_running_status = CHtml::image($image . "running.png") . " Running";
-        } else if ($created_date[0] >= date("Y-m-d")) {
+        } else if ($end_date[0] < date("Y-m-d")) {
             $this->_running_status = CHtml::image($image . "expired.gif") . "Expired";
         } else {
             $this->_running_status = "Unknown";
