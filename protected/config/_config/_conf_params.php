@@ -19,8 +19,8 @@ $params = array(
     'smtp' => true,
     //'mailPort' => 587,
     'mailPort' => 465,
-    'mailUsername' => 'naeem.ch@darussalampk.com',
-    'mailPassword' => 'niki.00028',
+    'mailUsername' => 'plugginserver2015@gmail.com',
+    'mailPassword' => 'seologica.net',
     'mailSecuity' => 'ssl',
     'langs' => array(
         'af', // afrikaans.

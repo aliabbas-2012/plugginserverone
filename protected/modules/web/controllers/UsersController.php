@@ -39,14 +39,25 @@ class UsersController extends Controller {
             ),
         );
     }
-
+    
+    /**
+     * 
+     * @param type $url
+     * @param type $pluggin : this pluggin var. usually should be pluggin name sent in curl call from the client server where pluggin is installed
+     */
     public function actionRegister($url = '', $pluggin = '') {
         $this->layout = "//layouts/column2";
         $model = new Users;
 
         $model->_url = $url;
         $model->_pluggin = $pluggin;
-
+        
+        /*when user is being registered from the remote client system or curl call or to purchase pluggin plan*/
+        if(!is_numeric($pluggin) && !empty($pluggin)){
+            $pluggin_id = Pluggin::model()->getPlugginId($pluggin); 
+            $model->_pluggin = $pluggin_id;
+        }
+        
         if (isset($_POST['Users'])) {
 
             $model->attributes = $_POST['Users'];
@@ -86,7 +97,6 @@ class UsersController extends Controller {
      * This will be responsible for logging in the user to the system
      */
     public function actionLogin($url = '', $pluggin = '') {
-
         $this->layout = "//layouts/column2";
 
         $model = new LoginForm;
@@ -106,6 +116,7 @@ class UsersController extends Controller {
 
             // validate user input and redirect to the previous page if valid
             if ($model->validate() && $model->login()) {
+                echo "Yii user logged in Id::";
                 echo Yii::app()->user->id;
 
                 PlugginSiteInfo::model()->updateSitinfoUser(Yii::app()->user->id, $model->_url, $model->_pluggin);

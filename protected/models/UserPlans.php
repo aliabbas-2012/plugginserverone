@@ -166,8 +166,35 @@ class UserPlans extends DTActiveRecord {
         $criteria = new CDbCriteria();
         $criteria->addCondition("end_date < :current_time AND pluggin_site_info_id = :site_info");
         $criteria->params = array("current_time" => date("Y-m-d"), "site_info" => $site_info);
-
+        
         return $this->count($criteria);
+    }
+    
+    /**
+     * This will return user's lates site's plugin plan
+     * @param type $pluggin_site_info
+     */
+    public function getLatestPlan($pluggin_site_info){
+        
+    }
+            
+            /**
+     * Pluggin Plan
+     * @param type $pluggin_id
+     */
+    public function getPlugginPlans($pluggin_id) {
+        
+        $criteria = new CDbCriteria;
+        $criteria->compare('pluggin_id', $pluggin_id, true);
+         
+        $criteria->select = 'id';
+        $pluggin_plans_list = CHtml::listData($this->findAll($criteria), "id", "id");
+        
+        /* here we are getting all plans of a user against a site against single plan id , this will be for logging purposes that we can know how many times user has upgraded a particular plan*/
+        $criteria = new CDbCriteria;
+        $criteria->addInCondition("pluggin_plan_id", array_keys($pluggin_plans_list)); // here plan is assigned by default
+
+        return UserPlans::model()->find($criteria); /* for single user plan against a single plugin id for single site*/
     }
 
 }
