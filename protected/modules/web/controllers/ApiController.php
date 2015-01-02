@@ -89,17 +89,18 @@ class ApiController extends Controller {
                 // here i will let a user show the list of pluggin plans against a single plugin 
             }
         } else {
-            echo "in the non empty pluggin plan for a single plugin need to upgrade";
+            //echo "in the non empty pluggin plan for a single plugin need to upgrade";
              
             // here one needs to hit query UserPlans to get user's latest plans by pluggin_id, order_by created_time descending , limit 1,,
             $user_pluggin_plan = UserPlans::model()->getLatestPlan($pluggin_site);
             //$user_pluggin_plan = UserPlans::model()->getActivePlan($pluggin_site->id);
             
             
-            if($user_pluggin_plan->end_date <= strtotime(date("Y-m-d H:i:s")) ){ // plan is running
-                echo "success";
+            if(!empty($user_pluggin_plan)){ // plan is running
+                $this->renderPartial("//api/success",array("model"=>$user_pluggin_plan));
             }else{ // plan is expired
-                echo "Your Plugin has expired! You need to upgrade your Plugin to use it's services in the future";
+                $this->renderPartial("//api/expired");
+                
             }
             
             // here one needs to hit query UserPlans to get user's latest plans by pluggin_id, order_by created_time descending , limit 1,,

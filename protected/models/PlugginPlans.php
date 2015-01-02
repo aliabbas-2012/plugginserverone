@@ -141,8 +141,8 @@ class PlugginPlans extends DTActiveRecord {
         
         /* here we are getting all plans of a user against a site against single plan id , this will be for logging purposes that we can know how many times user has upgraded a particular plan*/
         $criteria = new CDbCriteria;
-        //$criteria->addInCondition("pluggin_plan_id", array_keys($pluggin_plans_list));
-        $criteria->addInCondition("pluggin_plan_id", array(25,26));
+        $criteria->addInCondition("pluggin_plan_id", array_keys($pluggin_plans_list));
+        //$criteria->addInCondition("pluggin_plan_id", array(25,26));
         
         return UserPlans::model()->findAll($criteria);  /* to get the list of latest plugin upgrade*/
         

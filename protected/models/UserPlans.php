@@ -134,7 +134,7 @@ class UserPlans extends DTActiveRecord {
     }
 
     public function afterFind() {
-        $image = Yii::app()->theme->baseUrl . "/images/icons/";
+        $image = Yii::app()->request->hostInfo.Yii::app()->theme->baseUrl . "/images/icons/";
         $end_date = explode(" ", $this->end_date);
         if ($end_date[0] >= date("Y-m-d")) {
             $this->_running_status = CHtml::image($image . "running.png") . " Running";
@@ -166,35 +166,39 @@ class UserPlans extends DTActiveRecord {
         $criteria = new CDbCriteria();
         $criteria->addCondition("end_date < :current_time AND pluggin_site_info_id = :site_info");
         $criteria->params = array("current_time" => date("Y-m-d"), "site_info" => $site_info);
-        
+
         return $this->count($criteria);
     }
-    
+
     /**
      * This will return user's lates site's plugin plan
      * @param type $pluggin_site_info
      */
-    public function getLatestPlan($pluggin_site_info){
-        
+    public function getLatestPlan($pluggin_site_info) {
+        $criteria = new CDbCriteria;
+        $criteria->addCondition("end_date>=:today");
+        $criteria->params = array(":today" => date("Y-m-d H:i:s"));
+        $criteria->order = "end_date DESC";
+        return $this->find($criteria);
     }
-            
-            /**
+
+    /**
      * Pluggin Plan
      * @param type $pluggin_id
      */
     public function getPlugginPlans($pluggin_id) {
-        
+
         $criteria = new CDbCriteria;
         $criteria->compare('pluggin_id', $pluggin_id, true);
-         
+
         $criteria->select = 'id';
         $pluggin_plans_list = CHtml::listData($this->findAll($criteria), "id", "id");
-        
-        /* here we are getting all plans of a user against a site against single plan id , this will be for logging purposes that we can know how many times user has upgraded a particular plan*/
+
+        /* here we are getting all plans of a user against a site against single plan id , this will be for logging purposes that we can know how many times user has upgraded a particular plan */
         $criteria = new CDbCriteria;
         $criteria->addInCondition("pluggin_plan_id", array_keys($pluggin_plans_list)); // here plan is assigned by default
 
-        return UserPlans::model()->find($criteria); /* for single user plan against a single plugin id for single site*/
+        return UserPlans::model()->find($criteria); /* for single user plan against a single plugin id for single site */
     }
 
 }
