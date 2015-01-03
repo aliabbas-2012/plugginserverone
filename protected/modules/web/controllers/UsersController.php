@@ -31,7 +31,7 @@ class UsersController extends Controller {
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array(
-                    'updateprofile', 'ChangePass', ),
+                    'updateProfile', 'ChangePass',),
                 'users' => array('@'),
             ),
             array('deny', // deny all users
@@ -39,7 +39,7 @@ class UsersController extends Controller {
             ),
         );
     }
-    
+
     /**
      * 
      * @param type $url
@@ -51,13 +51,13 @@ class UsersController extends Controller {
 
         $model->_url = $url;
         $model->_pluggin = $pluggin;
-        
-        /*when user is being registered from the remote client system or curl call or to purchase pluggin plan*/
-        if(!is_numeric($pluggin) && !empty($pluggin)){
-            $pluggin_id = Pluggin::model()->getPlugginId($pluggin); 
+
+        /* when user is being registered from the remote client system or curl call or to purchase pluggin plan */
+        if (!is_numeric($pluggin) && !empty($pluggin)) {
+            $pluggin_id = Pluggin::model()->getPlugginId($pluggin);
             $model->_pluggin = $pluggin_id;
         }
-        
+
         if (isset($_POST['Users'])) {
 
             $model->attributes = $_POST['Users'];
@@ -111,6 +111,7 @@ class UsersController extends Controller {
         if (isset($_POST['LoginForm'])) {
             $model->attributes = $_POST['LoginForm'];
 
+            $pluggin = Pluggin::model()->getPlateformId($pluggin);
             $model->_url = $url;
             $model->_pluggin = $pluggin;
 
@@ -120,8 +121,8 @@ class UsersController extends Controller {
                 echo Yii::app()->user->id;
 
                 PlugginSiteInfo::model()->updateSitinfoUser(Yii::app()->user->id, $model->_url, $model->_pluggin);
-                
-                
+
+
                 if (!empty(Yii::app()->user->returnUrl)) {
                     $this->redirect($this->createUrl("/web/default/index"));
                 }
@@ -129,7 +130,7 @@ class UsersController extends Controller {
             }
         }
 
-        $this->render("//users/_login",array("login_model"=>$model));
+        $this->render("//users/_login", array("login_model" => $model));
     }
 
     public function actionActivate() {
@@ -176,10 +177,13 @@ class UsersController extends Controller {
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
     }
-
-    public function actionUpdateProfile($id) {
+    /**
+     * 
+     * @param type $id
+     */
+    public function actionUpdateProfile() {
         $this->layout = "//layouts/column2";
-        $model = $this->loadModel($id);
+        $model = $this->loadModel(Yii::app()->user->id);
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
@@ -190,7 +194,7 @@ class UsersController extends Controller {
                 $this->redirect(array('view', 'id' => $model->id));
         }
 
-        $this->render('update_profile', array(
+        $this->render('//users/update_profile', array(
             'model' => $model,
         ));
     }
@@ -221,11 +225,9 @@ class UsersController extends Controller {
 
                 $id = $record->id;
 
-
                 $modelUsers = new Users;
                 $pass_new = md5($pass_new);
                 if ($modelUsers->updateByPk($id, array('password' => "$pass_new"))) {
-                    //Users::updateAll(array('email=>'), $condition='', $params=array());
 
                     Yii::app()->user->setFlash('password_reset', 'Your passowrd has been sent to your Email.Please get your new password form your email account');
                 }
@@ -242,19 +244,17 @@ class UsersController extends Controller {
 
     public function actionChangePass() {
         $this->layout = "//layouts/column2";
-        //Yii::app()->user->SiteSessions;
-        //Yii::app()->controller->layout = '//layouts/main';
+        
         $model = new ChangePassword;
         if (Yii::app()->user->id) {
             if (isset($_POST['ChangePassword'])) {
                 $model->attributes = $_POST['ChangePassword'];
                 if ($model->validate()) {
-                    if ($model->updatePassword()) {
-                        /*
-                         * here we will add sending email module to inform users for password change..
-                         */
-                        $this->redirect($this->createUrl('/web/users/changePass'));
-                    }
+                    $user = $model->_model;
+                    $user->password = $model->password;
+                    $user->save(false);
+                    Yii::app()->user->setFlash("success", "Your Password change Successfully");
+                    $this->redirect($this->createUrl('/web/users/changePass'));
                 }
             }
             $this->render('//users/change_password', array('model' => $model));
