@@ -20,6 +20,7 @@ class PlateformController extends Controller {
 
     public function beforeAction($action) {
 
+        
         return parent::beforeAction($action);
     }
 

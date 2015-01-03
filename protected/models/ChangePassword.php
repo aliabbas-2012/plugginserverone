@@ -36,6 +36,18 @@ class ChangePassword extends CFormModel {
                 // Please remove those attributes that should not be searched.
         );
     }
+    
+     /**
+     * @return array customized attribute labels (name=>label)
+     */
+    public function attributeLabels() {
+        return array(
+            'password' => 'Password',
+            'old_pwd' => 'Old Password',
+            'pwd_repeat' => 'Password Repeat',
+  
+        );
+    }
 
     public function checkOldPassword($attribute, $params) {
 

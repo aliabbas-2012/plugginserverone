@@ -110,16 +110,16 @@ class UsersController extends Controller {
         // collect user input data
         if (isset($_POST['LoginForm'])) {
             $model->attributes = $_POST['LoginForm'];
-         
-            
+
+
             $pluggin = Pluggin::model()->getPlugginId($pluggin);
             $model->_url = $url;
             $model->_pluggin = $pluggin;
-          
+
 
             // validate user input and redirect to the previous page if valid
             if ($model->validate() && $model->login()) {
-                
+
 
                 PlugginSiteInfo::model()->updateSitinfoUser(Yii::app()->user->id, $model->_url, $model->_pluggin);
 
@@ -150,17 +150,17 @@ class UsersController extends Controller {
                 Yii::app()->user->setFlash('login', 'Your account is already activated. Please try login or if you have missed your login information then go to forgot password section. Thank You');
                 $this->redirect($this->createUrl('/web/users/login'));
             } else if ($obj->activation_key != $activation_key) {
-                Yii::app()->user->setFlash('login', 'Your activation key not registered. Please resend activation key and activate your account. Thank You');
+                Yii::app()->user->setFlash('error', 'Your activation key not registered. Please resend activation key and activate your account. Thank You');
                 $this->redirect($this->createUrl('/web/users/login'));
             }
 
-            Yii::app()->user->setFlash('login', 'Thank You ! Your account has been activated....Now Please Login');
+            Yii::app()->user->setFlash('success', 'Thank You ! Your account has been activated....Now Please Login');
 
             $modelUsers = new Users();
             $modelUsers->updateByPk($id, array('is_active' => '1'));
             $this->redirect($this->createUrl('/web/users/login'));
         } else {
-            Yii::app()->user->setFlash('login', 'User does not exist. Please signup and get activation link.');
+            Yii::app()->user->setFlash('error', 'User does not exist. Please signup and get activation link.');
             $this->redirect($this->createUrl('/web/users/login'));
         }
     }
@@ -178,21 +178,24 @@ class UsersController extends Controller {
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
     }
+
     /**
      * 
      * @param type $id
      */
     public function actionUpdateProfile() {
         $this->layout = "//layouts/column2";
-        $model = $this->loadModel(Yii::app()->user->id);
+        $model = UpdateUser::model()->findByPk(Yii::app()->user->id);
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
-        if (isset($_POST['Users'])) {
-            $model->attributes = $_POST['Users'];
-            if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id));
+        if (isset($_POST['UpdateUser'])) {
+            $model->attributes = $_POST['UpdateUser'];
+            if ($model->save()) {
+                Yii::app()->user->setFlash('success', 'Your profile has been updated');
+                $this->redirect(array('/web/users/updateProfile',));
+            }
         }
 
         $this->render('//users/update_profile', array(
@@ -245,7 +248,7 @@ class UsersController extends Controller {
 
     public function actionChangePass() {
         $this->layout = "//layouts/column2";
-        
+
         $model = new ChangePassword;
         if (Yii::app()->user->id) {
             if (isset($_POST['ChangePassword'])) {

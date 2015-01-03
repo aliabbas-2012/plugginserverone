@@ -17,7 +17,12 @@
                     array('label' => 'My Pluggins', 'url' => array('/web/userPluggin/index',), 'visible' => !Yii::app()->user->isGuest),
                     array('label' => 'Login', 'url' => array('/web/users/login'), 'visible' => Yii::app()->user->isGuest),
                     array('label' => 'Register', 'url' => array('/web/users/register'), 'visible' => Yii::app()->user->isGuest),
-                    array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest),
+                    array('label' => 'My Account <span class="caret"></span>', 'url' => '#', 'itemOptions' => array('class' => 'dropdown', 'tabindex' => "-1"), 'linkOptions' => array('class' => 'dropdown-toggle', 'data-toggle' => "dropdown"),
+                        'items' => array(
+                            array('label' => 'Update Profile', 'url' => array('/web/users/updateProfile')),
+                            array('label' => 'Change Password', 'url' => array('/web/users/changePass')),
+                            array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest),
+                        ), 'visible' => !Yii::app()->user->isGuest)
                 );
                 if (strstr(Yii::app()->request->hostInfo, "localhost")) {
                     $extra_items = array(array('label' => 'Graphs & Charts',
@@ -35,7 +40,7 @@
                                 array('label' => 'Separated link', 'url' => '#'),
                                 array('label' => 'One more separated link', 'url' => '#'),
                     )));
-                    $items = array_merge($items,$extra_items);
+                    $items = array_merge($items, $extra_items);
                 }
                 $this->widget('zii.widgets.CMenu', array(
                     'htmlOptions' => array('class' => 'pull-right nav'),
