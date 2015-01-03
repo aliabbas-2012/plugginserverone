@@ -202,7 +202,9 @@ class UsersController extends Controller {
             'model' => $model,
         ));
     }
-
+    /**
+     * Non authenticated user 
+     */
     public function actionForgot() {
         $this->layout = "//layouts/column2";
         //Yii::app()->user->SiteSessions;
@@ -213,7 +215,7 @@ class UsersController extends Controller {
                     )
             );
             if ($record === null) {
-                Yii::app()->user->setFlash('incorrect_email', 'Email does not exists...Please try correct email address');
+                Yii::app()->user->setFlash('error', 'Email does not exists...Please try correct email address');
             } else {
 
                 $pass_new = substr(str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyz", 7)), 0, 9);
@@ -233,7 +235,7 @@ class UsersController extends Controller {
                 $pass_new = md5($pass_new);
                 if ($modelUsers->updateByPk($id, array('password' => "$pass_new"))) {
 
-                    Yii::app()->user->setFlash('password_reset', 'Your passowrd has been sent to your Email.Please get your new password form your email account');
+                    Yii::app()->user->setFlash('success', 'Your passowrd has been sent to your Email.Please get your new password form your email account');
                 }
             }
         }
