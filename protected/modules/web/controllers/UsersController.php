@@ -110,15 +110,16 @@ class UsersController extends Controller {
         // collect user input data
         if (isset($_POST['LoginForm'])) {
             $model->attributes = $_POST['LoginForm'];
-
-            $pluggin = Pluggin::model()->getPlateformId($pluggin);
+         
+            
+            $pluggin = Pluggin::model()->getPlugginId($pluggin);
             $model->_url = $url;
             $model->_pluggin = $pluggin;
+          
 
             // validate user input and redirect to the previous page if valid
             if ($model->validate() && $model->login()) {
-                echo "Yii user logged in Id::";
-                echo Yii::app()->user->id;
+                
 
                 PlugginSiteInfo::model()->updateSitinfoUser(Yii::app()->user->id, $model->_url, $model->_pluggin);
 
