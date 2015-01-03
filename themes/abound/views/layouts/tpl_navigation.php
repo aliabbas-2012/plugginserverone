@@ -17,6 +17,7 @@
                     array('label' => 'My Pluggins', 'url' => array('/web/userPluggin/index',), 'visible' => !Yii::app()->user->isGuest),
                     array('label' => 'Login', 'url' => array('/web/users/login'), 'visible' => Yii::app()->user->isGuest),
                     array('label' => 'Register', 'url' => array('/web/users/register'), 'visible' => Yii::app()->user->isGuest),
+                    array('label' => 'Forget Password', 'url' => array('/web/users/forgot'), 'visible' => Yii::app()->user->isGuest),
                     array('label' => 'My Account <span class="caret"></span>', 'url' => '#', 'itemOptions' => array('class' => 'dropdown', 'tabindex' => "-1"), 'linkOptions' => array('class' => 'dropdown-toggle', 'data-toggle' => "dropdown"),
                         'items' => array(
                             array('label' => 'Update Profile', 'url' => array('/web/users/updateProfile')),
