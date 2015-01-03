@@ -153,7 +153,7 @@ class Pluggin extends DTActiveRecord {
      */
     public function getPlateformId($name) {
         $criteria = new CDbCriteria;
-        $criteria->compare('name', $name, true);
+        $criteria->compare('name', $name, false);
         $criteria->select = 'id';
         if ($model = Plateform::model()->find($criteria)) {
             return $model->id;
@@ -166,7 +166,7 @@ class Pluggin extends DTActiveRecord {
      */
     public function getPlugginId($name) {
         $criteria = new CDbCriteria;
-        $criteria->compare('name', $name, true);
+        $criteria->compare('name', $name, false);
         $criteria->select = 'id';
         if ($model = $this->find($criteria)) {
             return $model->id;
