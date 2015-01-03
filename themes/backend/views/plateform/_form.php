@@ -18,6 +18,10 @@
                         $form = $this->beginWidget('CActiveForm', array(
                             'id' => 'plateform-form',
                             'enableAjaxValidation' => false,
+                            'htmlOptions' => array(
+                                'class' => 'form-horizontal',
+                                'enctype' => "multipart/form-data"
+                            )
                         ));
                         ?>
 
@@ -34,7 +38,7 @@
                                 <?php echo $form->error($model, 'name'); ?>
                             </div>
                         </div>
-         
+
                         <div class="form-group">
                             <div class="col-lg-2">
                                 <?php echo $form->labelEx($model, 'parent'); ?> 
@@ -50,6 +54,21 @@
                                 echo $form->dropDownList($model, 'parent', $plates, array('class' => 'form-control'));
                                 ?>
                                 <?php echo $form->error($model, 'parent'); ?>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-lg-2">
+                                <?php echo $form->labelEx($model, 'image'); ?>
+                            </div>
+                            <div class="col-lg-6">
+                                <?php echo $form->FileField($model, 'image', array('class' => 'form-control', 'size' => 60, 'maxlength' => 150)); ?>
+                                <?php
+                                if (!empty($model->id) && !empty($model->image)) {
+                                    echo CHtml::link("View", $model->image_url["image_large"], array("rel" => "lightbox[_default]"));
+                                }
+                                ?>
+                                <?php echo $form->error($model, 'name'); ?>
                             </div>
                         </div>
 
@@ -101,7 +120,7 @@
                                     'attribute' => 'description',
                                     'options' => array('theme' => 'advanced')));
                                 ?>
-                                
+
                                 <?php echo $form->error($model, 'description'); ?>
                             </div>
 

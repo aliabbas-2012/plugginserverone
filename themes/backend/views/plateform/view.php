@@ -48,6 +48,11 @@ $this->menu = array(
                             'meta_title',
                             'meta_description',
                             array(
+                                'name' => 'image',
+                                'value' => isset($model->image)?CHtml::link($model->image, $model->image_url["image_large"], array("rel" => "lightbox[_default]")):"",
+                                'type' => 'raw'
+                            ),
+                            array(
                                 'name' => 'description',
                                 'value' => $model->description,
                                 'type' => 'raw'

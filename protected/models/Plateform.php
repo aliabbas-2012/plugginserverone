@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'plateform':
  * @property string $id
  * @property string $name
+ * @property string $image
  * @property integer $parent
  * @property string $url
  * @property string $meta_title
@@ -26,6 +27,10 @@ class Plateform extends DTActiveRecord {
         return 'plateform';
     }
 
+    public $image_url = array();
+    public $upload_insance = '';
+    public $oldLargeImg = "";
+
     /**
      * @return array validation rules for model attributes.
      */
@@ -38,6 +43,8 @@ class Plateform extends DTActiveRecord {
             array('name, url, meta_title', 'length', 'max' => 150),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             array('meta_description, description, activity_log', 'safe'),
+            array('image', 'file', 'allowEmpty' => $this->isNewRecord ? false : true,
+                'types' => 'jpg,jpeg,gif,png,JPG,JPEG,GIF,PNG'),
             array('name', 'unique'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
@@ -52,7 +59,6 @@ class Plateform extends DTActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-           
             'pluggins' => array(self::HAS_MANY, 'Pluggin', 'plateform_id'),
             'parent_plate' => array(self::BELONGS_TO, 'Plateform', 'parent'),
         );
@@ -78,6 +84,122 @@ class Plateform extends DTActiveRecord {
         );
     }
 
+    public function afterFind() {
+        $this->oldLargeImg = $this->image;
+
+        /**
+         *  setting path  for front end images
+         */
+        if (!empty($this->image)) {
+
+
+            $this->image_url['image_large'] = Yii::app()->baseUrl . "/uploads/plateform/" . $this->primaryKey;
+            $this->image_url['image_large'].= "/" . $this->image;
+        } else {
+            $this->image_url['image_large'] = Yii::app()->baseUrl . "/images/pluggin_images/noimages.jpeg";
+        }
+
+        // $this->get_transcript();
+        parent::afterFind();
+    }
+
+    /**
+     * set for validation to occure
+     * need image instance for validation rules
+     * @return type
+     */
+    public function beforeValidate() {
+        $this->upload_insance = DTUploadedFile::getInstance($this, 'image');
+
+        if (!empty($this->upload_insance)) {
+            $this->image = $this->upload_insance;
+        }
+        return parent::beforeValidate();
+    }
+
+    public function afterValidate() {
+
+        return parent::afterValidate();
+    }
+
+    /**
+     * for setting object to save
+     * image name rather its emtpy
+     * @return type 
+     */
+    public function beforeSave() {
+
+
+        $this->setUploadVars();
+        
+        $this->setSlug();
+        return parent::beforeSave();
+    }
+
+    public function afterSave() {
+        parent::afterSave();
+        $this->uploadImages();
+
+        return true;
+    }
+
+    /**
+     * set image variable before save
+     */
+    public function setUploadVars() {
+
+
+
+        $its_t = new DTFunctions();
+        if (!empty($this->upload_insance)) {
+
+            $this->image = $its_t->getRanddomeNo(10) . "." . $this->upload_insance->extensionName;
+            
+        } else {
+
+            $this->image = $this->oldLargeImg;
+        
+        }
+    }
+      /**
+     * upload images
+     */
+    public function uploadImages() {
+
+        if (!empty($this->upload_insance)) {
+
+
+            $folder_array = array("plateform", $this->id);
+
+            $upload_path = DTUploadedFile::creeatRecurSiveDirectories($folder_array);
+            $this->upload_insance->saveAs($upload_path . str_replace(" ", "_", $this->image));
+
+           
+        }
+    }
+    
+        /**
+     * to delete old image in case of not empty
+     * not equal new image
+     */
+    public function deleteldImage() {
+
+        if (!empty($this->oldLargeImg) && $this->oldLargeImg != $this->image) {
+            $path = Yii::app()->basePath . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR;
+            $path.= "uploads" . DIRECTORY_SEPARATOR . "plateform"  ;
+            $large_path = $path . DIRECTORY_SEPARATOR . $this->id . DIRECTORY_SEPARATOR . $this->oldLargeImg;
+
+            DTUploadedFile::deleteExistingFile($large_path);
+        }
+
+
+    }
+
+    public function beforeDelete() {
+        $this->deleteldImage();
+        parent::beforeDelete();
+    }
+
     /**
      * Retrieves a list of models based on the current search/filter conditions.
      *
@@ -97,6 +219,7 @@ class Plateform extends DTActiveRecord {
 
         $criteria->compare('id', $this->id, true);
         $criteria->compare('name', $this->name, true);
+        $criteria->compare('image', $this->image, true);
         $criteria->compare('parent', $this->parent);
         $criteria->compare('url', $this->url, true);
         $criteria->compare('meta_title', $this->meta_title, true);
@@ -110,7 +233,7 @@ class Plateform extends DTActiveRecord {
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
-             'pagination' => array(
+            'pagination' => array(
                 'pageSize' => 20,
             ),
         ));
@@ -126,15 +249,7 @@ class Plateform extends DTActiveRecord {
         return parent::model($className);
     }
 
-    /**
-     * 
-     * @return type
-     */
-    public function beforeSave() {
-        $this->setSlug();
-        return parent::beforeSave();
-    }
-
+ 
     /**
      * setting slug
      * for url

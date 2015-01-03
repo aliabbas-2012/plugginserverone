@@ -44,9 +44,17 @@ class DefaultController extends Controller {
     public function actionIndex() {
         $this->layout = "//layouts/column2";
 
-
-
         $this->render('//default/index');
+    }
+
+    /**
+     * Plateform
+     */
+    public function actionPlateform($id) {
+        $this->layout = "//layouts/column2";
+        $model = Plateform::model()->findByPk($id);
+
+        $this->render('//default/platform', array("model" => $model));
     }
 
     /**
