@@ -33,7 +33,11 @@
             'itemsCssClass' => 'table table-striped table-bordered table-hover',
             'columns' => array(
                 'name',
-                'meta_title',
+                array(
+                    'name' => 'url',
+                    'value' => 'isset($data->url)? CHtml::link($data->url,$data->url,array("target"=>"_blank")) : ""',
+                    'type' => "raw",
+                ),
             ),
         ));
         ?>

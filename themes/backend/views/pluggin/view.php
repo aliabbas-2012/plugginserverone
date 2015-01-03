@@ -33,7 +33,7 @@ $this->menu = array(
             <div class="panel-body">
                 <div class="table-responsive">
                     <?php
-                    /*$en_lang = Language::model()->getLanuageId("en", "id");*/
+                    /* $en_lang = Language::model()->getLanuageId("en", "id"); */
                     $this->widget('zii.widgets.CDetailView', array(
                         'data' => $model,
                         'htmlOptions' => array("class" => "table table-striped table-bordered table-hover"),
@@ -45,7 +45,11 @@ $this->menu = array(
                                 'value' => isset($model->plateform) ? $model->plateform->name : "",
                                 'type' => "raw",
                             ),
-                            'url',
+                            array(
+                                'name' => 'url',
+                                'value' => isset($model->url) ? CHtml::link($model->url,$model->url,array("target"=>"_blank")) : "",
+                                'type' => "raw",
+                            ),
                             'meta_title',
                             'meta_description',
                             array(
@@ -64,7 +68,7 @@ $this->menu = array(
 </div>   
 <?php
 Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/css/gridform.css');
-Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . '/js/functions.js',  CClientScript::POS_END);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . '/js/functions.js', CClientScript::POS_END);
 ?>
 <?php
 Yii::app()->getClientScript()->registerScriptFile(Yii::app()->theme->baseUrl . '/assets/scripts/jquery.ba-bbq1.js', CClientScript::POS_END);
