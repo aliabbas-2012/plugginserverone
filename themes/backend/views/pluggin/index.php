@@ -64,6 +64,7 @@ return false;
                         'filter' => $model,
                         'columns' => array(
                             'name',
+                            'url',
                             'meta_title',
                             array(
                                 'name' => 'plateform_id',

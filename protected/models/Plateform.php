@@ -46,6 +46,7 @@ class Plateform extends DTActiveRecord {
             array('image', 'file', 'allowEmpty' => $this->isNewRecord ? false : true,
                 'types' => 'jpg,jpeg,gif,png,JPG,JPEG,GIF,PNG'),
             array('name', 'unique'),
+            array('url', 'validateUrl'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, name, parent, url, meta_title, meta_description, description, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on' => 'search'),

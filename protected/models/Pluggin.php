@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'plugins':
  * @property string $id
  * @property string $name
+ * @property string $url
  * @property integer $plateform_id
  * @property string $meta_title
  * @property string $meta_description
@@ -40,6 +41,7 @@ class Pluggin extends DTActiveRecord {
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             array('meta_description, description, activity_log', 'safe'),
             array('name', 'unique'),
+            array('url', 'validateUrl'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, name, meta_title, plateform_id, meta_title, meta_description, description, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on' => 'search'),
@@ -63,6 +65,8 @@ class Pluggin extends DTActiveRecord {
             'pluggin_images_display_count' => array(self::STAT, 'PlugginImage', 'pluggin_id', 'order' => 'id DESC '),
         );
     }
+
+   
 
     /**
      * Behaviour
@@ -119,6 +123,7 @@ class Pluggin extends DTActiveRecord {
         $criteria = new CDbCriteria;
         $criteria->compare('id', $this->id, true);
         $criteria->compare('name', $this->name, true);
+        $criteria->compare('url', $this->url, true);
 
         $criteria->compare('plateform_id', $this->plateform_id);
 
@@ -136,7 +141,7 @@ class Pluggin extends DTActiveRecord {
 
         return new CActiveDataProvider('Pluggin', array(
             'criteria' => $criteria,
-             'pagination' => array(
+            'pagination' => array(
                 'pageSize' => 20,
             ),
         ));
@@ -154,6 +159,7 @@ class Pluggin extends DTActiveRecord {
             return $model->id;
         }
     }
+
     /**
      * 
      * @param type $name

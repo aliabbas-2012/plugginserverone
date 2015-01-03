@@ -45,6 +45,7 @@ $this->menu = array(
                                 'value' => isset($model->plateform) ? $model->plateform->name : "",
                                 'type' => "raw",
                             ),
+                            'url',
                             'meta_title',
                             'meta_description',
                             array(

@@ -66,6 +66,15 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . '/js/f
 
 
                         <div class="form-group">
+                            <?php echo $form->labelEx($model, 'url', array('class' => 'control-label col-lg-2')); ?>
+                            <div class="col-lg-4">
+                                <?php echo $form->textField($model, 'url', array('class' => 'form-control', 'maxlength' => 150)); ?>
+                                <?php echo $form->error($model, 'url'); ?>
+
+                            </div>
+
+                        </div><!-- group -->
+                        <div class="form-group">
                             <?php echo $form->labelEx($model, 'meta_title', array('class' => 'control-label col-lg-2')); ?>
                             <div class="col-lg-4">
                                 <?php echo $form->textField($model, 'meta_title', array('class' => 'form-control', 'maxlength' => 150)); ?>

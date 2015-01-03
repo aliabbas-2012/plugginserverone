@@ -272,6 +272,17 @@ class DTActiveRecord extends CActiveRecord {
         return (php_sapi_name() === 'cli');
     }
 
+    /**
+     *  Validate Url
+     */
+    public function validateUrl() {
+        if (!empty($this->url)) {
+            if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $this->url)) {
+                $this->addError("url", "Url is not valid");
+            }
+        }
+    }
+
 }
 
 ?>
