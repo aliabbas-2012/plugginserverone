@@ -28,7 +28,7 @@ class PlugginController extends AdminController {
         return array(
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array_merge(parent::alloweActions(), array('create', 'update', 'index', 'view', 'delete',
-                    'plans'
+                    'plans', 'editPlansStatus'
                 )),
                 'users' => array('@'),
             ),
@@ -141,11 +141,28 @@ class PlugginController extends AdminController {
         $model = new UserPlans('search');
         $model->pluggin_site_info_id = $info_id;
         $model->is_active = 1;
-        
+
         $pluggin = Pluggin::model()->findByPk($pluggin_id);
         $this->render('plans', array(
             'model' => $model,
             'pluggin' => $pluggin,
+        ));
+    }
+
+    /**
+     * edit plan status
+     * @param type $id
+     */
+    public function actionEditPlansStatus($id) {
+        $model = UserPlans::model()->findByPk($id);
+        if (isset($_POST['UserPlans'])) {
+            $model->attributes = $_POST['UserPlans'];
+            $model->updateByPk($id, array("is_active" => $model->is_active));
+            Yii::app()->user->setFlash("success", "Status been updated successfully");
+            $this->redirect(array('/pluggin/editPlansStatus', 'id' => $model->id));
+        }
+        $this->render('user_plan', array(
+            'model' => $model,
         ));
     }
 

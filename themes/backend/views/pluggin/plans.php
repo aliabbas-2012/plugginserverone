@@ -11,8 +11,6 @@ $this->menu = array(
     array('label' => 'List Pluggin', 'url' => array('index')),
     array('label' => 'Create Pluggin', 'url' => array('create')),
 );
-
-
 ?>
 
 <!-- Page-Level CSS -->
@@ -82,6 +80,19 @@ $this->menu = array(
                                     'value' => '$data->create_time',
                                     "type" => "raw",
                                 ),
+                                array
+                                    (
+                                    'class' => 'CButtonColumn',
+                                    'template' => '{update} ',
+                                    'buttons' => array
+                                        (
+                                        'update' => array
+                                            (
+                                            'label' => 'update Status',
+                                            'url' => 'Yii::app()->controller->createUrl("/pluggin/editPlansStatus", array("id"=> $data->primaryKey))',
+                                        ),
+                                    ),
+                                )
                             ),
                         ));
                         ?>
