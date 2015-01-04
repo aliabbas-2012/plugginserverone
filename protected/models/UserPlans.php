@@ -164,9 +164,11 @@ class UserPlans extends DTActiveRecord {
 
     public function getActivePlan($site_info) {
         $criteria = new CDbCriteria();
-        $criteria->addCondition("end_date < :current_time AND pluggin_site_info_id = :site_info");
+        $criteria->addCondition("end_date >= :current_time AND pluggin_site_info_id = :site_info");
         $criteria->params = array("current_time" => date("Y-m-d"), "site_info" => $site_info);
-
+//        CVarDumper::dump($criteria,10,true);
+//        CVarDumper::dump($this->count($criteria),10,true);
+//        die;
         return $this->count($criteria);
     }
 
