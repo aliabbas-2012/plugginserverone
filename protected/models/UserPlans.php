@@ -134,7 +134,7 @@ class UserPlans extends DTActiveRecord {
     }
 
     public function afterFind() {
-        $image = Yii::app()->request->hostInfo.Yii::app()->theme->baseUrl . "/images/icons/";
+        $image = Yii::app()->request->hostInfo . Yii::app()->theme->baseUrl . "/images/icons/";
         $end_date = explode(" ", $this->end_date);
         if ($end_date[0] >= date("Y-m-d")) {
             $this->_running_status = CHtml::image($image . "running.png") . " Running";
@@ -199,6 +199,25 @@ class UserPlans extends DTActiveRecord {
         $criteria->addInCondition("pluggin_plan_id", array_keys($pluggin_plans_list)); // here plan is assigned by default
 
         return UserPlans::model()->find($criteria); /* for single user plan against a single plugin id for single site */
+    }
+
+    /*
+     * stauts is also will be log in sub plans
+     */
+
+    public function afterSave() {
+        parent::afterSave();
+        if ($this->isNewRecord) {
+            $userSub = new UserSubPlans;
+            $userSub->pluggin_plan_id = $this->pluggin_plan_id;
+            $userSub->user_plan_id = $this->id;
+            $userSub->payment_status = $this->payment_status;
+            $userSub->is_active = $this->is_active;
+            $userSub->start_date = $this->start_date;
+            $userSub->end_date = $this->end_date;
+            $userSub->save();
+        }
+        return true;
     }
 
 }
