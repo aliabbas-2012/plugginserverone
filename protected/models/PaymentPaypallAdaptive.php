@@ -207,7 +207,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
      * @param type $message
      */
     public function generateNotification($user_id, $payment_adaptive_id, $type, $message) {
-        $model = new BspNotify();
+        $model = new Notify();
         $model->user_id = $user_id;
         $model->payment_adaptive_id = $payment_adaptive_id;
         $model->message = $message;
@@ -312,11 +312,11 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $paymentAdaptive = new PaymentPaypallAdaptive;
         $paymentAdaptive->buyer_id = Yii::app()->user->id;
         $paymentAdaptive->seller_id = $payPallSetting->admin_user_id;
-        $paymentAdaptive->buyer_status = "paying";
-        $paymentAdaptive->buyer_status = "confirmed";
+        $paymentAdaptive->payment_status = "paying";
+       
         $paymentAdaptive->plan_id = $plan_id;
-        $paymentAdaptive->amount = $payPallSetting->discount_offer_rate;
-        $paymentAdaptive->payment_type = "creation_purchase";
+        $paymentAdaptive->amount = 10;
+        
 
         $paymentAdaptive->ip_address = Yii::app()->request->userHostAddress;
         
@@ -359,7 +359,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         /*
          *  	Amount to be credited to the receiver's account 
          */
-        $receiver[0]->amount = ceil((double) $payPallSetting->discount_offer_rate);
+        $receiver[0]->amount = ceil((double) 5);
         /*
          * Set to true to indicate a chained payment; only one receiver can be a primary receiver. Omit this field, or set it to false for simple and parallel payments. 
          */
