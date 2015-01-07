@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table 'paypalresponse':
  * @property string $id
- * @property integer $item_id
+ * @property integer $user_plan_id
  * @property string $paypal_action_id
  * @property string $Ack
  * @property string $Build
@@ -39,13 +39,13 @@ class Paypalresponse extends DTActiveRecord {
         // will receive user inputs.
         return array(
             array('paypal_action_id, create_time, create_user_id, update_time, update_user_id', 'required'),
-            array('item_id', 'numerical', 'integerOnly' => true),
+            array('user_plan_id', 'numerical', 'integerOnly' => true),
             array('paypal_action_id, create_user_id, update_user_id', 'length', 'max' => 11),
             array('Ack, Build, CorrelationID, Timestamp, PayKey, PaymentExecStatus, Status', 'length', 'max' => 255),
             array('RedirectURL, XMLRequest, XMLResponse', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, item_id, paypal_action_id, Ack, Build, CorrelationID, Timestamp, PayKey, PaymentExecStatus, Status, RedirectURL, XMLRequest, XMLResponse, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
+            array('id, user_plan_id, paypal_action_id, Ack, Build, CorrelationID, Timestamp, PayKey, PaymentExecStatus, Status, RedirectURL, XMLRequest, XMLResponse, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
         );
     }
 
@@ -56,7 +56,7 @@ class Paypalresponse extends DTActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'offer' => array(self::BELONGS_TO, 'BspItem', 'item_id'),
+            'offer' => array(self::BELONGS_TO, 'BspItem', 'user_plan_id'),
         );
     }
 
@@ -66,7 +66,7 @@ class Paypalresponse extends DTActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'ID',
-            'item_id' => 'Item',
+            'user_plan_id' => 'Item',
             'paypal_action_id' => 'Paypal Action',
             'Ack' => 'Ack',
             'Build' => 'Build',
@@ -103,7 +103,7 @@ class Paypalresponse extends DTActiveRecord {
         $criteria = new CDbCriteria;
 
         $criteria->compare('id', $this->id, true);
-        $criteria->compare('item_id', $this->item_id);
+        $criteria->compare('user_plan_id', $this->user_plan_id);
         $criteria->compare('paypal_action_id', $this->paypal_action_id, true);
         $criteria->compare('Ack', $this->Ack, true);
         $criteria->compare('Build', $this->Build, true);
@@ -147,7 +147,7 @@ class Paypalresponse extends DTActiveRecord {
         $response = json_decode(json_encode($response), true);
 
         $model = new Paypalresponse;
-        $model->item_id = $paypalladaptive->item_id;
+        $model->user_plan_id = $paypalladaptive->user_plan_id;
         $model->paypal_action_id = $paypalladaptive->id;
         $model->Ack = isset($response['responseEnvelope']['ack']) ? $response['responseEnvelope']['ack'] : "Failure";
         $model->Build = isset($response['responseEnvelope']['build']) ? $response['responseEnvelope']['build'] : "";

@@ -5,18 +5,13 @@
  *
  * The followings are the available columns in table 'payment_paypall_adaptive':
  * @property string $id
- * @property integer $sender_id
+ * @property integer $seller_id
  * @property integer $buyer_id
- * @property integer $item_id
- * @property string $buyer_status
- * @property string $seller_status
+ * @property integer $plan_id
+ * @property string $payment_status
  * @property double $amount
  * @property double $extra_amount
- * @property double $start_transfer_puzzzle
- * @property double $puzzzle_commission
- * @property double $puzzzle_admin_status
  * @property string $ip_address
- * @property string $payment_type
  * @property string $create_time
  * @property string $create_user_id
  * @property string $update_time
@@ -44,16 +39,16 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('sender_id, buyer_id, item_id, ip_address, create_time, create_user_id, update_time, update_user_id', 'required'),
-            array('sender_id, buyer_id, item_id', 'numerical', 'integerOnly' => true),
-            array('amount, extra_amount, start_transfer_puzzzle, puzzzle_commission', 'numerical'),
-            array('buyer_status, seller_status', 'length', 'max' => 9),
+            array('seller_id, buyer_id, plan_id, ip_address, create_time, create_user_id, update_time, update_user_id', 'required'),
+            array('seller_id, buyer_id, plan_id', 'numerical', 'integerOnly' => true),
+            array('amount', 'numerical'),
+            array('payment_status, seller_status', 'length', 'max' => 9),
             array('ip_address', 'length', 'max' => 50),
-            array('payment_type,_transfer_status,puzzzle_admin_status', 'safe'),
+            array('_transfer_status', 'safe'),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, sender_id, buyer_id, item_id, buyer_status, seller_status, amount, extra_amount, start_transfer_puzzzle, puzzzle_commission, ip_address, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
+            array('id, seller_id, buyer_id, plan_id, payment_status, seller_status, amount,ip_address, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
         );
     }
 
@@ -65,11 +60,11 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         // class name for the relations automatically generated below.
         return array(
             'paymentPaypallAdaptiveHistories' => array(self::HAS_MANY, 'PaymentPaypallAdaptiveHistory', 'paypall_adaptive_id'),
-            'seller' => array(self::BELONGS_TO, 'Users', 'sender_id'),
+            'seller' => array(self::BELONGS_TO, 'Users', 'seller_id'),
             'buyer' => array(self::BELONGS_TO, 'Users', 'buyer_id'),
-            'offer' => array(self::BELONGS_TO, 'BspItem', 'item_id'),
-            'order' => array(self::HAS_ONE, 'BspOrder', 'payment_adaptive_id'),
-            'paypall_response' => array(self::HAS_ONE, 'Paypalresponse', 'paypal_action_id', 'condition' => 'item_id  IS NOT NULL AND Ack = "Success"', "order" => " paypall_response.id DESC"),
+            'user_plan' => array(self::BELONGS_TO, 'UserPlans', 'plan_id'),
+            
+            //'paypall_response' => array(self::HAS_ONE, 'Paypalresponse', 'paypal_action_id', 'condition' => 'plan_id  IS NOT NULL AND Ack = "Success"', "order" => " paypall_response.id DESC"),
         );
     }
 
@@ -79,18 +74,15 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'ID',
-            'sender_id' => 'Sender',
+            'seller_id' => 'Sender',
             'buyer_id' => 'Buyer',
-            'item_id' => 'Item',
-            'buyer_status' => 'Buyer Status',
-            'seller_status' => 'Seller Status',
+            'plan_id' => 'User Plan',
+            'payment_status' => 'Buyer Status',
+           
             'amount' => 'Amount',
-            'extra_amount' => 'Extra Amount',
-            'start_transfer_puzzzle' => 'Start Transfer Puzzzle',
-            'puzzzle_commission' => 'Puzzzle Commission',
-            'puzzzle_admin_status' => 'Puzzzle Admin Status',
+         
             'ip_address' => 'Ip Address',
-            'payment_type' => 'Payment Type',
+         
             'create_time' => 'Create Time',
             'create_user_id' => 'Create User',
             'update_time' => 'Update Time',
@@ -116,18 +108,15 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $criteria = new CDbCriteria;
 
         $criteria->compare('id', $this->id, true);
-        $criteria->compare('sender_id', $this->sender_id);
+        $criteria->compare('seller_id', $this->seller_id);
         $criteria->compare('buyer_id', $this->buyer_id);
-        $criteria->compare('item_id', $this->item_id);
-        $criteria->compare('buyer_status', $this->buyer_status, true);
+        $criteria->compare('plan_id', $this->plan_id);
+        $criteria->compare('payment_status', $this->payment_status, true);
         $criteria->compare('seller_status', $this->seller_status, true);
         $criteria->compare('amount', $this->amount);
-        $criteria->compare('extra_amount', $this->extra_amount);
-        $criteria->compare('start_transfer_puzzzle', $this->start_transfer_puzzzle);
-        $criteria->compare('puzzzle_commission', $this->puzzzle_commission);
-        $criteria->compare('puzzzle_admin_status', $this->puzzzle_admin_status);
+      
         $criteria->compare('ip_address', $this->ip_address, true);
-        $criteria->compare('payment_type', $this->payment_type, true);
+      
         $criteria->compare('create_time', $this->create_time, true);
         $criteria->compare('create_user_id', $this->create_user_id, true);
         $criteria->compare('update_time', $this->update_time, true);
@@ -163,13 +152,8 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
     public function saveHistory() {
         $model = new PaymentPaypallAdaptiveHistory();
         $model->paypall_adaptive_id = $this->id;
-        $model->buyer_status = $this->buyer_status;
-        $model->seller_status = $this->seller_status;
+        $model->payment_status = $this->payment_status;
         $model->amount = $this->amount;
-        $model->extra_amount = $this->extra_amount;
-        $model->start_transfer_puzzzle = $this->start_transfer_puzzzle;
-        $model->puzzzle_commission = $this->puzzzle_commission;
-        $model->puzzzle_admin_status = $this->puzzzle_admin_status;
         $model->save();
     }
 
@@ -184,13 +168,13 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         //check old offer with same user
 
         $criteria = new CDbCriteria();
-        $criteria->addCondition("item_id = " . $offer->id . " AND seller_status <> 'rejected' AND buyer_id = " . Yii::app()->user->id);
+        $criteria->addCondition("plan_id = " . $offer->id . " AND seller_status <> 'rejected' AND buyer_id = " . Yii::app()->user->id);
         $old = PaymentPaypallAdaptive::model()->count($criteria);
         if ($old == 0) {
             $model = new PaymentPaypallAdaptive;
             $model->buyer_id = Yii::app()->user->id;
-            $model->sender_id = $owner->id;
-            $model->item_id = $offer->id;
+            $model->seller_id = $owner->id;
+            $model->plan_id = $offer->id;
             if ($owner->paypal_mail != "") {
                 $model->buyer_status = "initiated";
             }
@@ -209,7 +193,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
 
 
             $model->save();
-            $this->generateNotification($model->sender_id, $model->id, "seller", "You have recieved invitation to sale your offer");
+            $this->generateNotification($model->seller_id, $model->id, "seller", "You have recieved invitation to sale your offer");
             return true;
         } else {
             return false;
@@ -319,7 +303,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
      * pay direct to puzzle during purchase
      * with discount price
      */
-    public function payDirectToPuzzle($item_id) {
+    public function payDirectToPuzzle($plan_id) {
 //        $paymentAdaptive, $notifyModel
         //creating paypall adaptive 
 
@@ -327,10 +311,10 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
 
         $paymentAdaptive = new PaymentPaypallAdaptive;
         $paymentAdaptive->buyer_id = Yii::app()->user->id;
-        $paymentAdaptive->sender_id = $payPallSetting->admin_user_id;
+        $paymentAdaptive->seller_id = $payPallSetting->admin_user_id;
         $paymentAdaptive->buyer_status = "paying";
         $paymentAdaptive->buyer_status = "confirmed";
-        $paymentAdaptive->item_id = $item_id;
+        $paymentAdaptive->plan_id = $plan_id;
         $paymentAdaptive->amount = $payPallSetting->discount_offer_rate;
         $paymentAdaptive->payment_type = "creation_purchase";
 
@@ -341,7 +325,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $paymentAdaptive->save();
         
         $paymentAdaptive->saveHistory();
-        $notifyModel = $this->generateNotification($paymentAdaptive->sender_id, $paymentAdaptive->id, "seller", "You have recieved invitation to sale offer on discount price");
+        $notifyModel = $this->generateNotification($paymentAdaptive->seller_id, $paymentAdaptive->id, "seller", "You have recieved invitation to sale offer on discount price");
 
 
         Yii::import('application.extensions.paypalladaptive.samples.PPBootStrap');
@@ -356,8 +340,8 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $response_adaptive = Yii::getPathOfAlias('application.extensions.paypalladaptive.samples.Common.Response');
 
         $host_base = Yii::app()->request->hostInfo;
-        $cancel_url = $host_base . Yii::app()->controller->createUrl("/web/offers/confirmOffer", array("item"=>$item_id,"id" => $notifyModel->Id, "status" => "cancelled"));
-        $return_url = $host_base . Yii::app()->controller->createUrl("/web/offers/confirmOffer", array("item"=>$item_id,"id" => $notifyModel->Id, "status" => "completed"));
+        $cancel_url = $host_base . Yii::app()->controller->createUrl("/web/offers/confirmOffer", array("item"=>$plan_id,"id" => $notifyModel->Id, "status" => "cancelled"));
+        $return_url = $host_base . Yii::app()->controller->createUrl("/web/offers/confirmOffer", array("item"=>$plan_id,"id" => $notifyModel->Id, "status" => "completed"));
         
         
 
