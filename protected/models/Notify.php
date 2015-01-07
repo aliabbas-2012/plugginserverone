@@ -20,7 +20,7 @@
  * The followings are the available model relations:
  * @property BspUser $user
  */
-class BspNotify extends DTActiveRecord {
+class Notify extends DTActiveRecord {
 
     /**
      * @return string the associated database table name
