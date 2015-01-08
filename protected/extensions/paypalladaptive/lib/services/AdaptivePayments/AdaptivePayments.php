@@ -305,7 +305,7 @@ class ErrorData
 	 	 	 	 
 	 * @var string 	 
 	 */ 
-	public $plateform;
+	public $category;
 
 	/**
 	 * 
