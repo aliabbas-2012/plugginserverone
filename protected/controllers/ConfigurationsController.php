@@ -7,6 +7,7 @@ class ConfigurationsController extends Controller {
      * using two-column layout. See 'protected/views/layouts/column2.php'.
      */
     public $layout = '//layouts/column2';
+     public $filters;
 
     /**
      * Specifies the access control rules.
@@ -16,7 +17,7 @@ class ConfigurationsController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('load', 'payPallSettings'),
+                'actions' => array('load', 'payPallSettings','paymentNotifications'),
                 'users' => array('@'),
             ),
             array('deny', // deny all users
@@ -126,6 +127,71 @@ class ConfigurationsController extends Controller {
                 }
             }
             $this->render("//paypallsettings/index", array("model" => $model));
+        }
+    }
+
+    public function actionPaymentNotifications() {
+
+        $transfer_Model = new AdminPaymentTransfer();
+        $this->filters = array(
+            'payment_status' => array(
+                "initiated" => "Initiated",
+                "completed" => "Completed",
+                "paying" => "Paying",
+                "cancelled" => "Cancelled",
+            ),
+
+        );
+
+        $this->layout = "column2";
+        $model = new PaymentPaypallAdaptive('search');
+        $criteria = new CDbCriteria();
+        if (isset($_GET['PaymentPaypallAdaptive'])) {
+            $model->attributes = $_GET['PaymentPaypallAdaptive'];
+            $criteria->compare('payment_status', $model->payment_status);
+          
+        }
+
+        $dataProvider = new CActiveDataProvider('PaymentPaypallAdaptive', array(
+            'criteria' => $criteria,
+        ));
+
+        //transfer money
+        if (isset($_POST['AdminPaymentTransfer'])) {
+            $transfer_Model->attributes = $_POST['AdminPaymentTransfer'];
+            $transfer_Model->selection = isset($_POST['id']) ? $_POST['id'] : "";
+            if ($transfer_Model->validate()) {
+                $url = $transfer_Model->transferMoney($transfer_Model->selection);
+                if ($url != "") {
+                    $this->redirect($url);
+                } else {
+                    Yii::app()->user->setFlash("error", "Some things not completed pleas try again");
+                    $this->redirect($this->createUrl("/configurations/paymentNotifications"));
+                }
+            }
+        }
+
+        $this->render("//payment/notifications", array(
+            "dataProvider" => $dataProvider,
+            "model" => $model,
+            "transfer_Model" => $transfer_Model
+        ));
+    }
+
+    /**
+     * 
+     * @param type $ids
+     */
+    public function actionNotificationConfirm($ids = "") {
+        $ids = explode(",", $ids);
+
+        foreach ($ids as $id) {
+            $model = PaymentPaypallAdaptive::model()->findByPk($id);
+            Yii::app()->user->setFlash("success", "Payment has been Transfered");
+            $model->updateByPk($id, array("puzzzle_admin_status" => "tranfered"));
+            $model = PaymentPaypallAdaptive::model()->findByPk($id);
+            $model->saveHistory();
+            $this->redirect($this->createUrl("/configurations/paymentNotifications"));
         }
     }
 
