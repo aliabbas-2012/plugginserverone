@@ -121,6 +121,7 @@ class ConfigurationsController extends Controller {
             if (isset($_POST['Paypalsettings'])) {
                 $model->attributes = $_POST['Paypalsettings'];
                 if ($model->save()) {
+                    Yii::app()->user->setFlash("success", "Data has been saved successfully");
                     $this->redirect($this->createUrl('/configurations/payPallSettings', array('id' => 2)));
                 }
             }
