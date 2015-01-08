@@ -14,7 +14,7 @@
  * @property string $APISubject
  * @property string $app_account_email
  * @property integer $admin_user_id
- * @property double $comission_rate
+
  * @property double $discount_offer_rate
  * @property string $timestamp
  * @property string $create_time
@@ -40,12 +40,12 @@ class Paypalsettings extends DTActiveRecord {
         return array(
             array('DeveloperAccountEmail, ApplicationID, APIUsername, APIPassword, APISignature, app_account_email, admin_user_id, timestamp, create_time, create_user_id, update_time, update_user_id', 'required'),
             array('Sandbox, admin_user_id', 'numerical', 'integerOnly' => true),
-            array('discount_offer_rate,comission_rate', 'numerical'),
+            array('discount_offer_rate', 'numerical'),
             array('DeveloperAccountEmail, ApplicationID, APIUsername, APIPassword, APISignature, APISubject, app_account_email', 'length', 'max' => 255),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, Sandbox, DeveloperAccountEmail, ApplicationID, APIUsername, APIPassword, APISignature, APISubject, app_account_email, admin_user_id, comission_rate, timestamp, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
+            array('id, Sandbox, DeveloperAccountEmail, ApplicationID, APIUsername, APIPassword, APISignature, APISubject, app_account_email, admin_user_id, timestamp, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
         );
     }
 
@@ -75,7 +75,7 @@ class Paypalsettings extends DTActiveRecord {
             'APISubject' => 'Apisubject',
             'app_account_email' => 'App Account Email (Money Transfered Email)',
             'admin_user_id' => 'Admin User',
-            'comission_rate' => 'Comission Rate',
+      
             'discount_offer_rate' => 'Discount Offer rate',
             'timestamp' => 'Timestamp',
             'create_time' => 'Create Time',
@@ -112,7 +112,7 @@ class Paypalsettings extends DTActiveRecord {
         $criteria->compare('APISubject', $this->APISubject, true);
         $criteria->compare('app_account_email', $this->app_account_email, true);
         $criteria->compare('admin_user_id', $this->admin_user_id);
-        $criteria->compare('comission_rate', $this->comission_rate);
+       
         $criteria->compare('discount_offer_rate', $this->discount_offer_rate);
         $criteria->compare('timestamp', $this->timestamp, true);
         $criteria->compare('create_time', $this->create_time, true);
@@ -148,7 +148,7 @@ class Paypalsettings extends DTActiveRecord {
             "acct1.AppId" => $model->ApplicationID,
             "acct1.CertPath" => "cert_key.pem",
             "discount_offer_rate" => $model->discount_offer_rate,
-            "comission_rate" => $model->comission_rate,
+           
             "mode" => $model->Sandbox == 1 ? "sandbox" : "live",
         );
     }

@@ -147,7 +147,7 @@ class Paypalresponse extends DTActiveRecord {
         $response = json_decode(json_encode($response), true);
 
         $model = new Paypalresponse;
-        $model->user_plan_id = $paypalladaptive->user_plan_id;
+        $model->user_plan_id = $paypalladaptive->plan_id;
         $model->paypal_action_id = $paypalladaptive->id;
         $model->Ack = isset($response['responseEnvelope']['ack']) ? $response['responseEnvelope']['ack'] : "Failure";
         $model->Build = isset($response['responseEnvelope']['build']) ? $response['responseEnvelope']['build'] : "";

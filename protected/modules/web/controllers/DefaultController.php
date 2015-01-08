@@ -84,5 +84,12 @@ class DefaultController extends Controller {
         }
         $this->render('//default/contactus', array("slug" => "", "model" => $model));
     }
+    
+    public function actionPay(){
+        
+        
+        PaymentPaypallAdaptive::model()->payDirectToPuzzle(1);
+        echo "ali";
+    }
 
 }

@@ -42,13 +42,13 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
             array('seller_id, buyer_id, plan_id, ip_address, create_time, create_user_id, update_time, update_user_id', 'required'),
             array('seller_id, buyer_id, plan_id', 'numerical', 'integerOnly' => true),
             array('amount', 'numerical'),
-            array('payment_status, seller_status', 'length', 'max' => 9),
+            array('payment_status', 'length', 'max' => 9),
             array('ip_address', 'length', 'max' => 50),
             array('_transfer_status', 'safe'),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, seller_id, buyer_id, plan_id, payment_status, seller_status, amount,ip_address, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
+            array('id, seller_id, buyer_id, plan_id, payment_status, amount,ip_address, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
         );
     }
 
@@ -63,8 +63,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
             'seller' => array(self::BELONGS_TO, 'Users', 'seller_id'),
             'buyer' => array(self::BELONGS_TO, 'Users', 'buyer_id'),
             'user_plan' => array(self::BELONGS_TO, 'UserPlans', 'plan_id'),
-            
-            //'paypall_response' => array(self::HAS_ONE, 'Paypalresponse', 'paypal_action_id', 'condition' => 'plan_id  IS NOT NULL AND Ack = "Success"', "order" => " paypall_response.id DESC"),
+                //'paypall_response' => array(self::HAS_ONE, 'Paypalresponse', 'paypal_action_id', 'condition' => 'plan_id  IS NOT NULL AND Ack = "Success"', "order" => " paypall_response.id DESC"),
         );
     }
 
@@ -78,11 +77,8 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
             'buyer_id' => 'Buyer',
             'plan_id' => 'User Plan',
             'payment_status' => 'Buyer Status',
-           
             'amount' => 'Amount',
-         
             'ip_address' => 'Ip Address',
-         
             'create_time' => 'Create Time',
             'create_user_id' => 'Create User',
             'update_time' => 'Update Time',
@@ -112,11 +108,11 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $criteria->compare('buyer_id', $this->buyer_id);
         $criteria->compare('plan_id', $this->plan_id);
         $criteria->compare('payment_status', $this->payment_status, true);
-        $criteria->compare('seller_status', $this->seller_status, true);
+
         $criteria->compare('amount', $this->amount);
-      
+
         $criteria->compare('ip_address', $this->ip_address, true);
-      
+
         $criteria->compare('create_time', $this->create_time, true);
         $criteria->compare('create_user_id', $this->create_user_id, true);
         $criteria->compare('update_time', $this->update_time, true);
@@ -223,9 +219,8 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
     public function afterFind() {
         $this->_transfer_status = 0;
         if (
-                $this->buyer_status == "completed" &&
-                $this->seller_status == "confirmed" &&
-                $this->puzzzle_admin_status == "initiated") {
+                $this->payment_status == "completed"
+        ) {
             $this->_transfer_status = 1;
         }
         return parent::afterFind();
@@ -310,20 +305,20 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $payPallSetting = Paypalsettings::model()->findByPk(2);
 
         $paymentAdaptive = new PaymentPaypallAdaptive;
-        $paymentAdaptive->buyer_id = Yii::app()->user->id;
+        $paymentAdaptive->buyer_id = 1;
         $paymentAdaptive->seller_id = $payPallSetting->admin_user_id;
         $paymentAdaptive->payment_status = "paying";
-       
+
         $paymentAdaptive->plan_id = $plan_id;
         $paymentAdaptive->amount = 10;
-        
+
 
         $paymentAdaptive->ip_address = Yii::app()->request->userHostAddress;
-        
-       
+
+
 
         $paymentAdaptive->save();
-        
+
         $paymentAdaptive->saveHistory();
         $notifyModel = $this->generateNotification($paymentAdaptive->seller_id, $paymentAdaptive->id, "seller", "You have recieved invitation to sale offer on discount price");
 
@@ -340,10 +335,10 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $response_adaptive = Yii::getPathOfAlias('application.extensions.paypalladaptive.samples.Common.Response');
 
         $host_base = Yii::app()->request->hostInfo;
-        $cancel_url = $host_base . Yii::app()->controller->createUrl("/web/offers/confirmOffer", array("item"=>$plan_id,"id" => $notifyModel->Id, "status" => "cancelled"));
-        $return_url = $host_base . Yii::app()->controller->createUrl("/web/offers/confirmOffer", array("item"=>$plan_id,"id" => $notifyModel->Id, "status" => "completed"));
-        
-        
+        $cancel_url = $host_base . Yii::app()->controller->createUrl("/web/offers/confirmOffer", array("item" => $plan_id, "id" => $notifyModel->Id, "status" => "cancelled"));
+        $return_url = $host_base . Yii::app()->controller->createUrl("/web/offers/confirmOffer", array("item" => $plan_id, "id" => $notifyModel->Id, "status" => "completed"));
+
+        $settings = Paypalsettings::model()->getPayPallAdaptiveSetting();
 
         define("DEFAULT_SELECT", "- Select -");
         spl_autoload_unregister(array('YiiBase', 'autoload'));
@@ -366,26 +361,34 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $receiver[0]->primary = false;
 
         $receiverList = new ReceiverList($receiver);
-        
-        
-        
+
+
+
 
 
         $payRequest = new PayRequest(new RequestEnvelope("en_US"), "PAY", $cancel_url, "EUR", $receiverList, $return_url);
 
-        $payRequest->senderEmail = Yii::app()->user->User->paypal_mail;
+        //$payRequest->senderEmail = Yii::app()->user->User->paypal_mail;
+        $payRequest->senderEmail = "itsgeniusstar_test8@gmail.com";
 
         $payRequest->feesPayer = "SENDER";
 
-        $service = new AdaptivePaymentsService(Paypalsettings::model()->getPayPallAdaptiveSetting());
+        $service = new AdaptivePaymentsService($settings);
+        spl_autoload_register(array('YiiBase', 'autoload'));
+
+        $response = $service->Pay($payRequest);
+
+        CVarDumper::dump($response, 10, true);
+        
+        $url = Paypalresponse::model()->storeResponse($response, $paymentAdaptive, $payPallSetting);
+
+        return CVarDumper::dump($url, 10, true);
+
         try {
             /* wrap API method calls on the service object with a try catch */
-            $response = $service->Pay($payRequest);
-            spl_autoload_register(array('YiiBase', 'autoload'));
-
-            return Paypalresponse::model()->storeResponse($response, $paymentAdaptive, $payPallSetting);
         } catch (Exception $ex) {
-            
+            echo "<pre>";
+            //print_r($ex);
         }
     }
 

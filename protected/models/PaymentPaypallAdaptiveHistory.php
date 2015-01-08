@@ -37,11 +37,11 @@ class PaymentPaypallAdaptiveHistory extends DTActiveRecord {
             array('paypall_adaptive_id, create_time, create_user_id, update_time, update_user_id', 'required'),
             array('amount', 'numerical'),
             array('paypall_adaptive_id, create_user_id, update_user_id', 'length', 'max' => 11),
-            array('payment_status, seller_status', 'length', 'max' => 9),
+            array('payment_status', 'length', 'max' => 9),
            
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, paypall_adaptive_id, payment_status, seller_status, amount, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
+            array('id, paypall_adaptive_id, payment_status, amount, create_time, create_user_id, update_time, update_user_id', 'safe', 'on' => 'search'),
         );
     }
 
@@ -64,7 +64,7 @@ class PaymentPaypallAdaptiveHistory extends DTActiveRecord {
             'id' => 'ID',
             'paypall_adaptive_id' => 'Paypall Adaptive',
             'payment_status' => 'Buyer Status',
-            'seller_status' => 'Seller Status',
+            
             'amount' => 'Amount',
            
             'create_time' => 'Create Time',
@@ -94,7 +94,7 @@ class PaymentPaypallAdaptiveHistory extends DTActiveRecord {
         $criteria->compare('id', $this->id, true);
         $criteria->compare('paypall_adaptive_id', $this->paypall_adaptive_id, true);
         $criteria->compare('payment_status', $this->payment_status, true);
-        $criteria->compare('seller_status', $this->seller_status, true);
+      
         $criteria->compare('amount', $this->amount);
   
         $criteria->compare('create_time', $this->create_time, true);
