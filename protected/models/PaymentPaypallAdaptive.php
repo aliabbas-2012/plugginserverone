@@ -228,7 +228,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $return_url = $host_base . Yii::app()->controller->createUrl("/web/default/confirmOffer", array("plan" => $plan_id, "id" => $notifyModel->Id, "status" => "completed"));
 
         $settings = Paypalsettings::model()->getPayPallAdaptiveSetting();
-
+        $current_user = Yii::app()->user->User;
         define("DEFAULT_SELECT", "- Select -");
         spl_autoload_unregister(array('YiiBase', 'autoload'));
 
@@ -257,8 +257,8 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
 
         $payRequest = new PayRequest(new RequestEnvelope("en_US"), "PAY", $cancel_url, "EUR", $receiverList, $return_url);
 
-        //$payRequest->senderEmail = Yii::app()->user->User->paypal_mail;
-        $payRequest->senderEmail = "itsgeniusstar_test8@gmail.com";
+        $payRequest->senderEmail = $current_user->paypal_mail;
+        //$payRequest->senderEmail = "itsgeniusstar_test8@gmail.com";
 
         $payRequest->feesPayer = "SENDER";
 
