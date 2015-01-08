@@ -65,6 +65,8 @@
                             </li>
                             <li><a href='<?php echo $this->createUrl("/configurations/load", array("m" => "Plans",)); ?>'><i class="fa fa-gear fa-fw"></i>Plans</a>
                             </li>
+                            <li><a href='<?php echo $this->createUrl("/configurations/payPallSettings", array("id" => "2",)); ?>'><i class="fa fa-gear fa-fw"></i>PayPall Setting</a>
+                            </li>
                         
                             <li class="divider"></li>
                             <li><a href="<?php echo $this->createUrl("/site/logout"); ?>"><i class="fa fa-sign-out fa-fw"></i>Logout</a>

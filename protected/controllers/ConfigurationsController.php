@@ -16,7 +16,7 @@ class ConfigurationsController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('load'),
+                'actions' => array('load', 'payPallSettings'),
                 'users' => array('@'),
             ),
             array('deny', // deny all users
@@ -42,7 +42,7 @@ class ConfigurationsController extends Controller {
 
         /* Complete Model name */
         $model_name = 'Conf' . $m;
-        
+
 
         /* For add new or update */
         $model = new $model_name;
@@ -54,10 +54,10 @@ class ConfigurationsController extends Controller {
         $childModel = '';
         if ($child_id != '' && isset($model->childModel)) {
             $childModel = new $model->childModel;
-            if ($child_id!="new") {
-               $childModel = $childModel->findByPk($child_id);
+            if ($child_id != "new") {
+                $childModel = $childModel->findByPk($child_id);
             }
-      
+
             if (isset($_POST[$model->childModel])) {
                 /* Assign attributes */
 
@@ -66,7 +66,7 @@ class ConfigurationsController extends Controller {
                 /* Save record */
                 if ($childModel->save()) {
                     Yii::app()->user->setFlash("success", "Data has been saved successfully");
-                    $this->redirect(array('load', 'm' => $m, "id" => $model->id,"child_id"=>"new"));
+                    $this->redirect(array('load', 'm' => $m, "id" => $model->id, "child_id" => "new"));
                 }
             }
         } else {
@@ -77,7 +77,7 @@ class ConfigurationsController extends Controller {
                 /* Save record */
                 if ($model->save()) {
                     Yii::app()->user->setFlash("success", "Data has been saved successfully");
-                    $this->redirect(array('load', 'm' => $m, "id" => $model->id,"child_id"=>"new"));
+                    $this->redirect(array('load', 'm' => $m, "id" => $model->id, "child_id" => "new"));
                 }
             }
         }
@@ -109,6 +109,23 @@ class ConfigurationsController extends Controller {
         $model = new ConfMisc();
 
         $this->render("appSettings/index", array('model' => $model));
+    }
+
+    /**
+     * 
+     * paypall settings
+     */
+    public function actionPayPallSettings($id = 2) {
+        if ($id != 0) {
+            $model = Paypalsettings::model()->findByPk($id);
+            if (isset($_POST['Paypalsettings'])) {
+                $model->attributes = $_POST['Paypalsettings'];
+                if ($model->save()) {
+                    $this->redirect($this->createUrl('/configurations/payPallSettings', array('id' => 2)));
+                }
+            }
+            $this->render("//paypallsettings/index", array("model" => $model));
+        }
     }
 
 }

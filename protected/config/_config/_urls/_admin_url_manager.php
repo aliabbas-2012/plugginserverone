@@ -10,6 +10,7 @@ $rules_admin = array(
     'admin/login' => '/site/login',
     'gii' => 'gii',
     'config/<m:[\w-\.]+>' => '/configurations/load',
+    'config/paypall-setting/<id:[\w-\.]+>' => '/configurations/payPallSettings',
     //plateform create 
     'plateform/index' => '/plateform/index',
     'plateform/<id:[\w-\.]+>/view-<related:[\w-\.]+>-<related_id:[\w-\.]+>' => '/plateform/view',
