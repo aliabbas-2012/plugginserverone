@@ -1,8 +1,8 @@
 <?php
 Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/css/form.css');
-Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl. "/sliderlayer/jquery.js");
+Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . "/sliderlayer/jquery.js");
 Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/media/css/password_strength.css');
-Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/media/js/password_strength_plugin.js',  CClientScript::POS_END);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/media/js/password_strength_plugin.js', CClientScript::POS_END);
 ?>
 <script>
     jQuery(function() {
@@ -60,11 +60,11 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/media/js/pa
                 <?php echo $form->textField($model, 'username', array('class' => 'row_text_type')); ?>
             </div>
             <div class="row_text">
-                <article><?php // echo $form->error($model, 'username');           ?></article>
+                <article><?php // echo $form->error($model, 'username');             ?></article>
             </div>
         </div>
-        
-        
+
+
         <div class="row_input">
             <div class="row_text">
                 <article><?php echo $form->labelEx($model, 'first_name'); ?></article>
@@ -73,10 +73,10 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/media/js/pa
                 <?php echo $form->textField($model, 'first_name', array('class' => 'row_text_type')); ?>
             </div>
             <div class="row_text">
-                <article><?php // echo $form->error($model, 'first_name');           ?></article>
+                <article><?php // echo $form->error($model, 'first_name');             ?></article>
             </div>
         </div>
-        
+
         <div class="row_input">
             <div class="row_text">
                 <article><?php echo $form->labelEx($model, 'last_name'); ?></article>
@@ -85,9 +85,10 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/media/js/pa
                 <?php echo $form->textField($model, 'last_name', array('class' => 'row_text_type')); ?>
             </div>
             <div class="row_text">
-                <article><?php // echo $form->error($model, 'last_name');           ?></article>
+                <article><?php // echo $form->error($model, 'last_name');             ?></article>
             </div>
         </div>
+
 
         <div class="row_input">
             <div class="row_text">
@@ -97,9 +98,11 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/media/js/pa
                 <?php echo $form->textField($model, 'email', array('class' => 'row_text_type')); ?>
             </div>
             <div class="row_text">
-                <article><?php //echo $form->error($model, 'email');           ?></article>
+                <article><?php //echo $form->error($model, 'email');             ?></article>
             </div>
         </div>
+
+
 
         <div class="row_input">
             <div class="row_text">
@@ -109,7 +112,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/media/js/pa
                 <?php echo $form->passwordField($model, 'password', array('class' => 'row_text_type password_test')); ?>
             </div>
             <div class="row_text">
-                <article><?php //echo $form->error($model, 'password');           ?></article>
+                <article><?php //echo $form->error($model, 'password');             ?></article>
             </div>
         </div>
 
@@ -121,12 +124,24 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/media/js/pa
                 <?php echo $form->passwordField($model, 'password2', array('class' => 'row_text_type')); ?>
             </div>
             <div class="row_text">
-                <article><?php //echo $form->error($model, 'password2');           ?></article>
+                <article><?php //echo $form->error($model, 'password2');             ?></article>
+            </div>
+        </div>
+
+        <div class="row_input">
+            <div class="row_text">
+                <article><?php echo $form->labelEx($model, 'paypal_mail'); ?></article>
+            </div>
+            <div class="row_input_type">
+                <?php echo $form->textField($model, 'paypal_mail', array('class' => 'row_text_type')); ?>
+            </div>
+            <div class="row_text">
+                <article><?php // echo $form->error($model, 'paypal_mail');             ?></article>
             </div>
         </div>
         <div class="row_input">
             <div class="row_input_type">
-                <?php echo CHtml::submitButton('Sign Up', array('class' => 'row_button submit-btn','data-ajax'=>'false')); ?>
+                <?php echo CHtml::submitButton('Sign Up', array('class' => 'row_button submit-btn', 'data-ajax' => 'false')); ?>
             </div>
         </div>
         <?php $this->endWidget(); ?>

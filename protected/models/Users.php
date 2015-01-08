@@ -10,6 +10,7 @@
  * @property string $last_name
  * @property string $password
  * @property string $email
+ * @property string $paypal_mail
  * @property string $ip_address
  * @property string $type
  * @property integer $is_active
@@ -52,8 +53,9 @@ class Users extends DTActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('username, first_name, last_name, password, password2, email, create_time, create_user_id, update_time, update_user_id', 'required'),
+            array('paypal_mail,username, first_name, last_name, password, password2, email, create_time, create_user_id, update_time, update_user_id', 'required'),
             array('email,username', 'unique'),
+            array('paypal_mail,email','email'),
             array('is_active, deleted', 'numerical', 'integerOnly' => true),
             array('username, first_name, last_name, activation_key', 'length', 'max' => 50),
             array('password, email, ip_address', 'length', 'max' => 255),
@@ -119,6 +121,7 @@ class Users extends DTActiveRecord {
         $criteria->compare('last_name', $this->last_name, true);
         $criteria->compare('password', $this->password, true);
         $criteria->compare('email', $this->email, true);
+        $criteria->compare('paypal_mail', $this->paypal_mail, true);
         $criteria->compare('ip_address', $this->ip_address, true);
         $criteria->compare('type', $this->type, true);
         $criteria->compare('is_active', $this->is_active);

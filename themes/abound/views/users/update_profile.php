@@ -64,6 +64,17 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->theme->baseUrl . '/css/for
                
             </div>
         </div>
+        <div class="row_input">
+            <div class="row_text">
+                <article><?php echo $form->labelEx($model, 'paypal_mail'); ?></article>
+            </div>
+            <div class="row_input_type">
+                <?php echo $form->textField($model, 'paypal_mail', array('class' => 'row_text_type')); ?>
+            </div>
+            <div class="row_text">
+               
+            </div>
+        </div>
 
         <div class="row_input">
             <div class="row_text">

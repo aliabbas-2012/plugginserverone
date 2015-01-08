@@ -155,49 +155,6 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
 
     /**
      * 
-     * @param type $owner
-     * @param type $offer
-     */
-    public function saveInitialPaymentOrder($owner, $offer) {
-
-        $payPallSetting = Paypalsettings::model()->findByPk(2);
-        //check old offer with same user
-
-        $criteria = new CDbCriteria();
-        $criteria->addCondition("plan_id = " . $offer->id . " AND seller_status <> 'rejected' AND buyer_id = " . Yii::app()->user->id);
-        $old = PaymentPaypallAdaptive::model()->count($criteria);
-        if ($old == 0) {
-            $model = new PaymentPaypallAdaptive;
-            $model->buyer_id = Yii::app()->user->id;
-            $model->seller_id = $owner->id;
-            $model->plan_id = $offer->id;
-            if ($owner->paypal_mail != "") {
-                $model->buyer_status = "initiated";
-            }
-            if ($offer->_order_price != "") {
-                $model->amount = $offer->_order_price;
-            }
-            if ($offer->discount_price != "") {
-                $model->amount = $offer->discount_price;
-            } else {
-                $model->amount = $offer->price;
-            }
-
-            $model->seller_status = "initiated";
-            $model->puzzzle_commission = $payPallSetting->comission_rate;
-            $model->ip_address = Yii::app()->request->userHostAddress;
-
-
-            $model->save();
-            $this->generateNotification($model->seller_id, $model->id, "seller", "You have recieved invitation to sale your offer");
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * 
      * @param type $user_id
      * @param type $payment_adaptive_id
      * @param type $message
@@ -227,85 +184,17 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
     }
 
     /**
-
-     *  money will be transfred to puzzle
-     * 
-
-     * @param type $paymentAdaptive
-     * @param type $notifyModel
-     * @return type
-     */
-    public function payToPuzzle($paymentAdaptive, $notifyModel) {
-        $payPallSetting = Paypalsettings::model()->findByPk(2);
-        Yii::import('application.extensions.paypalladaptive.samples.PPBootStrap');
-        Yii::import('application.extensions.paypalladaptive.samples.Common.Constants');
-        Yii::import('application.extensions.paypalladaptive.samples.Common.Error');
-        Yii::import('application.extensions.paypalladaptive.samples.Common.Response');
-
-        require_once(Yii::getPathOfAlias('application.extensions.paypalladaptive.samples.PPBootStrap')) . ".php";
-        require_once(Yii::getPathOfAlias('application.extensions.paypalladaptive.samples.Common.Constants')) . ".php";
-
-        $error_adaptive = Yii::getPathOfAlias('application.extensions.paypalladaptive.samples.Common.Error');
-        $response_adaptive = Yii::getPathOfAlias('application.extensions.paypalladaptive.samples.Common.Response');
-
-        $host_base = Yii::app()->request->hostInfo;
-        $cancel_url = $host_base . Yii::app()->controller->createUrl("/web/offers/payPallPayment", array("id" => $notifyModel->Id, "status" => "cancelled"));
-        $return_url = $host_base . Yii::app()->controller->createUrl("/web/offers/payPallPayment", array("id" => $notifyModel->Id, "status" => "completed"));
-
-
-        define("DEFAULT_SELECT", "- Select -");
-        spl_autoload_unregister(array('YiiBase', 'autoload'));
-
-
-        $receiver = array();
-        /*
-         * A receiver's email address 
-         */
-
-        $receiver[0] = new Receiver();
-        $receiver[0]->email = $payPallSetting->app_account_email;
-        /*
-         *  	Amount to be credited to the receiver's account 
-         */
-        $receiver[0]->amount = (double) $payPallSetting->comission_rate;
-        /*
-         * Set to true to indicate a chained payment; only one receiver can be a primary receiver. Omit this field, or set it to false for simple and parallel payments. 
-         */
-        $receiver[0]->primary = false;
-
-        $receiverList = new ReceiverList($receiver);
-
-
-        $payRequest = new PayRequest(new RequestEnvelope("en_US"), "PAY", $cancel_url, "USD", $receiverList, $return_url);
-
-        $payRequest->senderEmail = Yii::app()->user->User->paypal_mail;
-
-        $payRequest->feesPayer = "SENDER";
-
-        $service = new AdaptivePaymentsService(Paypalsettings::model()->getPayPallAdaptiveSetting());
-        try {
-            /* wrap API method calls on the service object with a try catch */
-            $response = $service->Pay($payRequest);
-            spl_autoload_register(array('YiiBase', 'autoload'));
-
-            return Paypalresponse::model()->storeResponse($response, $paymentAdaptive, $payPallSetting);
-        } catch (Exception $ex) {
-            
-        }
-    }
-
-    /**
      * pay direct to puzzle during purchase
      * with discount price
      */
-    public function payDirectToPuzzle($plan_id) {
-//        $paymentAdaptive, $notifyModel
+    public function payToPluggginOwner($plan_id) {
+        //$paymentAdaptive, $notifyModel
         //creating paypall adaptive 
 
         $payPallSetting = Paypalsettings::model()->findByPk(2);
 
         $paymentAdaptive = new PaymentPaypallAdaptive;
-        $paymentAdaptive->buyer_id = 1;
+        $paymentAdaptive->buyer_id = isset(Yii::app()->user->id)?Yii::app()->user->id:1;
         $paymentAdaptive->seller_id = $payPallSetting->admin_user_id;
         $paymentAdaptive->payment_status = "paying";
 
@@ -335,8 +224,8 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $response_adaptive = Yii::getPathOfAlias('application.extensions.paypalladaptive.samples.Common.Response');
 
         $host_base = Yii::app()->request->hostInfo;
-        $cancel_url = $host_base . Yii::app()->controller->createUrl("/web/offers/confirmOffer", array("item" => $plan_id, "id" => $notifyModel->Id, "status" => "cancelled"));
-        $return_url = $host_base . Yii::app()->controller->createUrl("/web/offers/confirmOffer", array("item" => $plan_id, "id" => $notifyModel->Id, "status" => "completed"));
+        $cancel_url = $host_base . Yii::app()->controller->createUrl("/web/default/confirmOffer", array("plan" => $plan_id, "id" => $notifyModel->Id, "status" => "cancelled"));
+        $return_url = $host_base . Yii::app()->controller->createUrl("/web/default/confirmOffer", array("plan" => $plan_id, "id" => $notifyModel->Id, "status" => "completed"));
 
         $settings = Paypalsettings::model()->getPayPallAdaptiveSetting();
 
@@ -376,16 +265,15 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $service = new AdaptivePaymentsService($settings);
         spl_autoload_register(array('YiiBase', 'autoload'));
 
-        $response = $service->Pay($payRequest);
 
-        CVarDumper::dump($response, 10, true);
-        
-        $url = Paypalresponse::model()->storeResponse($response, $paymentAdaptive, $payPallSetting);
-
-        return CVarDumper::dump($url, 10, true);
 
         try {
             /* wrap API method calls on the service object with a try catch */
+            $response = $service->Pay($payRequest);
+
+            $url = Paypalresponse::model()->storeResponse($response, $paymentAdaptive, $payPallSetting);
+
+            return $url;
         } catch (Exception $ex) {
             echo "<pre>";
             //print_r($ex);

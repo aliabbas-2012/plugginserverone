@@ -9,8 +9,9 @@ class UpdateUser extends DTActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('username, first_name, last_name, email, create_time, create_user_id, update_time, update_user_id', 'required'),
+            array('paypal_mail,username, first_name, last_name, email, create_time, create_user_id, update_time, update_user_id', 'required'),
             array('email,username', 'unique'),
+            array('paypal_mail,email','email'),
             array('is_active, deleted', 'numerical', 'integerOnly' => true),
             array('username, first_name, last_name, activation_key', 'length', 'max' => 50),
             array('type', 'length', 'max' => 9),
