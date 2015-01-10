@@ -124,7 +124,10 @@ class UserPlugginController extends Controller {
      * @param type $info
      */
     public function actionConfirmPurchase($plan, $id = '', $status = '') {
+        $model = UserPlans::model()->findByPk($plan);
+        UserPlans::model()->updateByPk($plan, array("payment_status" => 1));
         Yii::app()->user->setFlash("success", 'You have purchased plan successfully');
+        $this->redirect($this->createUrl("/web/userPluggin/plans", array("info_id" => $model->pluggin_site_info->id, "pluggin_id" => $model->pluggin_site_info->pluggin_id)));
     }
 
     /*
@@ -132,7 +135,10 @@ class UserPlugginController extends Controller {
      */
 
     public function actionCancelPlan($plan, $id = '', $status = '') {
-        Yii::app()->user->setFlash("success", 'You have purchased plan successfully');
+        $model = UserPlans::model()->findByPk($plan);
+        UserPlans::model()->updateByPk($plan, array("payment_status" => 0));
+        Yii::app()->user->setFlash("error", 'You have cancelled your plan purchase order');
+        $this->redirect($this->createUrl("/web/userPluggin/plans", array("info_id" => $model->pluggin_site_info->id, "pluggin_id" => $model->pluggin_site_info->pluggin_id)));
     }
 
 }
