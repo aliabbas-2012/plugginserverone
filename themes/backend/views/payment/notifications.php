@@ -16,8 +16,13 @@ $this->PcmWidget['filter'] = array('name' => 'ItstLeftFilter',
         "view" => "paymentNotifications"
         ));
 ?>
-
-<h1>Manage Payments</h1>
+<div class="row">
+    <!--  page header -->
+    <div class="col-lg-12">
+        <h1 class="page-header">Payment History</h1>
+    </div>
+    <!-- end  page header -->
+</div>
 
 <?php
 if (Yii::app()->user->hasFlash('error')) {

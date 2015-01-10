@@ -11,7 +11,7 @@ $rules_admin = array(
     'gii' => 'gii',
     'config/<m:[\w-\.]+>' => '/configurations/load',
     'config/paypall-setting/<id:[\w-\.]+>' => '/configurations/payPallSettings',
-    'config/payment/notifications/' => '/configurations/paymentNotifications',
+    'config/payment/history/' => '/configurations/paymentHistory',
     //plateform create 
     'plateform/index' => '/plateform/index',
     'plateform/<id:[\w-\.]+>/view-<related:[\w-\.]+>-<related_id:[\w-\.]+>' => '/plateform/view',

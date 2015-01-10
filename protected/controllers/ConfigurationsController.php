@@ -17,7 +17,7 @@ class ConfigurationsController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('load', 'payPallSettings','paymentNotifications'),
+                'actions' => array('load', 'payPallSettings','paymentHistory'),
                 'users' => array('@'),
             ),
             array('deny', // deny all users
@@ -130,7 +130,7 @@ class ConfigurationsController extends Controller {
         }
     }
 
-    public function actionPaymentNotifications() {
+    public function actionPaymentHistory() {
 
         $transfer_Model = new AdminPaymentTransfer();
         $this->filters = array(

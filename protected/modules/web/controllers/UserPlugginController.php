@@ -128,7 +128,9 @@ class UserPlugginController extends Controller {
         if ($model = UserPlans::model()->findByPk($plan)) {
             UserPlans::model()->updateByPk($plan, array("payment_status" => 1));
             $model = UserPlans::model()->findByPk($plan);
+            $model->paypalladaptive->updateByPk($model->paypalladaptive->id,array("payment_status"=>"completed"));
             //email code
+            
             $body = $this->renderPartial("//userPluggin/emails/_plan", array("model" => $model), true);
 
             $email['FromName'] = Yii::app()->params['systemName'];
@@ -155,6 +157,7 @@ class UserPlugginController extends Controller {
     public function actionCancelPlan($plan, $id = '', $status = '') {
         $plan = base64_decode($plan);
         if ($model = UserPlans::model()->findByPk($plan)) {
+            $model->paypalladaptive->updateByPk($model->paypalladaptive->id,array("payment_status"=>"cancelled"));
 
             $body = $this->renderPartial("//userPluggin/emails/_plan", array("model" => $model), true);
 
