@@ -187,10 +187,10 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
      * pay direct to puzzle during purchase
      * with discount price
      */
-    public function payToPluggginOwner($plan_id,$selectedPlan) {
+    public function payToPluggginOwner($plan,$selectedPlan) {
         //$paymentAdaptive, $notifyModel
         //creating paypall adaptive 
-
+        $plan_id  = $plan->id;
         $payPallSetting = Paypalsettings::model()->findByPk(2);
 
         $paymentAdaptive = new PaymentPaypallAdaptive;
@@ -209,7 +209,10 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $paymentAdaptive->save();
 
         $paymentAdaptive->saveHistory();
-        $notifyModel = $this->generateNotification($paymentAdaptive->seller_id, $paymentAdaptive->id, "seller", "You have recieved invitation to sale offer on discount price");
+        $message = "[".Yii::app()->user->name."] purchasing  ".$plan->plugin_plan->plan_rel->_duration." ";
+        $message.= " <br/> Price : ".$plan->plugin_plan->price;
+        
+        $notifyModel = $this->generateNotification($paymentAdaptive->seller_id, $paymentAdaptive->id, "seller",$message);
 
 
         Yii::import('application.extensions.paypalladaptive.samples.PPBootStrap');

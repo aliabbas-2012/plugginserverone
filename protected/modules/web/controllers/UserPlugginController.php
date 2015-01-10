@@ -108,7 +108,7 @@ class UserPlugginController extends Controller {
         $purchase_plan->end_date = date("Y-m-d", $date);
 
         if ($purchase_plan->save()) {
-            $url = PaymentPaypallAdaptive::model()->payToPluggginOwner($purchase_plan->id, $model);
+            $url = PaymentPaypallAdaptive::model()->payToPluggginOwner($purchase_plan, $model);
 
             $this->redirect($url);
         } else {
