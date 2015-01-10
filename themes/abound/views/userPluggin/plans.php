@@ -22,6 +22,7 @@
         ));
         ?>
         <?php
+       
         $this->widget('zii.widgets.grid.CGridView', array(
             /* 'type'=>'striped bordered condensed', */
             'itemsCssClass' => 'table table-bordered',

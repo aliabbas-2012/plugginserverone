@@ -224,6 +224,8 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $response_adaptive = Yii::getPathOfAlias('application.extensions.paypalladaptive.samples.Common.Response');
 
         $host_base = Yii::app()->request->hostInfo;
+        //encoding plan
+        $plan_id = base64_encode($plan_id);
         $cancel_url = $host_base . Yii::app()->controller->createUrl("/web/userPluggin/cancelPlan", array("plan" => $plan_id, "id" => $notifyModel->Id, "status" => "cancelled"));
         $return_url = $host_base . Yii::app()->controller->createUrl("/web/userPluggin/confirmPurchase", array("plan" => $plan_id, "id" => $notifyModel->Id, "status" => "completed"));
 
