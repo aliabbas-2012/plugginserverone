@@ -140,7 +140,7 @@ class PlugginController extends AdminController {
     public function actionPlans($info_id, $pluggin_id) {
         $model = new UserPlans('search');
         $model->pluggin_site_info_id = $info_id;
-        $model->is_active = 1;
+//        $model->is_active = 1;
 
         $pluggin = Pluggin::model()->findByPk($pluggin_id);
         $this->render('plans', array(
@@ -159,6 +159,20 @@ class PlugginController extends AdminController {
             $model->attributes = $_POST['UserPlans'];
             $model->updateByPk($id, array("is_active" => $model->is_active));
             Yii::app()->user->setFlash("success", "Status been updated successfully");
+            
+            $body = "Admin Email: ".CHtml::mailto('Email Admin',Yii::app()->user->User->email);
+
+            $email['FromName'] = Yii::app()->params['systemName'];
+            $email['From'] = Yii::app()->params->adminEmail;
+            $email['To'] = "";
+            $email_status = $model->is_active ==0?"Disabled":"Enabled";
+            $email['Subject'] = "Your plan has been ".$email_status." By Admin";
+            $extra_body  = "Dear User ".$email['Subject']." For further information please contact admin ";
+            $email['Body'] = $extra_body.$body;
+
+            $email['Body'] = $this->renderPartial('//common/_email_template', array('email' => $email), true, false);
+            $this->sendEmail2($email);
+            
             $this->redirect(array('/pluggin/editPlansStatus', 'id' => $model->id));
         }
         $this->render('user_plan', array(

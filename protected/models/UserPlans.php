@@ -21,7 +21,7 @@
  */
 class UserPlans extends DTActiveRecord {
 
-    public $_running_status, $_admin_activation, $_dates;
+    public $_running_status,$_admin_running_status, $_admin_activation, $_dates;
 
     /**
      * @return string the associated database table name
@@ -139,9 +139,13 @@ class UserPlans extends DTActiveRecord {
 
         if ($end_date[0] >= date("Y-m-d")) {
             if ($this->payment_status == 0) {
-                $link = CHtml::link(" Pay", Yii::app()->controller->createAbsoluteUrl('/web/userPluggin/paytopaypall', array("id" => $this->plugin_plan->id, 
+                $link = CHtml::link(" (Pay)", Yii::app()->controller->createAbsoluteUrl('/web/userPluggin/paytopaypall', array("id" => $this->plugin_plan->id, 
                     "info" => $this->pluggin_site_info->id,"pay"=>$this->id)));
-                $this->_running_status = CHtml::image($image . "disable.png") . "UnPaid (".$link.")";
+
+                if(Yii::app()->theme->name=="backend"){
+                    $link = "";
+                }
+                $this->_running_status = CHtml::image($image . "disable.png") . "UnPaid ".$link;
             }
             else {
                 $this->_running_status = CHtml::image($image . "running.png") . " Running";
