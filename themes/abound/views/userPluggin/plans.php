@@ -106,7 +106,7 @@
             'columns' => array(
                 array(
                     'name' => 'plan',
-                    'value' => '$data->plan_rel->name',
+                    'value' => '$data->plan_rel->_duration',
                     "type" => "raw",
                 ),
                 array(

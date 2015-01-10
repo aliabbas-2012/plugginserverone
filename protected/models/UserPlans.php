@@ -103,7 +103,7 @@ class UserPlans extends DTActiveRecord {
         $criteria->compare('user_id', $this->user_id, true);
         $criteria->compare('pluggin_plan_id', $this->pluggin_plan_id, true);
         $criteria->compare('pluggin_site_info_id', $this->pluggin_site_info_id, false);
-        $criteria->compare('payment_status', $this->payment_status);
+        //$criteria->compare('payment_status', $this->payment_status);
         $criteria->compare('is_active', $this->is_active);
         $criteria->compare('start_date', $this->start_date, true);
         $criteria->compare('end_date', $this->end_date, true);

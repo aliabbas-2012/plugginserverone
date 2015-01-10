@@ -106,7 +106,7 @@ class UserPlugginController extends Controller {
         }
 
         $purchase_plan->end_date = date("Y-m-d", $date);
-        
+
         if ($purchase_plan->save()) {
             $url = PaymentPaypallAdaptive::model()->payToPluggginOwner($purchase_plan->id, $model);
 
@@ -126,7 +126,9 @@ class UserPlugginController extends Controller {
     public function actionConfirmPurchase($plan, $id = '', $status = '') {
         $plan = base64_decode($plan);
         if ($model = UserPlans::model()->findByPk($plan)) {
-
+            UserPlans::model()->updateByPk($plan, array("payment_status" => 1));
+            $model = UserPlans::model()->findByPk($plan);
+            //email code
             $body = $this->renderPartial("//userPluggin/emails/_plan", array("model" => $model), true);
 
             $email['FromName'] = Yii::app()->params['systemName'];
@@ -138,7 +140,7 @@ class UserPlugginController extends Controller {
             $email['Body'] = $this->renderPartial('//users/_email_template', array('email' => $email), true, false);
             $this->sendEmail2($email);
 
-            UserPlans::model()->updateByPk($plan, array("payment_status" => 1));
+
             Yii::app()->user->setFlash("success", 'You have purchased plan successfully');
             $this->redirect($this->createUrl("/web/userPluggin/plans", array("info_id" => $model->pluggin_site_info->id, "pluggin_id" => $model->pluggin_site_info->pluggin_id)));
         } else {
@@ -160,8 +162,8 @@ class UserPlugginController extends Controller {
             $email['From'] = Yii::app()->params->adminEmail;
             $email['To'] = Yii::app()->user->User->email;
             $email['Subject'] = "You  have cancelled your plan";
-            $extra_body  = "Dear User you  have cancelled your plan,you can purchase again by click on following link<br/>";
-            $email['Body'] = $extra_body.$body;
+            $extra_body = "Dear User you  have cancelled your plan,you can purchase again by click on following link<br/>";
+            $email['Body'] = $extra_body . $body;
 
             $email['Body'] = $this->renderPartial('//users/_email_template', array('email' => $email), true, false);
             $this->sendEmail2($email);
