@@ -134,7 +134,7 @@ class UserPlugginController extends Controller {
             $email['FromName'] = Yii::app()->params['systemName'];
             $email['From'] = Yii::app()->params->adminEmail;
             $email['To'] = Yii::app()->user->User->email;
-            $email['Subject'] = "You plan detail";
+            $email['Subject'] = "You plan detail for  url ".$model->pluggin_site_info->site_name;
             $email['Body'] = $body;
 
             $email['Body'] = $this->renderPartial('//users/_email_template', array('email' => $email), true, false);
