@@ -187,7 +187,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
      * pay direct to puzzle during purchase
      * with discount price
      */
-    public function payToPluggginOwner($plan_id) {
+    public function payToPluggginOwner($plan_id,$selectedPlan) {
         //$paymentAdaptive, $notifyModel
         //creating paypall adaptive 
 
@@ -199,7 +199,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $paymentAdaptive->payment_status = "paying";
 
         $paymentAdaptive->plan_id = $plan_id;
-        $paymentAdaptive->amount = 10;
+        $paymentAdaptive->amount = $selectedPlan->price;
 
 
         $paymentAdaptive->ip_address = Yii::app()->request->userHostAddress;
@@ -224,8 +224,8 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $response_adaptive = Yii::getPathOfAlias('application.extensions.paypalladaptive.samples.Common.Response');
 
         $host_base = Yii::app()->request->hostInfo;
-        $cancel_url = $host_base . Yii::app()->controller->createUrl("/web/default/confirmOffer", array("plan" => $plan_id, "id" => $notifyModel->Id, "status" => "cancelled"));
-        $return_url = $host_base . Yii::app()->controller->createUrl("/web/default/confirmOffer", array("plan" => $plan_id, "id" => $notifyModel->Id, "status" => "completed"));
+        $cancel_url = $host_base . Yii::app()->controller->createUrl("/web/userPluggin/cancelPlan", array("plan" => $plan_id, "id" => $notifyModel->Id, "status" => "cancelled"));
+        $return_url = $host_base . Yii::app()->controller->createUrl("/web/userPluggin/confirmPurchase", array("plan" => $plan_id, "id" => $notifyModel->Id, "status" => "completed"));
 
         $settings = Paypalsettings::model()->getPayPallAdaptiveSetting();
         $current_user = Yii::app()->user->User;

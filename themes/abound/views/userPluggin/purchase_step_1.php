@@ -33,7 +33,7 @@
                     'value' => CHtml::button("Purchase", array(
                         "class" => 'btn',
                         'id' => 'purchase_btn',
-                        'url' => $this->createUrl('/web/userPluggin/confirmPurchase', array("id" => $model->id, "info" => $info->id)))),
+                        'url' => $this->createUrl('/web/userPluggin/paytopaypall', array("id" => $model->id, "info" => $info->id)))),
                     "type" => "raw",
                 ),
             ),

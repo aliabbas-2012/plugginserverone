@@ -88,8 +88,7 @@ class DefaultController extends Controller {
     public function actionPay() {
 
 
-        $url = PaymentPaypallAdaptive::model()->payToPluggginOwner(1);
-        $this->redirect($url);
+        
     }
 
     public function actionConfirmOffer($plan, $id) {

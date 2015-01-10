@@ -58,6 +58,7 @@
                     'value' => '$data->_running_status',
                     "type" => "raw",
                 ),
+                
                 array(
                     'name' => 'is_active',
                     'value' => '$data->_admin_activation',

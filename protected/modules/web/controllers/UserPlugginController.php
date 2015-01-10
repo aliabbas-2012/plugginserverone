@@ -22,7 +22,8 @@ class UserPlugginController extends Controller {
         return array(
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array(
-                    'index', 'plans', 'purchase', 'confirmPurchase'),
+                    'index', 'plans', 'purchase', 'confirmPurchase', 'cancelPlan',
+                    'paytopaypall'),
                 'users' => array('@'),
             ),
             array('deny', // deny all users
@@ -52,26 +53,35 @@ class UserPlugginController extends Controller {
         $this->render("//userPluggin/purchase_step_1", array("model" => $model, "info" => $info));
     }
 
-    /**
-     * 
-     * @param type $id
-     * @param type $info
-     */
-    public function actionConfirmPurchase($id, $info = '') {
+    public function actionPaytopaypall($id, $info = '', $pay = '') {
+
         $info = PlugginSiteInfo::model()->findByPk($info);
         $model = PlugginPlans::model()->findByPk($id);
 
+        $purchase_plan = new UserPlans;
 
-        if (UserPlans::model()->getActivePlan($info->id) > 0) {
-            Yii::app()->user->setFlash("error", 'You have your current plan , you cannot purchase new plan');
+        if ($pay == '') {
+            if (UserPlans::model()->getActivePlan($info->id) > 0) {
+                Yii::app()->user->setFlash("error", 'You have your current plan , you cannot purchase new plan');
+                $this->redirect($this->createUrl("/web/userPluggin/plans", array("info_id" => $info->id, "pluggin_id" => $info->pluggin_id)));
+            }
+        } else {
+            $purchase_plan = UserPlans::model()->findByPk($pay);
+        }
+
+        if (!$purchase_plan->isNewRecord && $purchase_plan->payment_status != 0) {
+
+            Yii::app()->user->setFlash("error", 'You already purchased this plan');
             $this->redirect($this->createUrl("/web/userPluggin/plans", array("info_id" => $info->id, "pluggin_id" => $info->pluggin_id)));
         }
 
-        $purchase_plan = new UserPlans;
+
+
         $purchase_plan->user_id = Yii::app()->user->id;
         $purchase_plan->pluggin_site_info_id = $info->id;
         $purchase_plan->pluggin_plan_id = $model->id;
-        $purchase_plan->is_active = 1;
+        $purchase_plan->is_active = 0;
+        $purchase_plan->payment_status = 0;
         $purchase_plan->start_date = date("Y-m-d");
 
         $date = strtotime($purchase_plan->start_date);
@@ -98,13 +108,31 @@ class UserPlugginController extends Controller {
         $purchase_plan->end_date = date("Y-m-d", $date);
 
         if ($purchase_plan->save()) {
-            Yii::app()->user->setFlash("success", 'You have purchased plan successfully');
-            $this->redirect($this->createUrl("/web/userPluggin/plans", array("info_id" => $info->id, "pluggin_id" => $info->pluggin_id)));
+            $url = PaymentPaypallAdaptive::model()->payToPluggginOwner($purchase_plan->id, $model);
+
+            $this->redirect($url);
         } else {
 
             Yii::app()->user->setFlash("error_array", $purchase_plan->getErrors());
             $this->redirect($this->createUrl("/web/userPluggin/plans", array("info_id" => $info->id, "pluggin_id" => $info->pluggin_id)));
         }
+    }
+
+    /**
+     * 
+     * @param type $id
+     * @param type $info
+     */
+    public function actionConfirmPurchase($plan, $id = '', $status = '') {
+        Yii::app()->user->setFlash("success", 'You have purchased plan successfully');
+    }
+
+    /*
+     * 
+     */
+
+    public function actionCancelPlan($plan, $id = '', $status = '') {
+        Yii::app()->user->setFlash("success", 'You have purchased plan successfully');
     }
 
 }

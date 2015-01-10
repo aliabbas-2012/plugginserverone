@@ -136,8 +136,17 @@ class UserPlans extends DTActiveRecord {
     public function afterFind() {
         $image = Yii::app()->request->hostInfo . Yii::app()->theme->baseUrl . "/images/icons/";
         $end_date = explode(" ", $this->end_date);
+
         if ($end_date[0] >= date("Y-m-d")) {
-            $this->_running_status = CHtml::image($image . "running.png") . " Running";
+            if ($this->payment_status == 0) {
+                $link = CHtml::link(" Pay", Yii::app()->controller->createUrl('/web/userPluggin/paytopaypall', array("id" => $this->plugin_plan->id, 
+                    "info" => $this->pluggin_site_info->id,"pay"=>$this->id)));
+                $this->_running_status = CHtml::image($image . "disable.png") . "UnPaid (".$link.")";
+            }
+            else {
+                $this->_running_status = CHtml::image($image . "running.png") . " Running";
+            }
+            
         } else if ($end_date[0] < date("Y-m-d")) {
             $this->_running_status = CHtml::image($image . "expired.gif") . "Expired";
         } else {
