@@ -228,7 +228,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $plan_id = base64_encode($plan_id);
         $cancel_url = $host_base . Yii::app()->controller->createUrl("/web/userPluggin/cancelPlan", array("plan" => $plan_id, "id" => $notifyModel->Id, "status" => "cancelled"));
         $return_url = $host_base . Yii::app()->controller->createUrl("/web/userPluggin/confirmPurchase", array("plan" => $plan_id, "id" => $notifyModel->Id, "status" => "completed"));
-
+        
         $settings = Paypalsettings::model()->getPayPallAdaptiveSetting();
         $current_user = Yii::app()->user->User;
         define("DEFAULT_SELECT", "- Select -");
@@ -245,7 +245,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         /*
          *  	Amount to be credited to the receiver's account 
          */
-        $receiver[0]->amount = ceil((double) 5);
+        $receiver[0]->amount = ceil((double) $selectedPlan->price);
         /*
          * Set to true to indicate a chained payment; only one receiver can be a primary receiver. Omit this field, or set it to false for simple and parallel payments. 
          */
@@ -257,7 +257,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
 
 
 
-        $payRequest = new PayRequest(new RequestEnvelope("en_US"), "PAY", $cancel_url, "EUR", $receiverList, $return_url);
+        $payRequest = new PayRequest(new RequestEnvelope("en_US"), "PAY", $cancel_url, "USD", $receiverList, $return_url);
 
         $payRequest->senderEmail = $current_user->paypal_mail;
         //$payRequest->senderEmail = "itsgeniusstar_test8@gmail.com";
@@ -266,8 +266,8 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
 
         $service = new AdaptivePaymentsService($settings);
         spl_autoload_register(array('YiiBase', 'autoload'));
-
-
+        
+     
 
         try {
             /* wrap API method calls on the service object with a try catch */
@@ -278,7 +278,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
             return $url;
         } catch (Exception $ex) {
             echo "<pre>";
-            //print_r($ex);
+            print_r($ex);
         }
     }
 
