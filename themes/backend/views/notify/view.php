@@ -1,8 +1,53 @@
 <?php
+/* @var $this PlateformController */
+/* @var $model Plateform */
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+$this->breadcrumbs = array(
+    'Notifications' => array('index'),
+    'Manage',
+);
 
+$this->menu = array(
+    array('label' => 'List Notifications', 'url' => array('index')),
+);
+?>
+<!-- Page-Level CSS -->
+<link href="<?php echo Yii::app()->theme->baseUrl ?>/assets/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+
+<div class="row">
+    <!-- page header -->
+    <div class="col-lg-12">
+        Detail Page
+    </div>
+    <!--end page header -->
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <!-- Advanced Tables -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <?php
+                    $this->widget('zii.widgets.CDetailView', array(
+                        'data' => $model,
+                        'htmlOptions' => array("class" => "table table-striped table-bordered table-hover"),
+                        'attributes' => array(
+                       
+                            array(
+                                'name' => 'message',
+                                'value' => $model->message,
+                                'type' => 'raw'
+                            ),
+                        ),
+                    ));
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    
+<div class="clear"></div>

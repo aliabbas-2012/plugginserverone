@@ -44,7 +44,9 @@ $this->menu = array(
                         'columns' => array(
                             array(
                                 'name' => 'message',
-                                'value' => '($data->isview==0)?CHtml::tag("span",array("style"=>"font-weight:bold"),$data->message):$data->message',
+                                'value' => 'CHtml::link(($data->isview==0)?CHtml::tag("span",array("style"=>"font-weight:bold"),$data->message):$data->message,'
+                                . 'Yii::app()->controller->createUrl("/notify/view",array("id"=>$data->Id))'
+                                . ' )',
                                 'type' => 'raw'
                             )
                         ),

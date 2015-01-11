@@ -45,7 +45,7 @@ class NotifyController extends Controller {
         $this->render('index', array(
             'model' => $model,
         ));
-        $this->render('index');
+        $this->render('//notify/index');
     }
 
     /*
@@ -53,7 +53,8 @@ class NotifyController extends Controller {
      */
 
     public function actionView($id) {
-        
+        $model = Notify::model()->findByPk($id);
+        $this->render('//notify/view', array("model" => $model));
     }
 
 }
