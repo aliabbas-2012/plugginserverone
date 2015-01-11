@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/media/bootstrap-gallery/css/bootstrap-image-gallery.css" />
         <!-- Page-Level CSS -->
         <link href="<?php echo Yii::app()->theme->baseUrl ?>/assets/plugins/morris/morris-0.4.3.min.css" rel="stylesheet" />
-                <script src="<?php echo Yii::app()->theme->baseUrl; ?>/assets/plugins/jquery-1.10.2.js"></script>
+        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/assets/plugins/jquery-1.10.2.js"></script>
         <script>
             // defining js base path
             var js_basePath = '<?php echo Yii::app()->theme->baseUrl; ?>';
@@ -45,7 +45,7 @@
                     </button>
                     <a class="navbar-brand" href="<?php echo $this->createUrl("/site/index"); ?>">
                         <?php
-                            echo CHtml::image(Yii::app()->theme->baseUrl."/images/logo.jpg");
+                        echo CHtml::image(Yii::app()->theme->baseUrl . "/images/logo.jpg");
                         ?>
                     </a>
                 </div>
@@ -55,6 +55,16 @@
                     <?php
                     //notification box
                     ?>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
+                            <i class="fa fa-inbox fa-1x">
+                                <a href="<?php echo $this->createUrl("//"); ?>">
+                                    Notifications(<?php echo Notify::model()->countByUser(); ?>)
+                                </a>
+                                
+                            </i>
+                        </a>
+                    </li>    
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
                             <i class="fa fa-user fa-3x"></i>
@@ -71,7 +81,7 @@
                             </li>
                             <li><a href='<?php echo $this->createUrl("/configurations/paymentHistory"); ?>'><i class="fa fa-gear fa-fw"></i>Payment History</a>
                             </li>
-                        
+
                             <li class="divider"></li>
                             <li><a href="<?php echo $this->createUrl("/site/logout"); ?>"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
                             </li>
@@ -141,9 +151,9 @@
         <script src="<?php echo Yii::app()->request->baseUrl; ?>/media/bootstrap-gallery/js/jquery.blueimp-gallery.min.js"></script>
         <script src="<?php echo Yii::app()->request->baseUrl; ?>/media/bootstrap-gallery/js/bootstrap-image-gallery.js"></script>
         <script type="text/javascript">
-                jQuery(function() {
-                    jQuery('#blueimp-gallery').data('fullScreen', true);
-                })
+            jQuery(function() {
+                jQuery('#blueimp-gallery').data('fullScreen', true);
+            })
         </script> 
     </body>
 </html>

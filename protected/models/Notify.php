@@ -123,5 +123,14 @@ class Notify extends DTActiveRecord {
     public static function model($className = __CLASS__) {
         return parent::model($className);
     }
+    /**
+     * count by user
+     */
+    public function countByUser(){
+        $criteria = new CDbCriteria();
+        $criteria->addCondition("user_id = :user_id AND isview = 0");
+        $criteria->params = array("user_id"=>Yii::app()->user->id);
+        return $this->count($criteria);
+    }
 
 }

@@ -159,12 +159,13 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
      * @param type $payment_adaptive_id
      * @param type $message
      */
-    public function generateNotification($user_id, $payment_adaptive_id, $type, $message) {
+    public function generateNotification($user_id, $payment_adaptive_id, $type, $message,$plan_id) {
         $model = new Notify();
         $model->user_id = $user_id;
         $model->payment_adaptive_id = $payment_adaptive_id;
         $model->message = $message;
         $model->user_type = $type;
+        $model->user_plan_id = $plan_id;
         $model->save();
         return $model;
     }
@@ -212,7 +213,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $message = "[".Yii::app()->user->name."] purchasing  ".$plan->plugin_plan->plan_rel->_duration." ";
         $message.= " <br/> Price : ".$plan->plugin_plan->price;
         
-        $notifyModel = $this->generateNotification($paymentAdaptive->seller_id, $paymentAdaptive->id, "seller",$message);
+        $notifyModel = $this->generateNotification($paymentAdaptive->seller_id, $paymentAdaptive->id, "seller",$message,$plan_id);
 
 
         Yii::import('application.extensions.paypalladaptive.samples.PPBootStrap');

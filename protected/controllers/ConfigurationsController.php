@@ -7,7 +7,7 @@ class ConfigurationsController extends Controller {
      * using two-column layout. See 'protected/views/layouts/column2.php'.
      */
     public $layout = '//layouts/column2';
-     public $filters;
+    public $filters;
 
     /**
      * Specifies the access control rules.
@@ -141,7 +141,6 @@ class ConfigurationsController extends Controller {
                 "paying" => "Paying",
                 "cancelled" => "Cancelled",
             ),
-
         );
 
         $this->layout = "column2";
@@ -150,7 +149,6 @@ class ConfigurationsController extends Controller {
         if (isset($_GET['PaymentPaypallAdaptive'])) {
             $model->attributes = $_GET['PaymentPaypallAdaptive'];
             $criteria->compare('payment_status', $model->payment_status);
-          
         }
 
         $dataProvider = new CActiveDataProvider('PaymentPaypallAdaptive', array(
