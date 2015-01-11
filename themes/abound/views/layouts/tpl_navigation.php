@@ -8,7 +8,13 @@
             </a>
 
             <!-- Be sure to leave the brand out there if you want it shown -->
-            <a class="brand" href="javascript:void(0)">Pluggin Server <small></small></a>
+            <a class="brand" href="javascript:void(0)">Plugin Server 
+                <small>
+                    <?php
+                    echo CHtml::image(Yii::app()->theme->baseUrl . "/images/logo.jpg");
+                    ?>
+                </small>
+            </a>
 
             <div class="nav-collapse">
                 <?php

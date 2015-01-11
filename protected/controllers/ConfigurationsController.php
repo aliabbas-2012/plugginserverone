@@ -17,7 +17,8 @@ class ConfigurationsController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('load', 'payPallSettings','paymentHistory'),
+                'actions' => array('load', 'payPallSettings',
+                    'paymentHistory'),
                 'users' => array('@'),
             ),
             array('deny', // deny all users

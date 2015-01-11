@@ -44,7 +44,9 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="<?php echo $this->createUrl("/site/index"); ?>">
-                        Logo
+                        <?php
+                            echo CHtml::image(Yii::app()->theme->baseUrl."/images/logo.jpg");
+                        ?>
                     </a>
                 </div>
                 <!-- end navbar-header -->
