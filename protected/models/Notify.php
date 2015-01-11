@@ -56,6 +56,7 @@ class Notify extends DTActiveRecord {
         return array(
             'user' => array(self::BELONGS_TO, 'Users', 'user_id'),
             'payment_adaptive' => array(self::BELONGS_TO, 'PaymentPaypallAdaptive', 'payment_adaptive_id'),
+            'user_plan' => array(self::BELONGS_TO, 'UserPlans', 'user_plan_id'),
         );
     }
 
@@ -65,7 +66,7 @@ class Notify extends DTActiveRecord {
     public function attributeLabels() {
         return array(
             'Id' => 'ID',
-            'user_plan_id' => 'Order',
+            'user_plan_id' => 'Plan',
             'user_id' => 'User',
             'date_time' => 'Date Time',
             'isview' => 'Isview',

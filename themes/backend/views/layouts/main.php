@@ -56,12 +56,9 @@
                     //notification box
                     ?>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
+                        <a class="dropdown-toggle" href="<?php echo $this->createUrl("/notify/index"); ?>">
                             <i class="fa fa-inbox fa-1x">
-                                <a href="<?php echo $this->createUrl("/notify/index"); ?>">
-                                    Notifications(<?php echo Notify::model()->countByUser(); ?>)
-                                </a>
-                                
+                                Notifications(<?php echo Notify::model()->countByUser(); ?>)
                             </i>
                         </a>
                     </li>    

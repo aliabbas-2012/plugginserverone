@@ -42,6 +42,11 @@ $this->menu = array(
                                 'value' => $model->message,
                                 'type' => 'raw'
                             ),
+                            array(
+                                'name' => 'user_plan_id',
+                                'value' => isset($model->user_plan)?CHtml::link($model->user_plan->plugin_plan->plan_rel->_duration,$this->createUrl("/pluggin/editPlansStatus/",array("id"=>$model->user_plan->id))):"",
+                                'type' => 'raw'
+                            ),
                         ),
                     ));
                     ?>
