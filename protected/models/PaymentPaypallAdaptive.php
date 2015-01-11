@@ -120,6 +120,12 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
+            'pagination' => array(
+                'pageSize' => 50,
+            ),
+            'sort' => array(
+                'defaultOrder' => 'id DESC',
+            )
         ));
     }
 
@@ -159,7 +165,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
      * @param type $payment_adaptive_id
      * @param type $message
      */
-    public function generateNotification($user_id, $payment_adaptive_id, $type, $message,$plan_id) {
+    public function generateNotification($user_id, $payment_adaptive_id, $type, $message, $plan_id) {
         $model = new Notify();
         $model->user_id = $user_id;
         $model->payment_adaptive_id = $payment_adaptive_id;
@@ -188,14 +194,14 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
      * pay direct to puzzle during purchase
      * with discount price
      */
-    public function payToPluggginOwner($plan,$selectedPlan) {
+    public function payToPluggginOwner($plan, $selectedPlan) {
         //$paymentAdaptive, $notifyModel
         //creating paypall adaptive 
-        $plan_id  = $plan->id;
+        $plan_id = $plan->id;
         $payPallSetting = Paypalsettings::model()->findByPk(2);
 
         $paymentAdaptive = new PaymentPaypallAdaptive;
-        $paymentAdaptive->buyer_id = isset(Yii::app()->user->id)?Yii::app()->user->id:1;
+        $paymentAdaptive->buyer_id = isset(Yii::app()->user->id) ? Yii::app()->user->id : 1;
         $paymentAdaptive->seller_id = $payPallSetting->admin_user_id;
         $paymentAdaptive->payment_status = "paying";
 
@@ -210,10 +216,10 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $paymentAdaptive->save();
 
         $paymentAdaptive->saveHistory();
-        $message = "[".Yii::app()->user->name."] purchasing  ".$plan->plugin_plan->plan_rel->_duration." ";
-        $message.= " <br/> Price : ".$plan->plugin_plan->price;
-        
-        $notifyModel = $this->generateNotification($paymentAdaptive->seller_id, $paymentAdaptive->id, "seller",$message,$plan_id);
+        $message = "[" . Yii::app()->user->name . "] purchasing  " . $plan->plugin_plan->plan_rel->_duration . " ";
+        $message.= " <br/> Price : " . $plan->plugin_plan->price;
+
+        $notifyModel = $this->generateNotification($paymentAdaptive->seller_id, $paymentAdaptive->id, "seller", $message, $plan_id);
 
 
         Yii::import('application.extensions.paypalladaptive.samples.PPBootStrap');
@@ -232,7 +238,7 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
         $plan_id = base64_encode($plan_id);
         $cancel_url = $host_base . Yii::app()->controller->createUrl("/web/userPluggin/cancelPlan", array("plan" => $plan_id, "id" => $notifyModel->Id, "status" => "cancelled"));
         $return_url = $host_base . Yii::app()->controller->createUrl("/web/userPluggin/confirmPurchase", array("plan" => $plan_id, "id" => $notifyModel->Id, "status" => "completed"));
-        
+
         $settings = Paypalsettings::model()->getPayPallAdaptiveSetting();
         $current_user = Yii::app()->user->User;
         define("DEFAULT_SELECT", "- Select -");
@@ -270,8 +276,8 @@ class PaymentPaypallAdaptive extends DTActiveRecord {
 
         $service = new AdaptivePaymentsService($settings);
         spl_autoload_register(array('YiiBase', 'autoload'));
-        
-     
+
+
 
         try {
             /* wrap API method calls on the service object with a try catch */

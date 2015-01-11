@@ -54,6 +54,7 @@ class NotifyController extends Controller {
 
     public function actionView($id) {
         $model = Notify::model()->findByPk($id);
+        $model->updateByPk($id,array("isview"=>1));
         $this->render('//notify/view', array("model" => $model));
     }
 
