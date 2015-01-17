@@ -30,7 +30,7 @@ $rules_web = array(
     'user-plugin/purchase/<id:\w+>/<info:\d+>' => '/web/userPluggin/purchase',
     'user-plugin/pay-to-pay-pall' => '/web/userPluggin/paytopaypall',
     'user-plugin/confirm-purchase' => '/web/userPluggin/confirmPurchase',
-    'user-plugin/canel-plan' => '/web/userPluggin/CancelPlan',
+    'user-plugin/canel-plan' => '/web/userPluggin/cancelPlan',
     
     /* api **/
     'api-index'=>'web/api/index',
