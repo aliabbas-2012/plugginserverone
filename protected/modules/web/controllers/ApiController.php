@@ -99,7 +99,7 @@ class ApiController extends Controller {
             if(!empty($user_pluggin_plan)){ // plan is running
                 $this->renderPartial("//api/success",array("model"=>$user_pluggin_plan));
             }else{ // plan is expired
-                $this->renderPartial("//api/expired");
+                $this->renderPartial("//api/expired",array("pluggin_site"=>$pluggin_site));
                 
             }
             
