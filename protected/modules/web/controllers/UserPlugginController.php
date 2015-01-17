@@ -42,7 +42,7 @@ class UserPlugginController extends Controller {
      * Plans detail
      */
     public function actionPlans($info_id, $pluggin_id) {
-
+        
         $model = Pluggin::model()->findByPk($pluggin_id);
         $this->render("//userPluggin/plans", array("model" => $model, 'info_id' => $info_id));
     }

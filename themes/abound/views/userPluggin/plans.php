@@ -1,9 +1,10 @@
 <div class="page-header">
-    <h1> <small>Your Plans for this Plugin (<?php echo $model->name; ?>)</small></h1>
+    <h1> <small>Your Plans for this Plugin (<?php  echo $model->name; ?>)</small></h1>
 </div>
 <div class="row-fluid">
     <div class="span10">
         <?php
+       
         $this->beginWidget('zii.widgets.CPortlet', array(
             'title' => "Your Plans for this Plugin (" . $model->name . ")",
         ));

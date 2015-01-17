@@ -18,6 +18,19 @@ $rules_web = array(
     /*Users Links */
     'login' => '/web/users/login',
     'signup' => '/web/users/register',
+    'activate/password' => '/web/users/activate',
+    'set-new/password' => '/web/users/setNewPass',
+    'forgot/password' => '/web/users/forgot',
+    'change/password' => '/web/users/changePass',
+    'update/profile' => '/web/users/updateProfile',
+    //others user
+    'user-plateform/index' => '/web/default/plateform',
+    'user-plugin/index' => '/web/userPluggin/index',
+    'user-plugin/plans/<info_id:\w+>/<pluggin_id:\d+>' => '/web/userPluggin/plans',
+    'user-plugin/purchase/<id:\w+>/<info:\d+>' => '/web/userPluggin/purchase',
+    'user-plugin/pay-to-pay-pall' => '/web/userPluggin/paytopaypall',
+    'user-plugin/confirm-purchase' => '/web/userPluggin/confirmPurchase',
+    'user-plugin/canel-plan' => '/web/userPluggin/CancelPlan',
     
     /* api **/
     'api-index'=>'web/api/index',
